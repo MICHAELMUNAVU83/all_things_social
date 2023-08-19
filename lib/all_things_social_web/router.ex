@@ -1,6 +1,8 @@
 defmodule AllThingsSocialWeb.Router do
   use AllThingsSocialWeb, :router
 
+  import AllThingsSocialWeb.InfluencerAuth
+
   import AllThingsSocialWeb.BrandAuth
 
   pipeline :browser do
@@ -10,6 +12,7 @@ defmodule AllThingsSocialWeb.Router do
     plug :put_root_layout, {AllThingsSocialWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_influencer
     plug :fetch_current_brand
   end
 
@@ -88,5 +91,38 @@ defmodule AllThingsSocialWeb.Router do
     post "/brands/confirm", BrandConfirmationController, :create
     get "/brands/confirm/:token", BrandConfirmationController, :edit
     post "/brands/confirm/:token", BrandConfirmationController, :update
+  end
+
+  ## Authentication routes
+
+  scope "/", AllThingsSocialWeb do
+    pipe_through [:browser, :redirect_if_influencer_is_authenticated]
+
+    get "/influencers/register", InfluencerRegistrationController, :new
+    post "/influencers/register", InfluencerRegistrationController, :create
+    get "/influencers/log_in", InfluencerSessionController, :new
+    post "/influencers/log_in", InfluencerSessionController, :create
+    get "/influencers/reset_password", InfluencerResetPasswordController, :new
+    post "/influencers/reset_password", InfluencerResetPasswordController, :create
+    get "/influencers/reset_password/:token", InfluencerResetPasswordController, :edit
+    put "/influencers/reset_password/:token", InfluencerResetPasswordController, :update
+  end
+
+  scope "/", AllThingsSocialWeb do
+    pipe_through [:browser, :require_authenticated_influencer]
+
+    get "/influencers/settings", InfluencerSettingsController, :edit
+    put "/influencers/settings", InfluencerSettingsController, :update
+    get "/influencers/settings/confirm_email/:token", InfluencerSettingsController, :confirm_email
+  end
+
+  scope "/", AllThingsSocialWeb do
+    pipe_through [:browser]
+
+    delete "/influencers/log_out", InfluencerSessionController, :delete
+    get "/influencers/confirm", InfluencerConfirmationController, :new
+    post "/influencers/confirm", InfluencerConfirmationController, :create
+    get "/influencers/confirm/:token", InfluencerConfirmationController, :edit
+    post "/influencers/confirm/:token", InfluencerConfirmationController, :update
   end
 end

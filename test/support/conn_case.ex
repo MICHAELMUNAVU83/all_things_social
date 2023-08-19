@@ -61,4 +61,30 @@ defmodule AllThingsSocialWeb.ConnCase do
     |> Phoenix.ConnTest.init_test_session(%{})
     |> Plug.Conn.put_session(:brand_token, token)
   end
+
+  @doc """
+  Setup helper that registers and logs in influencers.
+
+      setup :register_and_log_in_influencer
+
+  It stores an updated connection and a registered influencer in the
+  test context.
+  """
+  def register_and_log_in_influencer(%{conn: conn}) do
+    influencer = AllThingsSocial.InfluencersFixtures.influencer_fixture()
+    %{conn: log_in_influencer(conn, influencer), influencer: influencer}
+  end
+
+  @doc """
+  Logs the given `influencer` into the `conn`.
+
+  It returns an updated `conn`.
+  """
+  def log_in_influencer(conn, influencer) do
+    token = AllThingsSocial.Influencers.generate_influencer_session_token(influencer)
+
+    conn
+    |> Phoenix.ConnTest.init_test_session(%{})
+    |> Plug.Conn.put_session(:influencer_token, token)
+  end
 end
