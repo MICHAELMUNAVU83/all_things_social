@@ -23,14 +23,13 @@ defmodule AllThingsSocialWeb.Router do
   scope "/", AllThingsSocialWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PageLive.Index, :index
     live "/content_boards", ContentBoardLive.Index, :index
     live "/content_boards/new", ContentBoardLive.Index, :new
     live "/content_boards/:id/edit", ContentBoardLive.Index, :edit
 
     live "/content_boards/:id", ContentBoardLive.Show, :show
     live "/content_boards/:id/show/edit", ContentBoardLive.Show, :edit
-
 
     live "/influencer_accounts", InfluencerAccountLive.Index, :index
     live "/influencer_accounts/new", InfluencerAccountLive.Index, :new
@@ -39,7 +38,6 @@ defmodule AllThingsSocialWeb.Router do
     live "/influencer_accounts/:id", InfluencerAccountLive.Show, :show
     live "/influencer_accounts/:id/show/edit", InfluencerAccountLive.Show, :edit
 
-
     live "/niches", NicheLive.Index, :index
     live "/niches/new", NicheLive.Index, :new
     live "/niches/:id/edit", NicheLive.Index, :edit
@@ -47,8 +45,12 @@ defmodule AllThingsSocialWeb.Router do
     live "/niches/:id", NicheLive.Show, :show
     live "/niches/:id/show/edit", NicheLive.Show, :edit
 
+    live "/rates", RateLive.Index, :index
+    live "/rates/new", RateLive.Index, :new
+    live "/rates/:id/edit", RateLive.Index, :edit
 
-
+    live "/rates/:id", RateLive.Show, :show
+    live "/rates/:id/show/edit", RateLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

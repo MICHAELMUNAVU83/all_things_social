@@ -1,15 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
 /* This file is for your main application CSS */
 
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
-  margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+
+  left: 50%;
+  transform: translateX(-50%);
+
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
 .alert-info {
   color: #31708f;
   background-color: #d9edf7;
@@ -68,14 +79,28 @@
   background-color: #fefefe;
   margin: 15vh auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 1rem;
+
+  width: 60%;
+}
+
+@media screen and (max-width: 768px) {
+  .phx-modal-content {
+    width: 90%;
+  }
 }
 
 .phx-modal-close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  font-size: 24px;
   font-weight: bold;
 }
 

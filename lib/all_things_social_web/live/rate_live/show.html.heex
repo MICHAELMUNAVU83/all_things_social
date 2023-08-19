@@ -1,0 +1,36 @@
+<h1>Show Rate</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.rate_show_path(@socket, :show, @rate)}>
+    <.live_component
+      module={AllThingsSocialWeb.RateLive.FormComponent}
+      id={@rate.id}
+      title={@page_title}
+      action={@live_action}
+      rate={@rate}
+      return_to={Routes.rate_show_path(@socket, :show, @rate)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Platform:</strong>
+    <%= @rate.platform %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @rate.description %>
+  </li>
+
+  <li>
+    <strong>Amount:</strong>
+    <%= @rate.amount %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.rate_show_path(@socket, :edit, @rate), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.rate_index_path(@socket, :index) %></span>
