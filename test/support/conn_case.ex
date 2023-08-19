@@ -35,4 +35,30 @@ defmodule AllThingsSocialWeb.ConnCase do
     AllThingsSocial.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
+
+  @doc """
+  Setup helper that registers and logs in brands.
+
+      setup :register_and_log_in_brand
+
+  It stores an updated connection and a registered brand in the
+  test context.
+  """
+  def register_and_log_in_brand(%{conn: conn}) do
+    brand = AllThingsSocial.BrandsFixtures.brand_fixture()
+    %{conn: log_in_brand(conn, brand), brand: brand}
+  end
+
+  @doc """
+  Logs the given `brand` into the `conn`.
+
+  It returns an updated `conn`.
+  """
+  def log_in_brand(conn, brand) do
+    token = AllThingsSocial.Brands.generate_brand_session_token(brand)
+
+    conn
+    |> Phoenix.ConnTest.init_test_session(%{})
+    |> Plug.Conn.put_session(:brand_token, token)
+  end
 end
