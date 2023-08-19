@@ -1,0 +1,39 @@
+<h1>Listing Niches</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.niche_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.NicheLive.FormComponent}
+      id={@niche.id || :new}
+      title={@page_title}
+      action={@live_action}
+      niche={@niche}
+      return_to={Routes.niche_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="niches">
+    <%= for niche <- @niches do %>
+      <tr id={"niche-#{niche.id}"}>
+        <td><%= niche.name %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.niche_show_path(@socket, :show, niche) %></span>
+          <span><%= live_patch "Edit", to: Routes.niche_index_path(@socket, :edit, niche) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: niche.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Niche", to: Routes.niche_index_path(@socket, :new) %></span>

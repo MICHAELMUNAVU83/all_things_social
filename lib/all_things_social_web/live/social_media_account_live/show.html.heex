@@ -1,0 +1,31 @@
+<h1>Show Social media account</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.social_media_account_show_path(@socket, :show, @social_media_account)}>
+    <.live_component
+      module={AllThingsSocialWeb.SocialMediaAccountLive.FormComponent}
+      id={@social_media_account.id}
+      title={@page_title}
+      action={@live_action}
+      social_media_account={@social_media_account}
+      return_to={Routes.social_media_account_show_path(@socket, :show, @social_media_account)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Account url:</strong>
+    <%= @social_media_account.account_url %>
+  </li>
+
+  <li>
+    <strong>Platform:</strong>
+    <%= @social_media_account.platform %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.social_media_account_show_path(@socket, :edit, @social_media_account), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.social_media_account_index_path(@socket, :index) %></span>

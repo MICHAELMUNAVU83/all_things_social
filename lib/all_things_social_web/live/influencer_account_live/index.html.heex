@@ -1,0 +1,39 @@
+<h1>Listing Influencer accounts</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.influencer_account_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.InfluencerAccountLive.FormComponent}
+      id={@influencer_account.id || :new}
+      title={@page_title}
+      action={@live_action}
+      influencer_account={@influencer_account}
+      return_to={Routes.influencer_account_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="influencer_accounts">
+    <%= for influencer_account <- @influencer_accounts do %>
+      <tr id={"influencer_account-#{influencer_account.id}"}>
+        <td><%= influencer_account.column %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.influencer_account_show_path(@socket, :show, influencer_account) %></span>
+          <span><%= live_patch "Edit", to: Routes.influencer_account_index_path(@socket, :edit, influencer_account) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: influencer_account.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Influencer account", to: Routes.influencer_account_index_path(@socket, :new) %></span>

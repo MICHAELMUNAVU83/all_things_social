@@ -1,0 +1,26 @@
+<h1>Show Content board</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.content_board_show_path(@socket, :show, @content_board)}>
+    <.live_component
+      module={AllThingsSocialWeb.ContentBoardLive.FormComponent}
+      id={@content_board.id}
+      title={@page_title}
+      action={@live_action}
+      content_board={@content_board}
+      return_to={Routes.content_board_show_path(@socket, :show, @content_board)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @content_board.name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.content_board_show_path(@socket, :edit, @content_board), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.content_board_index_path(@socket, :index) %></span>

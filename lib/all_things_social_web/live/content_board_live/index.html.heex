@@ -1,0 +1,39 @@
+<h1>Listing Content boards</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.content_board_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.ContentBoardLive.FormComponent}
+      id={@content_board.id || :new}
+      title={@page_title}
+      action={@live_action}
+      content_board={@content_board}
+      return_to={Routes.content_board_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="content_boards">
+    <%= for content_board <- @content_boards do %>
+      <tr id={"content_board-#{content_board.id}"}>
+        <td><%= content_board.name %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.content_board_show_path(@socket, :show, content_board) %></span>
+          <span><%= live_patch "Edit", to: Routes.content_board_index_path(@socket, :edit, content_board) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: content_board.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Content board", to: Routes.content_board_index_path(@socket, :new) %></span>

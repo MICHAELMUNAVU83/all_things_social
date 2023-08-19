@@ -1,0 +1,26 @@
+<h1>Show Influencer account</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.influencer_account_show_path(@socket, :show, @influencer_account)}>
+    <.live_component
+      module={AllThingsSocialWeb.InfluencerAccountLive.FormComponent}
+      id={@influencer_account.id}
+      title={@page_title}
+      action={@live_action}
+      influencer_account={@influencer_account}
+      return_to={Routes.influencer_account_show_path(@socket, :show, @influencer_account)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Column:</strong>
+    <%= @influencer_account.column %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.influencer_account_show_path(@socket, :edit, @influencer_account), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.influencer_account_index_path(@socket, :index) %></span>

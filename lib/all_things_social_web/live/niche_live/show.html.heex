@@ -1,0 +1,26 @@
+<h1>Show Niche</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.niche_show_path(@socket, :show, @niche)}>
+    <.live_component
+      module={AllThingsSocialWeb.NicheLive.FormComponent}
+      id={@niche.id}
+      title={@page_title}
+      action={@live_action}
+      niche={@niche}
+      return_to={Routes.niche_show_path(@socket, :show, @niche)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @niche.name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.niche_show_path(@socket, :edit, @niche), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.niche_index_path(@socket, :index) %></span>

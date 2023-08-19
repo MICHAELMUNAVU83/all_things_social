@@ -1,0 +1,41 @@
+<h1>Listing Social media accounts</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.social_media_account_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.SocialMediaAccountLive.FormComponent}
+      id={@social_media_account.id || :new}
+      title={@page_title}
+      action={@live_action}
+      social_media_account={@social_media_account}
+      return_to={Routes.social_media_account_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account url</th>
+      <th>Platform</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="social_media_accounts">
+    <%= for social_media_account <- @social_media_accounts do %>
+      <tr id={"social_media_account-#{social_media_account.id}"}>
+        <td><%= social_media_account.account_url %></td>
+        <td><%= social_media_account.platform %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.social_media_account_show_path(@socket, :show, social_media_account) %></span>
+          <span><%= live_patch "Edit", to: Routes.social_media_account_index_path(@socket, :edit, social_media_account) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: social_media_account.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Social media account", to: Routes.social_media_account_index_path(@socket, :new) %></span>
