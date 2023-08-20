@@ -1,3 +1,19 @@
+<%= if @live_action in [:add_influencer_account] do %>
+  <.modal return_to={Routes.all_influencers_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.InfluencerAccountLive.FormComponent}
+      id={@influencer_account.id || :new}
+      title={@page_title}
+      action={@live_action}
+      influencer_id={@influencer_id}
+      logged_in_brand={@logged_in_brand}
+      influencer_account={@influencer_account}
+      content_boards={@content_boards}
+      return_to={Routes.all_influencers_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
 <div>
   <div class="flex justify-between items-center">
     <p class="text-[#887CF2] font-bold text-xl">Discovery</p>
@@ -89,9 +105,11 @@
             <td>5.6 M</td>
             <td>10</td>
             <td>
-              <button class="bg-gradient-to-r cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white px-2 py-1 rounded-md">
-                Save to Board
-              </button>
+              <%= live_redirect to: Routes.all_influencers_index_path(@socket, :add_influencer_account , influencer) do %>
+                <button class="bg-gradient-to-r cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white px-2 py-1 rounded-md">
+                  Save to Board
+                </button>
+              <% end %>
             </td>
             <td>5.6 M</td>
             <td>5.6 M</td>
