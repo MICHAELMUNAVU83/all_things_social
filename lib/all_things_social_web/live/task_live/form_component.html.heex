@@ -11,6 +11,9 @@
     phx-change="validate"
     phx-submit="save"
   >
+    <%= hidden_input(f, :content_board_id, value: @content_board_id) %>
+    <%= hidden_input(f, :influencer_id, value: @influencer_id) %>
+    <%= hidden_input(f, :brand_id, value: @brand_id) %>
     <div class="flex gap-2 w-[80%] mx-auto flex-col">
       <div class="flex gap-2 flex-col w-[100%]">
         <%= text_input(f, :name,

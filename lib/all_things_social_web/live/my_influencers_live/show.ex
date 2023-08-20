@@ -4,6 +4,8 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
   alias AllThingsSocial.Brands
   alias AllThingsSocial.Chats
   alias AllThingsSocial.Chats.Chat
+  alias AllThingsSocial.Tasks
+  alias AllThingsSocial.Tasks.Task
 
   def mount(_params, session, socket) do
     logged_in_brand = Brands.get_brand_by_session_token(session["brand_token"])
@@ -14,7 +16,8 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
+  def handle_params(params, _, socket) do
+    id = params["id"]
     influencer_account = InfluencerAccounts.get_influencer_account!(id)
 
     correct_brand =
@@ -30,11 +33,20 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
         influencer_account.influencer_id
       )
 
+    content_board_id = influencer_account.content_board_id
+    influencer_id = influencer_account.influencer_id
+    brand_id = influencer_account.brand_id
+
     {:noreply,
      socket
      |> assign(:influencer_account, InfluencerAccounts.get_influencer_account!(id))
      |> assign(:changeset, Chats.change_chat(%Chat{}))
      |> assign(:chats, chats)
+     |> assign(:page_title, "New Task")
+     |> assign(:content_board_id, content_board_id)
+     |> assign(:influencer_id, influencer_id)
+     |> assign(:brand_id, brand_id)
+     |> assign(:task, %Task{})
      |> assign(:correct_brand, correct_brand)}
   end
 

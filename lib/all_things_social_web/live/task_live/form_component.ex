@@ -40,7 +40,7 @@ defmodule AllThingsSocialWeb.TaskLive.FormComponent do
     end
   end
 
-  defp save_task(socket, :new, task_params) do
+  defp save_task(socket, :add_task, task_params) do
     case Tasks.create_task(task_params) do
       {:ok, _task} ->
         {:noreply,

@@ -1,3 +1,19 @@
+<%= if @live_action in [:add_task] do %>
+  <.modal return_to={Routes.my_influencers_show_path(@socket, :show, @influencer_account.id)}>
+    <.live_component
+      module={AllThingsSocialWeb.TaskLive.FormComponent}
+      id={@task.id || :new}
+      title={@page_title}
+      action={@live_action}
+      task={@task}
+      content_board_id={@content_board_id}
+      influencer_id={@influencer_id}
+      brand_id={@brand_id}
+      return_to={Routes.my_influencers_show_path(@socket, :show, @influencer_account.id)}
+    />
+  </.modal>
+<% end %>
+
 <%= if @correct_brand == true do %>
   <div class="flex justify-between  pt-4  items-start">
     <div class="flex flex-col h-[400px] bg-white p-4 shadow-md rounded-xl shadow-gray-400 w-[25%] gap-4">
@@ -37,12 +53,14 @@
         </div>
       </div>
 
-      <div class="bg-[#FFF9E6] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
-        <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#F59E0B] font-semibold w-4") %>
-        <p class="text-[#F59E0B] font-semibold">
-          Add task
-        </p>
-      </div>
+      <%= live_redirect to: Routes.my_influencers_show_path(@socket, :add_task, @influencer_account.id) do %>
+        <div class="bg-[#FFF9E6] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
+          <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#F59E0B] font-semibold w-4") %>
+          <p class="text-[#F59E0B] font-semibold">
+            Add task
+          </p>
+        </div>
+      <% end %>
 
       <div class="bg-[#E8D8F4] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
         <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#887CF2] font-semibold w-4") %>
