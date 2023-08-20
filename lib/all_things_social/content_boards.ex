@@ -7,6 +7,7 @@ defmodule AllThingsSocial.ContentBoards do
   alias AllThingsSocial.Repo
 
   alias AllThingsSocial.ContentBoards.ContentBoard
+  alias AllThingsSocial.InfluencerAccounts.InfluencerAccount
 
   @doc """
   Returns the list of content_boards.
@@ -24,6 +25,61 @@ defmodule AllThingsSocial.ContentBoards do
   def list_content_boards_for_a_brand(brand_id) do
     from(c in ContentBoard, where: c.brand_id == ^brand_id)
     |> Repo.all()
+  end
+
+  def list_potential_influencer_accounts_for_a_content_board(content_board_id) do
+    from(i in InfluencerAccount, where: i.content_board_id == ^content_board_id)
+    |> Repo.all()
+    |> Enum.filter(fn influencer_account ->
+      influencer_account.column == "Potential"
+    end)
+    |> Repo.preload(:influencer)
+    |> Repo.preload(:brand)
+    |> Repo.preload(:content_board)
+  end
+
+  def list_outreached_influencer_accounts_for_a_content_board(content_board_id) do
+    from(i in InfluencerAccount, where: i.content_board_id == ^content_board_id)
+    |> Repo.all()
+    |> Enum.filter(fn influencer_account ->
+      influencer_account.column == "Outreached"
+    end)
+    |> Repo.preload(:influencer)
+    |> Repo.preload(:brand)
+    |> Repo.preload(:content_board)
+  end
+
+  def list_negotiating_influencer_accounts_for_a_content_board(content_board_id) do
+    from(i in InfluencerAccount, where: i.content_board_id == ^content_board_id)
+    |> Repo.all()
+    |> Enum.filter(fn influencer_account ->
+      influencer_account.column == "Negotiating"
+    end)
+    |> Repo.preload(:influencer)
+    |> Repo.preload(:brand)
+    |> Repo.preload(:content_board)
+  end
+
+  def list_negotiating_influencer_accounts_for_a_content_board(content_board_id) do
+    from(i in InfluencerAccount, where: i.content_board_id == ^content_board_id)
+    |> Repo.all()
+    |> Enum.filter(fn influencer_account ->
+      influencer_account.column == "Negotiating"
+    end)
+    |> Repo.preload(:influencer)
+    |> Repo.preload(:brand)
+    |> Repo.preload(:content_board)
+  end
+
+  def list_active_influencer_accounts_for_a_content_board(content_board_id) do
+    from(i in InfluencerAccount, where: i.content_board_id == ^content_board_id)
+    |> Repo.all()
+    |> Enum.filter(fn influencer_account ->
+      influencer_account.column == "Active"
+    end)
+    |> Repo.preload(:influencer)
+    |> Repo.preload(:brand)
+    |> Repo.preload(:content_board)
   end
 
   @doc """

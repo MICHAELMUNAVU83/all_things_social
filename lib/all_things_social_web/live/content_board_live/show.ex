@@ -1,5 +1,5 @@
 defmodule AllThingsSocialWeb.ContentBoardLive.Show do
-  use AllThingsSocialWeb, :live_view
+  use AllThingsSocialWeb, :brand_live_view
 
   alias AllThingsSocial.ContentBoards
 
@@ -10,6 +10,11 @@ defmodule AllThingsSocialWeb.ContentBoardLive.Show do
 
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
+    potential_influencer_accounts =
+      ContentBoards.list_potential_influencer_accounts_for_a_content_board(id)
+
+    IO.inspect(potential_influencer_accounts)
+
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
