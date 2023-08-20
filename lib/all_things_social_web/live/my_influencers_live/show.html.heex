@@ -83,8 +83,10 @@
           <div class="flex flex-col w-[100%]   gap-2">
             <%= for chat <- @chats do %>
               <%= if chat.sender == "brand" do %>
-                <div class="flex justify-end bg-[#F59E0B]  ">
-                  <%= chat.message %>
+                <div class="flex  justify-end   ">
+                  <p class="  text-[#E3E6EB] p-2 md:h-[70px] text-xs bg-[#F59E0B] w-[200px]">
+                    <%= chat.message %>
+                  </p>
                 </div>
               <% else %>
                 <div class="flex justify-end  bg-[#887CF2] ">
