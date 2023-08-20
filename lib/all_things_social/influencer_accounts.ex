@@ -43,7 +43,8 @@ defmodule AllThingsSocial.InfluencerAccounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_influencer_account!(id), do: Repo.get!(InfluencerAccount, id)
+  def get_influencer_account!(id),
+    do: Repo.get!(InfluencerAccount, id) |> Repo.preload(:influencer)
 
   @doc """
   Creates a influencer_account.
