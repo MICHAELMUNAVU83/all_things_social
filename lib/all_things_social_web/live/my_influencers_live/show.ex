@@ -49,13 +49,13 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
       Map.put(chat_params, "brand_id", brand_id)
       |> Map.put("influencer_id", influencer_id)
       |> Map.put("content_board_id", content_board_id)
+      |> Map.put("sender", "brand")
 
     if new_chat_params["message"] != "" do
       case Chats.create_chat(new_chat_params) do
         {:ok, _chat} ->
           {:noreply,
            socket
-           |> put_flash(:info, "done")
            |> assign(:chats, Chats.list_chats_for_a_brand_and_influencer(brand_id, influencer_id))
            |> assign(:changeset, changeset)}
       end

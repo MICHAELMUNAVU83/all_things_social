@@ -82,7 +82,15 @@
         <div class="bg-gray-100 h-[80%] flex flex-col-reverse overflow-y-scroll  md:p-4 p-2  w-[100%]">
           <div class="flex flex-col w-[100%]   gap-2">
             <%= for chat <- @chats do %>
-              yvbujnikml
+              <%= if chat.sender == "brand" do %>
+                <div class="flex justify-end bg-[#F59E0B]  ">
+                  <%= chat.message %>
+                </div>
+              <% else %>
+                <div class="flex justify-end  bg-[#887CF2] ">
+                  ubnkml
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
