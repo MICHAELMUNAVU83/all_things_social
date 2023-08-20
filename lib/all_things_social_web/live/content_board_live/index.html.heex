@@ -1,5 +1,3 @@
-<h1>Listing Content boards</h1>
-
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.content_board_index_path(@socket, :index)}>
     <.live_component

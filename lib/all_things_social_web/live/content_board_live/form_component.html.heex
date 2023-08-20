@@ -9,12 +9,21 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :name) %>
-    <%= text_input(f, :name) %>
-    <%= error_tag(f, :name) %>
+    <div class="flex gap-2 w-[80%] mx-auto flex-col">
+      <%= text_input(f, :text,
+        required: true,
+        class:
+          "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+        placeholder: "Name of the board"
+      ) %>
 
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
+      <p class="pt-5">
+        <%= error_tag(f, :text) %>
+      </p>
+
+      <div class="flex justify-end">
+        <%= submit("Save", phx_disable_with: "Saving..." , class: "bg-[#887CF2] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-4 py-2  flex justify-center items-center gap-2 text-white rounded-xl") %>
+      </div>
     </div>
   </.form>
 </div>
