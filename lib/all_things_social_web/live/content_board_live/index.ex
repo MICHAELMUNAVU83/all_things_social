@@ -3,10 +3,18 @@ defmodule AllThingsSocialWeb.ContentBoardLive.Index do
 
   alias AllThingsSocial.ContentBoards
   alias AllThingsSocial.ContentBoards.ContentBoard
+  alias AllThingsSocial.Brands
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :content_boards, list_content_boards())}
+  def mount(_params, session, socket) do
+    logged_in_brand = Brands.get_brand_by_session_token(session["brand_token"])
+
+    content_boards = ContentBoards.list_content_boards_for_a_brand(logged_in_brand.id)
+
+    {:ok,
+     socket
+     |> assign(:logged_in_brand, logged_in_brand)
+     |> assign(:content_boards, content_boards)}
   end
 
   @impl true
@@ -37,7 +45,10 @@ defmodule AllThingsSocialWeb.ContentBoardLive.Index do
     content_board = ContentBoards.get_content_board!(id)
     {:ok, _} = ContentBoards.delete_content_board(content_board)
 
-    {:noreply, assign(socket, :content_boards, list_content_boards())}
+    content_boards =
+      ContentBoards.list_content_boards_for_a_brand(socket.assigns.logged_in_brand.id)
+
+    {:noreply, assign(socket, :content_boards, content_boards)}
   end
 
   defp list_content_boards do

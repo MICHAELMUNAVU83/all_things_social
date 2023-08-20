@@ -26,6 +26,10 @@ defmodule AllThingsSocial.Influencers do
     Repo.get_by(Influencer, email: email)
   end
 
+  def list_influencers do
+    Repo.all(Influencer)
+  end
+
   @doc """
   Gets a influencer by email and password.
 

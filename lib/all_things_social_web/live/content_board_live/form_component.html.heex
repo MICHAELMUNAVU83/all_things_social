@@ -11,6 +11,7 @@
     phx-change="validate"
     phx-submit="save"
   >
+    <%= hidden_input(f, :brand_id, value: @logged_in_brand.id) %>
     <div class="flex gap-2 w-[80%] mx-auto flex-col">
       <%= text_input(f, :name,
         required: true,
@@ -27,7 +28,7 @@
         <%= submit("Save",
           phx_disable_with: "Saving...",
           class:
-            "bg-[#887CF2] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-4 py-2  flex justify-center items-center gap-2 text-white rounded-xl"
+            "bg-[#887CF2] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-8 py-2 text-xl  flex justify-center items-center gap-2 text-white rounded-xl"
         ) %>
       </div>
     </div>

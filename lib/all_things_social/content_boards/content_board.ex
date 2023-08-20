@@ -4,6 +4,7 @@ defmodule AllThingsSocial.ContentBoards.ContentBoard do
 
   schema "content_boards" do
     field :name, :string
+    belongs_to :brand, AllThingsSocial.Brands.Brand
 
     timestamps()
   end
@@ -11,7 +12,7 @@ defmodule AllThingsSocial.ContentBoards.ContentBoard do
   @doc false
   def changeset(content_board, attrs) do
     content_board
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :brand_id])
+    |> validate_required([:name, :brand_id])
   end
 end

@@ -5,6 +5,7 @@ defmodule AllThingsSocial.SocialMediaAccounts.SocialMediaAccount do
   schema "social_media_accounts" do
     field :account_url, :string
     field :platform, :string
+    belongs_to :influencer, AllThingsSocial.Influencers.Influencer
 
     timestamps()
   end
@@ -12,7 +13,7 @@ defmodule AllThingsSocial.SocialMediaAccounts.SocialMediaAccount do
   @doc false
   def changeset(social_media_account, attrs) do
     social_media_account
-    |> cast(attrs, [:account_url, :platform])
-    |> validate_required([:account_url, :platform])
+    |> cast(attrs, [:account_url, :platform, :influencer_id])
+    |> validate_required([:account_url, :platform, :influencer_id])
   end
 end

@@ -21,6 +21,11 @@ defmodule AllThingsSocial.ContentBoards do
     Repo.all(ContentBoard)
   end
 
+  def list_content_boards_for_a_brand(brand_id) do
+    from(c in ContentBoard, where: c.brand_id == ^brand_id)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single content_board.
 

@@ -21,6 +21,31 @@ defmodule AllThingsSocial.SocialMediaAccounts do
     Repo.all(SocialMediaAccount)
   end
 
+  def get_tiktok_followers() do
+    url = "https://scraper-api.smartproxy.com/v1/scrape"
+
+    body = %{
+      "target" => "tiktok_profile",
+      "url" => "https://www.tiktok.com/@azz_iad",
+      "locale" => "en",
+      "geo" => "United States"
+    }
+
+    headers = [
+      {
+        "Content-Type",
+        "application/json"
+      },
+      {
+        "Authorization",
+        "Basic UzAwMDAxMTY0OTA6UCRXMTU5NjA4NTVmMzdiYzU2YmU0NGNkYWM0MTU4YjFiZWJj"
+      }
+    ]
+
+    request_body = Poison.encode!(body)
+    IO.inspect(HTTPoison.post(url, request_body, headers))
+  end
+
   @doc """
   Gets a single social_media_account.
 

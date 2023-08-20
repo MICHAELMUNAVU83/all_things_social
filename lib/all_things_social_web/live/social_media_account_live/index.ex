@@ -5,7 +5,9 @@ defmodule AllThingsSocialWeb.SocialMediaAccountLive.Index do
   alias AllThingsSocial.SocialMediaAccounts.SocialMediaAccount
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
+    # influencer = Influencers.get_influencer_by_session_token(session["user_token"])
+
     {:ok, assign(socket, :social_media_accounts, list_social_media_accounts())}
   end
 

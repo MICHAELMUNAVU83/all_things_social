@@ -1,5 +1,7 @@
 <div>
-  <h2><%= @title %></h2>
+  <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+    <%= @title %>
+  </h1>
 
   <.form
     let={f}
@@ -9,16 +11,37 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :account_url) %>
-    <%= text_input(f, :account_url) %>
-    <%= error_tag(f, :account_url) %>
+    <div class="flex gap-2 w-[80%] mx-auto flex-col">
+      <div class="flex gap-2 flex-col w-[100%]">
+        <%= select(f, :platform, ["Instagram", "Tiktok"],
+          prompt: "Select One",
+          class:
+            "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+        ) %>
+        <p class="pt-5">
+          <%= error_tag(f, :platform) %>
+        </p>
+      </div>
+      <div class="flex gap-2 flex-col w-[100%]">
+        <%= text_input(f, :account_url,
+          class:
+            "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+          placeholder: "Add The Account URL"
+        ) %>
+        <p class="pt-5">
+          <%= error_tag(f, :account_url) %>
+        </p>
+      </div>
 
-    <%= label(f, :platform) %>
-    <%= text_input(f, :platform) %>
-    <%= error_tag(f, :platform) %>
+      <%= hidden_input(f, :influencer_id, value: 1) %>
 
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
+      <div class="flex justify-end">
+        <%= submit("Save",
+          phx_disable_with: "Saving...",
+          class:
+            "bg-[#887CF2] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-8 py-2 text-xl  flex justify-center items-center gap-2 text-white rounded-xl"
+        ) %>
+      </div>
     </div>
   </.form>
 </div>

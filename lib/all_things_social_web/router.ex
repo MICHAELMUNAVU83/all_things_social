@@ -46,6 +46,12 @@ defmodule AllThingsSocialWeb.Router do
     live "/niches/:id", NicheLive.Show, :show
     live "/niches/:id/show/edit", NicheLive.Show, :edit
 
+    live "/social_media_accounts", SocialMediaAccountLive.Index, :index
+    live "/social_media_accounts/new", SocialMediaAccountLive.Index, :new
+    live "/social_media_accounts/:id/edit", SocialMediaAccountLive.Index, :edit
+    live "/social_media_accounts/:id", SocialMediaAccountLive.Show, :show
+    live "/social_media_accounts/:id/show/edit", SocialMediaAccountLive.Show, :edit
+
     live "/rates", RateLive.Index, :index
     live "/rates/new", RateLive.Index, :new
     live "/rates/:id/edit", RateLive.Index, :edit
