@@ -35,6 +35,10 @@ defmodule AllThingsSocialWeb.Router do
          AllInfluencersLive.Index,
          :add_influencer_account
 
+    live "/influencer_accounts/:id/:influencer_account_id/edit",
+         ContentBoardLive.Show,
+         :editinfluenceraccount
+
     live "/content_boards", ContentBoardLive.Index, :index
     live "/content_boards/new", ContentBoardLive.Index, :new
     live "/content_boards/:id/edit", ContentBoardLive.Index, :edit
@@ -44,7 +48,6 @@ defmodule AllThingsSocialWeb.Router do
 
     live "/influencer_accounts", InfluencerAccountLive.Index, :index
     live "/influencer_accounts/new", InfluencerAccountLive.Index, :new
-    live "/influencer_accounts/:id/edit", InfluencerAccountLive.Index, :edit
 
     live "/influencer_accounts/:id", InfluencerAccountLive.Show, :show
     live "/influencer_accounts/:id/show/edit", InfluencerAccountLive.Show, :edit

@@ -32,11 +32,7 @@
               to: Routes.influencer_account_show_path(@socket, :show, influencer_account)
             ) %>
           </span>
-          <span>
-            <%= live_patch("Edit",
-              to: Routes.influencer_account_index_path(@socket, :edit, influencer_account)
-            ) %>
-          </span>
+
           <span>
             <%= link("Delete",
               to: "#",

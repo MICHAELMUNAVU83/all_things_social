@@ -1,3 +1,17 @@
+<%= if @live_action in [:editinfluenceraccount] do %>
+  <.modal return_to={Routes.content_board_show_path(@socket, :show, @content_board)}>
+    <.live_component
+      module={AllThingsSocialWeb.ContentBoardLive.EditInfluencerAccountComponent}
+      id={@influencer_account.id || :new}
+      title={@page_title}
+      action={@live_action}
+      influencer_account={@influencer_account}
+      changeset={@changeset}
+      return_to={Routes.content_board_show_path(@socket, :show, @content_board)}
+    />
+  </.modal>
+<% end %>
+
 <p class="text-[#887CF2] font-bold text-xl"><%= @content_board.name %></p>
 
 <div class="grid grid-cols-4 gap-8">
@@ -14,6 +28,16 @@
 
     <div class="flex flex-col gap-2">
       <%= for account <- @potential_influencer_accounts do %>
+        <%= live_patch("Edit",
+          to:
+            Routes.content_board_show_path(
+              @socket,
+              :editinfluenceraccount,
+              @content_board.id,
+              account
+            ),
+          class: "button"
+        ) %>
         <div class="border-[1px] border-[#887CF2] hover:bg-gray-50 transition-all ease-in-out duration-500 rounded-xl p-2 flex flex-col">
           <div class="flex  items-start gap-2">
             <img src="/images/instagram.jpg" class="w-[50px] h-[50px] rounded-full" alt="" />
@@ -40,5 +64,3 @@
   <div class="bg-white shadow-md min-h-[200px] p-2 rounded-xl hover:scale-105 flex flex-col gap-2 transition-all ease-in-out duration-500 cursor-pointer shadow-gray-300">
   </div>
 </div>
-
-<span><%= live_redirect("Back", to: Routes.content_board_index_path(@socket, :index)) %></span>
