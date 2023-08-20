@@ -1,15 +1,4 @@
-<%= if @live_action in [:show] do %>
-  <.modal return_to={Routes.my_influencers_index_path(@socket, :index)}>
-    <.live_component
-      module={AllThingsSocialWeb.MyInfluencersLive.ShowComponent}
-      id="new"
-      action={@live_action}
-      influencer_account_id={@influencer_account_id}
-      logged_in_brand={@logged_in_brand}
-      return_to={Routes.my_influencers_index_path(@socket, :index)}
-    />
-  </.modal>
-<% end %>
+
 
 <div>
   <div class="flex justify-between items-center">
@@ -102,7 +91,7 @@
             <td>5.6 M</td>
             <td>10</td>
             <td>
-              <%= live_redirect to: Routes.my_influencers_index_path(@socket, :show , influencer_account)  do %>
+              <%= live_redirect to: Routes.my_influencers_show_path(@socket, :show , influencer_account)  do %>
                 View
               <% end %>
             </td>
