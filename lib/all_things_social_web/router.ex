@@ -71,6 +71,13 @@ defmodule AllThingsSocialWeb.Router do
 
     live "/rates/:id", RateLive.Show, :show
     live "/rates/:id/show/edit", RateLive.Show, :edit
+
+    live "/chats", ChatLive.Index, :index
+    live "/chats/new", ChatLive.Index, :new
+    live "/chats/:id/edit", ChatLive.Index, :edit
+
+    live "/chats/:id", ChatLive.Show, :show
+    live "/chats/:id/show/edit", ChatLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

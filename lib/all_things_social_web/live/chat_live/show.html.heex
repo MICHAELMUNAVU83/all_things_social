@@ -1,0 +1,26 @@
+<h1>Show Chat</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.chat_show_path(@socket, :show, @chat)}>
+    <.live_component
+      module={AllThingsSocialWeb.ChatLive.FormComponent}
+      id={@chat.id}
+      title={@page_title}
+      action={@live_action}
+      chat={@chat}
+      return_to={Routes.chat_show_path(@socket, :show, @chat)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+  <li>
+    <strong>Message:</strong>
+    <%= @chat.message %>
+  </li>
+</ul>
+
+<span>
+  <%= live_patch("Edit", to: Routes.chat_show_path(@socket, :edit, @chat), class: "button") %>
+</span> |
+<span><%= live_redirect("Back", to: Routes.chat_index_path(@socket, :index)) %></span>
