@@ -19,7 +19,7 @@
     <div class="flex justify-between items-center">
       <div class="flex gap-2 items-center">
         <p class="text-[#595959] font-bold ">Potential</p>
-        <p class="text-[#595959] font-bold "><%= @content_board.name %></p>
+        <p class="text-[#595959] font-bold "><%= length(@potential_influencer_accounts) %></p>
       </div>
       <p class="text-[#887CF2] text-2xl">
         ...
@@ -56,11 +56,122 @@
   </div>
 
   <div class="bg-white shadow-md min-h-[200px] p-2 rounded-xl hover:scale-105 flex flex-col gap-2 transition-all ease-in-out duration-500 cursor-pointer shadow-gray-300">
+    <div class="flex justify-between items-center">
+      <div class="flex gap-2 items-center">
+        <p class="text-[#595959] font-bold ">Outreached</p>
+        <p class="text-[#595959] font-bold "><%= length(@outreached_influencer_accounts) %></p>
+      </div>
+      <p class="text-[#887CF2] text-2xl">
+        ...
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <%= for account <- @outreached_influencer_accounts do %>
+        <%= live_patch("Edit",
+          to:
+            Routes.content_board_show_path(
+              @socket,
+              :editinfluenceraccount,
+              @content_board.id,
+              account
+            ),
+          class: "button"
+        ) %>
+        <div class="border-[1px] border-[#887CF2] hover:bg-gray-50 transition-all ease-in-out duration-500 rounded-xl p-2 flex flex-col">
+          <div class="flex  items-start gap-2">
+            <img src="/images/instagram.jpg" class="w-[50px] h-[50px] rounded-full" alt="" />
+            <div class="flex  flex-col">
+              <p class="text-[#595959]">
+                Mike
+              </p>
+              <div class="flex gap-2 items-center">
+                insta link
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="bg-white shadow-md min-h-[200px] p-2 rounded-xl hover:scale-105 flex flex-col gap-2 transition-all ease-in-out duration-500 cursor-pointer shadow-gray-300">
+    <div class="flex justify-between items-center">
+      <div class="flex gap-2 items-center">
+        <p class="text-[#595959] font-bold ">Negotiating</p>
+        <p class="text-[#595959] font-bold "><%= length(@negotiating_influencer_accounts) %></p>
+      </div>
+      <p class="text-[#887CF2] text-2xl">
+        ...
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <%= for account <- @negotiating_influencer_accounts do %>
+        <%= live_patch("Edit",
+          to:
+            Routes.content_board_show_path(
+              @socket,
+              :editinfluenceraccount,
+              @content_board.id,
+              account
+            ),
+          class: "button"
+        ) %>
+        <div class="border-[1px] border-[#887CF2] hover:bg-gray-50 transition-all ease-in-out duration-500 rounded-xl p-2 flex flex-col">
+          <div class="flex  items-start gap-2">
+            <img src="/images/instagram.jpg" class="w-[50px] h-[50px] rounded-full" alt="" />
+            <div class="flex  flex-col">
+              <p class="text-[#595959]">
+                Mike
+              </p>
+              <div class="flex gap-2 items-center">
+                insta link
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="bg-white shadow-md min-h-[200px] p-2 rounded-xl hover:scale-105 flex flex-col gap-2 transition-all ease-in-out duration-500 cursor-pointer shadow-gray-300">
+    <div class="flex justify-between items-center">
+      <div class="flex gap-2 items-center">
+        <p class="text-[#595959] font-bold ">Active</p>
+        <p class="text-[#595959] font-bold "><%= length(@active_influencer_accounts) %></p>
+      </div>
+      <p class="text-[#887CF2] text-2xl">
+        ...
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <%= for account <- @active_influencer_accounts do %>
+        <%= live_patch("Edit",
+          to:
+            Routes.content_board_show_path(
+              @socket,
+              :editinfluenceraccount,
+              @content_board.id,
+              account
+            ),
+          class: "button"
+        ) %>
+        <div class="border-[1px] border-[#887CF2] hover:bg-gray-50 transition-all ease-in-out duration-500 rounded-xl p-2 flex flex-col">
+          <div class="flex  items-start gap-2">
+            <img src="/images/instagram.jpg" class="w-[50px] h-[50px] rounded-full" alt="" />
+            <div class="flex  flex-col">
+              <p class="text-[#595959]">
+                Mike
+              </p>
+              <div class="flex gap-2 items-center">
+                insta link
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
