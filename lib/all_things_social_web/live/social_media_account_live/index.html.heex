@@ -7,6 +7,7 @@
       id={@social_media_account.id || :new}
       title={@page_title}
       action={@live_action}
+      logged_in_influencer={@logged_in_influencer}
       social_media_account={@social_media_account}
       return_to={Routes.social_media_account_index_path(@socket, :index)}
     />

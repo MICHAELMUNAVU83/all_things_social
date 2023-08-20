@@ -3,10 +3,18 @@ defmodule AllThingsSocialWeb.NicheLive.Index do
 
   alias AllThingsSocial.Niches
   alias AllThingsSocial.Niches.Niche
+  alias AllThingsSocial.Influencers
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :niches, list_niches())}
+  def mount(_params, session, socket) do
+    logged_in_influencer =
+      Influencers.get_influencer_by_session_token(session["influencer_token"])
+
+    {:ok,
+     socket
+     |> assign(:niches, list_niches())
+     |> assign(:page_title, "Listing Niches")
+     |> assign(:logged_in_influencer, logged_in_influencer)}
   end
 
   @impl true

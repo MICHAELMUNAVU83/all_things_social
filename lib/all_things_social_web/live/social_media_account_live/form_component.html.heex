@@ -33,7 +33,7 @@
         </p>
       </div>
 
-      <%= hidden_input(f, :influencer_id, value: 1) %>
+      <%= hidden_input(f, :influencer_id, value: @logged_in_influencer.id) %>
 
       <div class="flex justify-end">
         <%= submit("Save",

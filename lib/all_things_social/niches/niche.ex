@@ -4,6 +4,7 @@ defmodule AllThingsSocial.Niches.Niche do
 
   schema "niches" do
     field :name, :string
+    belongs_to :influencer, AllThingsSocial.Influencers.Influencer
 
     timestamps()
   end
@@ -11,7 +12,7 @@ defmodule AllThingsSocial.Niches.Niche do
   @doc false
   def changeset(niche, attrs) do
     niche
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :influencer_id])
+    |> validate_required([:name, :influencer_id])
   end
 end

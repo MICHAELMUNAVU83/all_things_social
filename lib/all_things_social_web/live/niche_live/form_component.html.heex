@@ -1,5 +1,7 @@
 <div>
-  <h2><%= @title %></h2>
+  <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+    <%= @title %>
+  </h1>
 
   <.form
     let={f}
@@ -9,12 +11,27 @@
     phx-change="validate"
     phx-submit="save"
   >
-    <%= label(f, :name) %>
-    <%= text_input(f, :name) %>
-    <%= error_tag(f, :name) %>
+    <div class="flex gap-2 w-[80%] mx-auto flex-col">
+      <div class="flex gap-2 flex-col w-[100%]">
+        <%= text_input(f, :name,
+          class:
+            "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
+          placeholder: "Name of Niche"
+        ) %>
+        <p class="pt-5">
+          <%= error_tag(f, :name) %>
+        </p>
+      </div>
 
-    <div>
-      <%= submit("Save", phx_disable_with: "Saving...") %>
+      <%= hidden_input(f, :influencer_id, value: @logged_in_influencer.id) %>
+
+      <div class="flex justify-end">
+        <%= submit("Save",
+          phx_disable_with: "Saving...",
+          class:
+            "bg-[#887CF2] cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 px-8 py-2 text-xl  flex justify-center items-center gap-2 text-white rounded-xl"
+        ) %>
+      </div>
     </div>
   </.form>
 </div>
