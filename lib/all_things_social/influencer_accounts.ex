@@ -21,6 +21,10 @@ defmodule AllThingsSocial.InfluencerAccounts do
     Repo.all(InfluencerAccount)
   end
 
+  def list_influencer_accounts_for_a_brand(brand_id) do
+    from(i in InfluencerAccount, where: i.brand_id == ^brand_id) |> Repo.all()
+  end
+
   @doc """
   Gets a single influencer_account.
 
