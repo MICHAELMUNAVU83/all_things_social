@@ -3,10 +3,18 @@ defmodule AllThingsSocialWeb.RateLive.Index do
 
   alias AllThingsSocial.Rates
   alias AllThingsSocial.Rates.Rate
+  alias AllThingsSocial.Influencers
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :rates, list_rates())}
+  def mount(_params, session, socket) do
+    logged_in_influencer =
+      Influencers.get_influencer_by_session_token(session["influencer_token"])
+
+    {:ok,
+     socket
+     |> assign(:rates, list_rates())
+     |> assign(:page_title, "Listing Rates")
+     |> assign(:logged_in_influencer, logged_in_influencer)}
   end
 
   @impl true
