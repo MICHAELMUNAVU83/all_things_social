@@ -7,10 +7,9 @@ defmodule AllThingsSocialWeb.ContentBoardLive.EditInfluencerAccountComponent do
     <div>
       <div id="myModal" class="modal">
         <div class="modal-content pt-12 ">
-          <div class="flex items-center gap-2">
-            <%= Heroicons.icon("heart", type: "outline", class: "h-4 text-red-500 w-4") %>
-            <p class="text-xl font-semibold">Influencer highlights</p>
-          </div>
+          <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            Change Column for this Celebrity
+          </h1>
 
           <.form
             let={f}
