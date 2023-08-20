@@ -1,0 +1,42 @@
+<main>
+  <%= if @flash["info"] do %>
+    <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">
+      <%= live_flash(@flash, :info) %>
+    </p>
+  <% end %>
+
+  <%= if @flash["error"] do %>
+    <p class="alert alert-danger" role="alert" phx-click="lv:clear-flash" phx-value-key="error">
+      <%= live_flash(@flash, :error) %>
+    </p>
+  <% end %>
+
+  <div class="flex flex-col">
+    <div class="flex flex-col gap-4  bg-gradient-to-br from-purple-100 py-4 px-2 via-purple-100 to-white">
+      <div class="flex justify-between items-center ">
+        <p class="dancing text-[#887CF2]">All Things Social</p>
+
+        <div class="flex gap-2 items-center">
+          <p>Michael Munavu</p>
+
+          <%= Heroicons.icon("chevron-down", type: "outline", class: "h-4 w-4") %>
+        </div>
+      </div>
+      <div class="flex justify-between items-center ">
+        <div class="flex gap-8  text-[#595959] text-xs font-bold uppercase items-center">
+          <p>Boards</p>
+          <p>Discover Influencers</p>
+          <p>My Influencers</p>
+        </div>
+        <div class="flec gap-2 text-sm items-center">
+          <button class="bg-gradient-to-r cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white px-2 py-1 rounded-md">
+            Pay Premium
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="bg-[#EEF0F8] flex flex-col gap-4 px-8 pt-8 h-[100vh]">
+      <%= @inner_content %>
+    </div>
+  </div>
+</main>

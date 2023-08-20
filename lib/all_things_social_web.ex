@@ -51,6 +51,15 @@ defmodule AllThingsSocialWeb do
     end
   end
 
+  def brand_live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {AllThingsSocialWeb.LayoutView, "brandlive.html"}
+
+      unquote(view_helpers())
+    end
+  end
+
   def live_component do
     quote do
       use Phoenix.LiveComponent

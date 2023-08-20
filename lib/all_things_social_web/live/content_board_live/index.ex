@@ -1,5 +1,5 @@
 defmodule AllThingsSocialWeb.ContentBoardLive.Index do
-  use AllThingsSocialWeb, :live_view
+  use AllThingsSocialWeb, :brand_live_view
 
   alias AllThingsSocial.ContentBoards
   alias AllThingsSocial.ContentBoards.ContentBoard
