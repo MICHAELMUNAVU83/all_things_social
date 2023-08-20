@@ -3,7 +3,7 @@ defmodule AllThingsSocial.Chats.Chat do
   import Ecto.Changeset
 
   schema "chats" do
-    field :message, :string
+    field :message, :stringb
     belongs_to :brand, AllThingsSocial.Brands.Brand
     belongs_to :influencer, AllThingsSocial.InfluencerAccounts.InfluencerAccount
     belongs_to :content_board, AllThingsSocial.ContentBoards.ContentBoard

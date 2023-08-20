@@ -22,5 +22,6 @@
 
 <span>
   <%= live_patch("Edit", to: Routes.chat_show_path(@socket, :edit, @chat), class: "button") %>
-</span> |
+</span>
+|
 <span><%= live_redirect("Back", to: Routes.chat_index_path(@socket, :index)) %></span>

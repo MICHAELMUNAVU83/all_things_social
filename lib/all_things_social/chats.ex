@@ -21,6 +21,13 @@ defmodule AllThingsSocial.Chats do
     Repo.all(Chat)
   end
 
+  def list_chats_for_a_brand_and_influencer(brand_id, influencer_id) do
+    from(chat in Chat,
+      where: chat.brand_id == ^brand_id and chat.influencer_id == ^influencer_id
+    )
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single chat.
 
