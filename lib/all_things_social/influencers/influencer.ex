@@ -117,7 +117,10 @@ defmodule AllThingsSocial.Influencers.Influencer do
   If there is no influencer or the influencer doesn't have a password, we call
   `Bcrypt.no_user_verify/0` to avoid timing attacks.
   """
-  def valid_password?(%AllThingsSocial.Influencers.Influencer{hashed_password: hashed_password}, password)
+  def valid_password?(
+        %AllThingsSocial.Influencers.Influencer{hashed_password: hashed_password},
+        password
+      )
       when is_binary(hashed_password) and byte_size(password) > 0 do
     Bcrypt.verify_pass(password, hashed_password)
   end

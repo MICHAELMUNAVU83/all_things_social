@@ -21,7 +21,11 @@ defmodule AllThingsSocial.RatesTest do
     end
 
     test "create_rate/1 with valid data creates a rate" do
-      valid_attrs = %{description: "some description", platform: "some platform", amount: "some amount"}
+      valid_attrs = %{
+        description: "some description",
+        platform: "some platform",
+        amount: "some amount"
+      }
 
       assert {:ok, %Rate{} = rate} = Rates.create_rate(valid_attrs)
       assert rate.description == "some description"
@@ -35,7 +39,12 @@ defmodule AllThingsSocial.RatesTest do
 
     test "update_rate/2 with valid data updates the rate" do
       rate = rate_fixture()
-      update_attrs = %{description: "some updated description", platform: "some updated platform", amount: "some updated amount"}
+
+      update_attrs = %{
+        description: "some updated description",
+        platform: "some updated platform",
+        amount: "some updated amount"
+      }
 
       assert {:ok, %Rate{} = rate} = Rates.update_rate(rate, update_attrs)
       assert rate.description == "some updated description"

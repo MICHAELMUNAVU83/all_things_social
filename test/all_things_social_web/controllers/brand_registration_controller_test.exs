@@ -13,7 +13,9 @@ defmodule AllThingsSocialWeb.BrandRegistrationControllerTest do
     end
 
     test "redirects if already logged in", %{conn: conn} do
-      conn = conn |> log_in_brand(brand_fixture()) |> get(Routes.brand_registration_path(conn, :new))
+      conn =
+        conn |> log_in_brand(brand_fixture()) |> get(Routes.brand_registration_path(conn, :new))
+
       assert redirected_to(conn) == "/"
     end
   end

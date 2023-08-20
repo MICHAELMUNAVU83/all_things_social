@@ -48,7 +48,9 @@ defmodule AllThingsSocialWeb.ContentBoardLiveTest do
     test "updates content_board in listing", %{conn: conn, content_board: content_board} do
       {:ok, index_live, _html} = live(conn, Routes.content_board_index_path(conn, :index))
 
-      assert index_live |> element("#content_board-#{content_board.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#content_board-#{content_board.id} a", "Edit")
+             |> render_click() =~
                "Edit Content board"
 
       assert_patch(index_live, Routes.content_board_index_path(conn, :edit, content_board))
@@ -70,7 +72,10 @@ defmodule AllThingsSocialWeb.ContentBoardLiveTest do
     test "deletes content_board in listing", %{conn: conn, content_board: content_board} do
       {:ok, index_live, _html} = live(conn, Routes.content_board_index_path(conn, :index))
 
-      assert index_live |> element("#content_board-#{content_board.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#content_board-#{content_board.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#content_board-#{content_board.id}")
     end
   end
@@ -79,14 +84,16 @@ defmodule AllThingsSocialWeb.ContentBoardLiveTest do
     setup [:create_content_board]
 
     test "displays content_board", %{conn: conn, content_board: content_board} do
-      {:ok, _show_live, html} = live(conn, Routes.content_board_show_path(conn, :show, content_board))
+      {:ok, _show_live, html} =
+        live(conn, Routes.content_board_show_path(conn, :show, content_board))
 
       assert html =~ "Show Content board"
       assert html =~ content_board.name
     end
 
     test "updates content_board within modal", %{conn: conn, content_board: content_board} do
-      {:ok, show_live, _html} = live(conn, Routes.content_board_show_path(conn, :show, content_board))
+      {:ok, show_live, _html} =
+        live(conn, Routes.content_board_show_path(conn, :show, content_board))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Content board"

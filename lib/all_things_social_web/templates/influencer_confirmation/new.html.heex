@@ -1,15 +1,17 @@
 <h1>Resend confirmation instructions</h1>
 
 <.form let={f} for={:influencer} action={Routes.influencer_confirmation_path(@conn, :create)}>
-  <%= label f, :email %>
-  <%= email_input f, :email, required: true %>
+  <%= label(f, :email) %>
+  <%= email_input(f, :email, required: true) %>
 
   <div>
-    <%= submit "Resend confirmation instructions" %>
+    <%= submit("Resend confirmation instructions") %>
   </div>
 </.form>
 
 <p>
-  <%= link "Register", to: Routes.influencer_registration_path(@conn, :new) %> |
-  <%= link "Log in", to: Routes.influencer_session_path(@conn, :new) %>
+  <%= link("Register", to: Routes.influencer_registration_path(@conn, :new)) %> | <%= link(
+    "Log in",
+    to: Routes.influencer_session_path(@conn, :new)
+  ) %>
 </p>

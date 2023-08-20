@@ -1,10 +1,12 @@
 <ul>
-<%= if @current_brand do %>
-  <li><%= @current_brand.email %></li>
-  <li><%= link "Settings", to: Routes.brand_settings_path(@conn, :edit) %></li>
-  <li><%= link "Log out", to: Routes.brand_session_path(@conn, :delete), method: :delete %></li>
-<% else %>
-  <li><%= link "Register", to: Routes.brand_registration_path(@conn, :new) %></li>
-  <li><%= link "Log in", to: Routes.brand_session_path(@conn, :new) %></li>
-<% end %>
+  <%= if @current_brand do %>
+    <li><%= @current_brand.email %></li>
+    <li><%= link("Settings", to: Routes.brand_settings_path(@conn, :edit)) %></li>
+    <li>
+      <%= link("Log out", to: Routes.brand_session_path(@conn, :delete), method: :delete) %>
+    </li>
+  <% else %>
+    <li><%= link("Register", to: Routes.brand_registration_path(@conn, :new)) %></li>
+    <li><%= link("Log in", to: Routes.brand_session_path(@conn, :new)) %></li>
+  <% end %>
 </ul>

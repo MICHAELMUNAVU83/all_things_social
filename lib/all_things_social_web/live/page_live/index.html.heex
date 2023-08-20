@@ -1,3 +1,530 @@
-<div>
-  Home page
+<div class=" bg-gradient-to-bl from-purple-300 via-purple-100 to-white flex pt-36 flex-col justify-center items-center">
+  <div class="md:w-[80%] w-[95%] mx-auto flex md:flex-row flex-col justify-between ">
+    <div class="flex gap-6  text-xl flex-col md:w-[60%]">
+      <div class="flex gap-2  text-[#887CF2] items-center">
+        <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+        <p>Influencer management tool for brands and agencies</p>
+      </div>
+      <p class="md:text-6xl text-3xl text-[#595959] font-bold ">
+        Organize all your influencers and collabs
+        <span class="text-[#887CF2]">easily in one place</span>
+      </p>
+      <div class="flex gap-4  text-[#595959] items-center">
+        <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+        <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+        <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+      </div>
+    </div>
+    <div class="md:w-[30%] my-8 md:my-0 w-[90%] mx-auto flex flex-col md:rotate-12 rotate-6 justify-center items-center">
+      <img src="/images/instagram.jpg" class="w-[100%] h-[400px] object-cover" alt="instagram" />
+      <div class="bg-white py-4 w-[100%] flex justify-between items-center  h-[50px]">
+        <div class="flex justify-center  gap-2 items-center">
+          <%= Heroicons.icon("heart", type: "outline", class: "h-4 text-red-500 w-4") %>
+
+          <%= Heroicons.icon("chat-bubble-oval-left", type: "outline", class: "h-4  w-4") %>
+          <%= Heroicons.icon("paper-airplane", type: "outline", class: "h-4 rotate-12  w-4") %>
+        </div>
+
+        <%= Heroicons.icon("bookmark", type: "outline", class: "h-4 rotate-12  w-4") %>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col justify-center items-center gap-2">
+    <p class="text-[#595959]  uppercase font-bold text-xl">
+      Join Us Now
+    </p>
+    <div class="flex justify-center items-center gap-4 w-[100%]">
+      <button class="bg-[#887CF2] text-white px-4 py-2 rounded-md">
+        I am A Brand
+      </button>
+
+      <button class="bg-[#887CF2] text-white px-4 py-2 rounded-md">
+        I am An Influencer
+      </button>
+    </div>
+  </div>
+  <p class="text-[#595959] text-xl text-center font-bold mt-4">
+    Basically It is a CRM for brands to manage influencers and a way to get
+    influencers paid
+  </p>
+</div>
+
+<div class="bg-gradient-to-br pt-8  from-white via-purple-100 to-purple-300 ">
+  <p class="text-[#595959] text-2xl text-center font-bold ">
+    How does it work for brands?
+  </p>
+
+  <div class="md:w-[80%] w-[90%] my-4 mx-auto flex md:flex-row-reverse flex-col justify-between ">
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <div class="gap-1 text-2xl font-semibold flex flex-col">
+        <div class="gap-2 flex text-[#887CF2] items-center">
+          <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+          <p>Organize your influencers,</p>
+        </div>
+        <p class="text-[#595959]">based on your needs</p>
+      </div>
+      <p class="text-gray-600">
+        Add your current and potential influencers to the CRM, and organize
+        them into boards and columns
+      </p>
+
+      <div class="flex gap-2 text-gray-600 flex-col">
+        <div class="flex gap-2 items-center">
+          <%= Heroicons.icon("chevron-right", type: "outline", class: "h-4 w-4") %>
+          <p>by status (Potential, Outreached, …)</p>
+        </div>
+        <div class="flex gap-2 items-center">
+          <%= Heroicons.icon("chevron-right", type: "outline", class: "h-4 w-4") %>
+          <p>by niche (gym focus, vegan focus, …)</p>
+        </div>
+
+        <p class="text-gray-600">
+          …or other criteria. Additionally, you can add labels to every
+          influencer, and filter your board by labels.
+        </p>
+      </div>
+    </div>
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <img src="/images/instagram.jpg" class="w-[100%] h-[400px] object-cover" alt="instagram" />
+    </div>
+  </div>
+
+  <p class="bg-[#887CF2] h-[1px] md:w-[80%] w-[90%] mx-auto  " />
+
+  <div class="md:w-[80%] w-[90%] my-4 mx-auto flex md:flex-row flex-col justify-between ">
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <div class="gap-1 text-2xl font-semibold flex flex-col">
+        <div class="gap-2 flex text-[#887CF2] items-center">
+          <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+          <p>Build strong relationships</p>
+        </div>
+        <p class="text-[#595959]">with your influencers</p>
+      </div>
+      <p class="text-gray-600">
+        Every influencer profile can be enriched with comments, labels, and
+        notes: contact and shipping info, birthdays, preferences, and
+        historical data.
+      </p>
+
+      <p class="text-gray-600">
+        After all, influencer marketing is all about influencer
+        relationships – and influencer CRM helps a lot here.
+      </p>
+    </div>
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <img src="/images/instagram.jpg" class="w-[100%] h-[400px] object-cover" alt="instagram" />
+    </div>
+  </div>
+
+  <p class="bg-[#887CF2] h-[1px] md:w-[80%] w-[90%] mx-auto  " />
+
+  <div class="md:w-[80%] w-[90%] my-4 mx-auto flex md:flex-row-reverse flex-col justify-between ">
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <div class="gap-1 text-2xl font-semibold flex flex-col">
+        <div class="gap-2 flex text-[#887CF2] items-center">
+          <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+          <p>See detailed insights</p>
+        </div>
+        <p class="text-[#595959]">for every influencer account</p>
+      </div>
+      <p class="text-gray-600">
+        Get detailed profile analytics of every influencer:
+      </p>
+
+      <p class="text-gray-600">
+        reach, engagement, monthly follower growth, audience demographics,
+        similar profiles, popular posts, notable followers, and much more.
+      </p>
+    </div>
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <img src="/images/instagram.jpg" class="w-[100%] h-[400px] object-cover" alt="instagram" />
+    </div>
+  </div>
+
+  <p class="bg-[#887CF2] h-[1px] md:w-[80%] w-[90%] mx-auto  " />
+
+  <div class="bg-gradient-to-tr from-purple-200 via-purple-100 h-[300px] to-white flex flex-col gap-2 justify-center items-center">
+    <p class="text-[#595959] text-6xl text-center font-bold">
+      Want to know more?
+    </p>
+
+    <div class="gap-2 flex flex-col font-semibold justify-center items-center">
+      <button class="border-[#887CF2] border-2 uppercase w-[300px] text-[#887CF2]  py-4 rounded-md">
+        Book A Demo Call
+      </button>
+      <button class="bg-[#887CF2] border-2 uppercase w-[300px] text-white py-4 rounded-md">
+        Get Started as a Brand
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="bg-gradient-to-br pt-8  from-white via-purple-100 to-purple-300 ">
+  <p class="text-[#595959] text-2xl text-center font-bold ">
+    How does it work for influencers?
+  </p>
+
+  <div class="md:w-[80%] w-[90%] my-4 mx-auto flex md:flex-row-reverse flex-col justify-between ">
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <div class="gap-1 text-2xl font-semibold flex flex-col">
+        <div class="gap-2 flex text-[#887CF2] items-center">
+          <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+          <p>Organize your influencers,</p>
+        </div>
+        <p class="text-[#595959]">based on your needs</p>
+      </div>
+      <p class="text-gray-600">
+        Add your current and potential influencers to the CRM, and organize
+        them into boards and columns
+      </p>
+
+      <div class="flex gap-2 text-gray-600 flex-col">
+        <div class="flex gap-2 items-center">
+          <%= Heroicons.icon("chevron-right", type: "outline", class: "h-4 w-4") %>
+          <p>by status (Potential, Outreached, …)</p>
+        </div>
+        <div class="flex gap-2 items-center">
+          <%= Heroicons.icon("chevron-right", type: "outline", class: "h-4 w-4") %>
+          <p>by niche (gym focus, vegan focus, …)</p>
+        </div>
+
+        <p class="text-gray-600">
+          …or other criteria. Additionally, you can add labels to every
+          influencer, and filter your board by labels.
+        </p>
+      </div>
+    </div>
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <img src="/images/instagram.jpg" class="w-[100%] h-[400px] object-cover" alt="instagram" />
+    </div>
+  </div>
+
+  <p class="bg-[#887CF2] h-[1px] md:w-[80%] w-[90%] mx-auto  " />
+
+  <div class="md:w-[80%] w-[90%] my-4 mx-auto flex md:flex-row flex-col justify-between ">
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <div class="gap-1 text-2xl font-semibold flex flex-col">
+        <div class="gap-2 flex text-[#887CF2] items-center">
+          <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+          <p>Build strong relationships</p>
+        </div>
+        <p class="text-[#595959]">with your influencers</p>
+      </div>
+      <p class="text-gray-600">
+        Every influencer profile can be enriched with comments, labels, and
+        notes: contact and shipping info, birthdays, preferences, and
+        historical data.
+      </p>
+
+      <p class="text-gray-600">
+        After all, influencer marketing is all about influencer
+        relationships – and influencer CRM helps a lot here.
+      </p>
+    </div>
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <img src="/images/instagram.jpg" class="w-[100%] h-[400px] object-cover" alt="instagram" />
+    </div>
+  </div>
+
+  <p class="bg-[#887CF2] h-[1px] md:w-[80%] w-[90%] mx-auto  " />
+
+  <div class="md:w-[80%] w-[90%] my-4 mx-auto flex md:flex-row-reverse flex-col justify-between ">
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <div class="gap-1 text-2xl font-semibold flex flex-col">
+        <div class="gap-2 flex text-[#887CF2] items-center">
+          <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+          <p>See detailed insights</p>
+        </div>
+        <p class="text-[#595959]">for every influencer account</p>
+      </div>
+      <p class="text-gray-600">
+        Get detailed profile analytics of every influencer:
+      </p>
+
+      <p class="text-gray-600">
+        reach, engagement, monthly follower growth, audience demographics,
+        similar profiles, popular posts, notable followers, and much more.
+      </p>
+    </div>
+    <div class="flex md:w-[40%] w-[100%]  flex-col gap-4">
+      <img src="/images/instagram.jpg" class="w-[100%] h-[400px] object-cover" alt="instagram" />
+    </div>
+  </div>
+
+  <p class="bg-[#887CF2] h-[1px] md:w-[80%] w-[90%] mx-auto  " />
+
+  <div class="bg-gradient-to-tr from-purple-200 via-purple-100 h-[300px] to-white flex flex-col gap-2 justify-center items-center">
+    <p class="text-[#595959] text-6xl text-center font-bold">
+      Join As An Influencer
+    </p>
+
+    <div class="gap-2 flex flex-col font-semibold justify-center items-center">
+      <button class="border-[#887CF2] border-2 uppercase w-[300px] text-[#887CF2]  py-4 rounded-md">
+        Book A Demo Call
+      </button>
+      <button class="bg-[#887CF2] border-2 uppercase w-[300px] text-white py-4 rounded-md">
+        Get Started as an Influencer
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="md:h-[100vh] bg-gradient-to-tr py-8 from-purple-300 via-purple-100 to-white ">
+  <div class="flex flex-col gap-6">
+    <div class=" text-[#595959] md:w-[70%] w-[80%] mx-auto text-center md:text-5xl text-3xl font-bold items-center ">
+      You will get an influencer CRM , influencer search and analytics
+      <span class="text-[#887CF2]">all in one place</span>
+    </div>
+
+    <div class="md:w-[80%] w-[90%] grid md:grid-cols-3 gap-4 mx-auto">
+      <div class="bg-white h-[450px] border-[1px] border-[#887CF2]/50 rounded-md mt-[30px] flex flex-col justify-between ">
+        <div class="h-[50px] border-b-2 text-[#887CF2] font-semibold border-[#887CF2] rounded-t-xl flex justify-center  items-center  ">
+          AllThingsSocial Expert
+        </div>
+
+        <div class="flex flex-col px-4 py-2 gap-2">
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+          <p class="text-2xl font-bold text-[#887CF2]">KSH 100</p>
+          <p>per month</p>
+        </div>
+
+        <div class="flex pb-4 justify-center items-center">
+          <button class="bg-[#887CF2] text-white px-4 py-2 rounded-md">
+            Get Started
+          </button>
+        </div>
+      </div>
+      <div class="bg-white border-[1px] border-[#887CF2]/50 rounded-md border-t-0 rounded-t-xl h-[480px] flex flex-col">
+        <div class="h-[30px] bg-[#887CF2] rounded-t-xl flex justify-center font-semibold items-center text-white ">
+          Most Popular
+        </div>
+        <div class="flex h-[450px] flex-col justify-between ">
+          <div class="h-[50px] border-b-2 text-[#887CF2] font-semibold border-[#887CF2] rounded-t-xl flex justify-center  items-center  ">
+            AllThingsSocial Expert
+          </div>
+
+          <div class="flex flex-col px-4 py-2 gap-2">
+            <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+              <%= Heroicons.icon("check",
+                type: "outline",
+                class: "h-4 text-[#595959] rotate-12 w-4"
+              ) %>
+              <p>Acess Brands</p>
+            </div>
+            <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+              <%= Heroicons.icon("check",
+                type: "outline",
+                class: "h-4 text-[#595959] rotate-12 w-4"
+              ) %>
+              <p>Acess Brands</p>
+            </div>
+            <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+              <%= Heroicons.icon("check",
+                type: "outline",
+                class: "h-4 text-[#595959] rotate-12 w-4"
+              ) %>
+              <p>Acess Brands</p>
+            </div>
+            <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+              <%= Heroicons.icon("check",
+                type: "outline",
+                class: "h-4 text-[#595959] rotate-12 w-4"
+              ) %>
+              <p>Acess Brands</p>
+            </div>
+            <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+              <%= Heroicons.icon("check",
+                type: "outline",
+                class: "h-4 text-[#595959] rotate-12 w-4"
+              ) %>
+              <p>Acess Brands</p>
+            </div>
+            <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+              <%= Heroicons.icon("check",
+                type: "outline",
+                class: "h-4 text-[#595959] rotate-12 w-4"
+              ) %>
+              <p>Acess Brands</p>
+            </div>
+          </div>
+          <div class="flex flex-col justify-center items-center">
+            <p class="text-2xl font-bold text-[#887CF2]">KSH 100</p>
+            <p>per month</p>
+          </div>
+
+          <div class="flex pb-4 justify-center items-center">
+            <button class="bg-[#887CF2] text-white px-4 py-2 rounded-md">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white h-[450px] border-[1px] border-[#887CF2]/50 rounded-md mt-[30px] flex flex-col justify-between ">
+        <div class="h-[50px] border-b-2 text-[#887CF2] font-semibold border-[#887CF2] rounded-t-xl flex justify-center  items-center  ">
+          AllThingsSocial Expert
+        </div>
+
+        <div class="flex flex-col px-4 py-2 gap-2">
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+          <div class="flex items-center gap-1 border-b-2 border-[#595959] text-gray-600 border-dashed">
+            <%= Heroicons.icon("check",
+              type: "outline",
+              class: "h-4 text-[#595959] rotate-12 w-4"
+            ) %>
+            <p>Acess Brands</p>
+          </div>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+          <p class="text-2xl font-bold text-[#887CF2]">KSH 100</p>
+          <p>per month</p>
+        </div>
+
+        <div class="flex pb-4 justify-center items-center">
+          <button class="bg-[#887CF2] text-white px-4 py-2 rounded-md">
+            Get Started
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-[#F2EDF9] w-[100%] ">
+  <div class="h-[200px]  bg-white/80 md:w-[400px] mx-auto rounded-b-full flex justify-between items-center" />
+
+  <div class="w-[80%] text-gray-600 flex justify-center items-center gap-4 mx-auto">
+    <div class="w-[30%] flex justify-center items-center flex-col gap-2">
+      <p class="text-[#595959] text-xl font-bold mt-4">About Us</p>
+      <div class="flex flex-col gap-1">
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+      </div>
+    </div>
+    <div class="w-[30%] flex justify-center items-center flex-col gap-2">
+      <p class="text-[#595959] text-xl font-bold mt-4">About Us</p>
+      <div class="flex flex-col gap-1">
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+      </div>
+    </div>
+    <div class="w-[30%] flex justify-center items-center flex-col gap-2">
+      <p class="text-[#595959] text-xl font-bold mt-4">About Us</p>
+      <div class="flex flex-col gap-1">
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+        <p>
+          <a href="#">About Us</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-[80%] py-4 text-[#595959] flex flex-col  gap-1 mx-auto">
+    <p>© 2023 AllThingsSocial Marketing . All rights reserved.</p>
+    <p>Privacy Policy • Terms and Conditions • Cookie Policy</p>
+  </div>
 </div>

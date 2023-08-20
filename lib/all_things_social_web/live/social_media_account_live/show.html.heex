@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Account url:</strong>
     <%= @social_media_account.account_url %>
@@ -24,8 +23,13 @@
     <strong>Platform:</strong>
     <%= @social_media_account.platform %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.social_media_account_show_path(@socket, :edit, @social_media_account), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.social_media_account_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit",
+    to: Routes.social_media_account_show_path(@socket, :edit, @social_media_account),
+    class: "button"
+  ) %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.social_media_account_index_path(@socket, :index)) %></span>

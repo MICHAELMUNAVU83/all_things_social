@@ -45,13 +45,21 @@ defmodule AllThingsSocialWeb.InfluencerAccountLiveTest do
       assert html =~ "some column"
     end
 
-    test "updates influencer_account in listing", %{conn: conn, influencer_account: influencer_account} do
+    test "updates influencer_account in listing", %{
+      conn: conn,
+      influencer_account: influencer_account
+    } do
       {:ok, index_live, _html} = live(conn, Routes.influencer_account_index_path(conn, :index))
 
-      assert index_live |> element("#influencer_account-#{influencer_account.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#influencer_account-#{influencer_account.id} a", "Edit")
+             |> render_click() =~
                "Edit Influencer account"
 
-      assert_patch(index_live, Routes.influencer_account_index_path(conn, :edit, influencer_account))
+      assert_patch(
+        index_live,
+        Routes.influencer_account_index_path(conn, :edit, influencer_account)
+      )
 
       assert index_live
              |> form("#influencer_account-form", influencer_account: @invalid_attrs)
@@ -67,10 +75,16 @@ defmodule AllThingsSocialWeb.InfluencerAccountLiveTest do
       assert html =~ "some updated column"
     end
 
-    test "deletes influencer_account in listing", %{conn: conn, influencer_account: influencer_account} do
+    test "deletes influencer_account in listing", %{
+      conn: conn,
+      influencer_account: influencer_account
+    } do
       {:ok, index_live, _html} = live(conn, Routes.influencer_account_index_path(conn, :index))
 
-      assert index_live |> element("#influencer_account-#{influencer_account.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#influencer_account-#{influencer_account.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#influencer_account-#{influencer_account.id}")
     end
   end
@@ -79,19 +93,27 @@ defmodule AllThingsSocialWeb.InfluencerAccountLiveTest do
     setup [:create_influencer_account]
 
     test "displays influencer_account", %{conn: conn, influencer_account: influencer_account} do
-      {:ok, _show_live, html} = live(conn, Routes.influencer_account_show_path(conn, :show, influencer_account))
+      {:ok, _show_live, html} =
+        live(conn, Routes.influencer_account_show_path(conn, :show, influencer_account))
 
       assert html =~ "Show Influencer account"
       assert html =~ influencer_account.column
     end
 
-    test "updates influencer_account within modal", %{conn: conn, influencer_account: influencer_account} do
-      {:ok, show_live, _html} = live(conn, Routes.influencer_account_show_path(conn, :show, influencer_account))
+    test "updates influencer_account within modal", %{
+      conn: conn,
+      influencer_account: influencer_account
+    } do
+      {:ok, show_live, _html} =
+        live(conn, Routes.influencer_account_show_path(conn, :show, influencer_account))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Influencer account"
 
-      assert_patch(show_live, Routes.influencer_account_show_path(conn, :edit, influencer_account))
+      assert_patch(
+        show_live,
+        Routes.influencer_account_show_path(conn, :edit, influencer_account)
+      )
 
       assert show_live
              |> form("#influencer_account-form", influencer_account: @invalid_attrs)
@@ -101,7 +123,10 @@ defmodule AllThingsSocialWeb.InfluencerAccountLiveTest do
         show_live
         |> form("#influencer_account-form", influencer_account: @update_attrs)
         |> render_submit()
-        |> follow_redirect(conn, Routes.influencer_account_show_path(conn, :show, influencer_account))
+        |> follow_redirect(
+          conn,
+          Routes.influencer_account_show_path(conn, :show, influencer_account)
+        )
 
       assert html =~ "Influencer account updated successfully"
       assert html =~ "some updated column"

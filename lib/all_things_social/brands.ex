@@ -304,7 +304,11 @@ defmodule AllThingsSocial.Brands do
       when is_function(reset_password_url_fun, 1) do
     {encoded_token, brand_token} = BrandToken.build_email_token(brand, "reset_password")
     Repo.insert!(brand_token)
-    BrandNotifier.deliver_reset_password_instructions(brand, reset_password_url_fun.(encoded_token))
+
+    BrandNotifier.deliver_reset_password_instructions(
+      brand,
+      reset_password_url_fun.(encoded_token)
+    )
   end
 
   @doc """

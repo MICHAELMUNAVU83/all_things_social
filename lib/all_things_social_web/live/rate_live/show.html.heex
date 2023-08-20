@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Platform:</strong>
     <%= @rate.platform %>
@@ -29,8 +28,10 @@
     <strong>Amount:</strong>
     <%= @rate.amount %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.rate_show_path(@socket, :edit, @rate), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.rate_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.rate_show_path(@socket, :edit, @rate), class: "button") %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.rate_index_path(@socket, :index)) %></span>

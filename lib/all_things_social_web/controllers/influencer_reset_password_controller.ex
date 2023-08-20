@@ -26,7 +26,9 @@ defmodule AllThingsSocialWeb.InfluencerResetPasswordController do
   end
 
   def edit(conn, _params) do
-    render(conn, "edit.html", changeset: Influencers.change_influencer_password(conn.assigns.influencer))
+    render(conn, "edit.html",
+      changeset: Influencers.change_influencer_password(conn.assigns.influencer)
+    )
   end
 
   # Do not log in the influencer after reset password to avoid a

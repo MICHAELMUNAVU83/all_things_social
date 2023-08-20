@@ -17,7 +17,9 @@ defmodule AllThingsSocialWeb.InfluencerSessionControllerTest do
     end
 
     test "redirects if already logged in", %{conn: conn, influencer: influencer} do
-      conn = conn |> log_in_influencer(influencer) |> get(Routes.influencer_session_path(conn, :new))
+      conn =
+        conn |> log_in_influencer(influencer) |> get(Routes.influencer_session_path(conn, :new))
+
       assert redirected_to(conn) == "/"
     end
   end
@@ -26,7 +28,10 @@ defmodule AllThingsSocialWeb.InfluencerSessionControllerTest do
     test "logs the influencer in", %{conn: conn, influencer: influencer} do
       conn =
         post(conn, Routes.influencer_session_path(conn, :create), %{
-          "influencer" => %{"email" => influencer.email, "password" => valid_influencer_password()}
+          "influencer" => %{
+            "email" => influencer.email,
+            "password" => valid_influencer_password()
+          }
         })
 
       assert get_session(conn, :influencer_token)
@@ -82,7 +87,11 @@ defmodule AllThingsSocialWeb.InfluencerSessionControllerTest do
 
   describe "DELETE /influencers/log_out" do
     test "logs the influencer out", %{conn: conn, influencer: influencer} do
-      conn = conn |> log_in_influencer(influencer) |> delete(Routes.influencer_session_path(conn, :delete))
+      conn =
+        conn
+        |> log_in_influencer(influencer)
+        |> delete(Routes.influencer_session_path(conn, :delete))
+
       assert redirected_to(conn) == "/"
       refute get_session(conn, :influencer_token)
       assert get_flash(conn, :info) =~ "Logged out successfully"

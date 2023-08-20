@@ -50,7 +50,8 @@ defmodule AllThingsSocial.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:ex_heroicons, "~> 2.0.0"}
     ]
   end
 

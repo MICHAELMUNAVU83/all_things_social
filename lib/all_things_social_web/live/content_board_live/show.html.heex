@@ -14,13 +14,17 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @content_board.name %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.content_board_show_path(@socket, :edit, @content_board), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.content_board_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit",
+    to: Routes.content_board_show_path(@socket, :edit, @content_board),
+    class: "button"
+  ) %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.content_board_index_path(@socket, :index)) %></span>

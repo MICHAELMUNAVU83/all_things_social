@@ -2,7 +2,6 @@ import Config
 
 # Configure your database
 config :all_things_social, AllThingsSocial.Repo,
-
   hostname: "localhost",
   database: "all_things_social_dev",
   stacktrace: true,
@@ -27,7 +26,6 @@ config :all_things_social, AllThingsSocialWeb.Endpoint,
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
-
   ]
 
 # ## SSL Support

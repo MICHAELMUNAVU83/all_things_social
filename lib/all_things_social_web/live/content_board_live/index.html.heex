@@ -27,13 +27,30 @@
         <td><%= content_board.name %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.content_board_show_path(@socket, :show, content_board) %></span>
-          <span><%= live_patch "Edit", to: Routes.content_board_index_path(@socket, :edit, content_board) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: content_board.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show",
+              to: Routes.content_board_show_path(@socket, :show, content_board)
+            ) %>
+          </span>
+          <span>
+            <%= live_patch("Edit",
+              to: Routes.content_board_index_path(@socket, :edit, content_board)
+            ) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: content_board.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Content board", to: Routes.content_board_index_path(@socket, :new) %></span>
+<span>
+  <%= live_patch("New Content board", to: Routes.content_board_index_path(@socket, :new)) %>
+</span>

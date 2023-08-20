@@ -14,13 +14,17 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Column:</strong>
     <%= @influencer_account.column %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.influencer_account_show_path(@socket, :edit, @influencer_account), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.influencer_account_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit",
+    to: Routes.influencer_account_show_path(@socket, :edit, @influencer_account),
+    class: "button"
+  ) %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.influencer_account_index_path(@socket, :index)) %></span>

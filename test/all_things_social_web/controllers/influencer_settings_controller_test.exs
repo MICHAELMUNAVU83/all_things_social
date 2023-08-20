@@ -21,7 +21,10 @@ defmodule AllThingsSocialWeb.InfluencerSettingsControllerTest do
   end
 
   describe "PUT /influencers/settings (change password form)" do
-    test "updates the influencer password and resets tokens", %{conn: conn, influencer: influencer} do
+    test "updates the influencer password and resets tokens", %{
+      conn: conn,
+      influencer: influencer
+    } do
       new_password_conn =
         put(conn, Routes.influencer_settings_path(conn, :update), %{
           "action" => "update_password",
@@ -33,9 +36,16 @@ defmodule AllThingsSocialWeb.InfluencerSettingsControllerTest do
         })
 
       assert redirected_to(new_password_conn) == Routes.influencer_settings_path(conn, :edit)
-      assert get_session(new_password_conn, :influencer_token) != get_session(conn, :influencer_token)
+
+      assert get_session(new_password_conn, :influencer_token) !=
+               get_session(conn, :influencer_token)
+
       assert get_flash(new_password_conn, :info) =~ "Password updated successfully"
-      assert Influencers.get_influencer_by_email_and_password(influencer.email, "new valid password")
+
+      assert Influencers.get_influencer_by_email_and_password(
+               influencer.email,
+               "new valid password"
+             )
     end
 
     test "does not update password on invalid data", %{conn: conn} do
@@ -55,7 +65,8 @@ defmodule AllThingsSocialWeb.InfluencerSettingsControllerTest do
       assert response =~ "does not match password"
       assert response =~ "is not valid"
 
-      assert get_session(old_password_conn, :influencer_token) == get_session(conn, :influencer_token)
+      assert get_session(old_password_conn, :influencer_token) ==
+               get_session(conn, :influencer_token)
     end
   end
 
@@ -95,13 +106,22 @@ defmodule AllThingsSocialWeb.InfluencerSettingsControllerTest do
 
       token =
         extract_influencer_token(fn url ->
-          Influencers.deliver_update_email_instructions(%{influencer | email: email}, influencer.email, url)
+          Influencers.deliver_update_email_instructions(
+            %{influencer | email: email},
+            influencer.email,
+            url
+          )
         end)
 
       %{token: token, email: email}
     end
 
-    test "updates the influencer email once", %{conn: conn, influencer: influencer, token: token, email: email} do
+    test "updates the influencer email once", %{
+      conn: conn,
+      influencer: influencer,
+      token: token,
+      email: email
+    } do
       conn = get(conn, Routes.influencer_settings_path(conn, :confirm_email, token))
       assert redirected_to(conn) == Routes.influencer_settings_path(conn, :edit)
       assert get_flash(conn, :info) =~ "Email changed successfully"

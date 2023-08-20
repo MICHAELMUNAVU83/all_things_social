@@ -27,10 +27,15 @@ defmodule AllThingsSocialWeb.InfluencerConfirmationControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      assert Repo.get_by!(Influencers.InfluencerToken, influencer_id: influencer.id).context == "confirm"
+
+      assert Repo.get_by!(Influencers.InfluencerToken, influencer_id: influencer.id).context ==
+               "confirm"
     end
 
-    test "does not send confirmation token if Influencer is confirmed", %{conn: conn, influencer: influencer} do
+    test "does not send confirmation token if Influencer is confirmed", %{
+      conn: conn,
+      influencer: influencer
+    } do
       Repo.update!(Influencers.Influencer.confirm_changeset(influencer))
 
       conn =
@@ -83,7 +88,9 @@ defmodule AllThingsSocialWeb.InfluencerConfirmationControllerTest do
       # When not logged in
       conn = post(conn, Routes.influencer_confirmation_path(conn, :update, token))
       assert redirected_to(conn) == "/"
-      assert get_flash(conn, :error) =~ "Influencer confirmation link is invalid or it has expired"
+
+      assert get_flash(conn, :error) =~
+               "Influencer confirmation link is invalid or it has expired"
 
       # When logged in
       conn =
@@ -98,7 +105,10 @@ defmodule AllThingsSocialWeb.InfluencerConfirmationControllerTest do
     test "does not confirm email with invalid token", %{conn: conn, influencer: influencer} do
       conn = post(conn, Routes.influencer_confirmation_path(conn, :update, "oops"))
       assert redirected_to(conn) == "/"
-      assert get_flash(conn, :error) =~ "Influencer confirmation link is invalid or it has expired"
+
+      assert get_flash(conn, :error) =~
+               "Influencer confirmation link is invalid or it has expired"
+
       refute Influencers.get_influencer!(influencer.id).confirmed_at
     end
   end

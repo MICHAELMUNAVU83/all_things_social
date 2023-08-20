@@ -20,23 +20,41 @@ defmodule AllThingsSocialWeb.InfluencerAuthTest do
     test "stores the influencer token in the session", %{conn: conn, influencer: influencer} do
       conn = InfluencerAuth.log_in_influencer(conn, influencer)
       assert token = get_session(conn, :influencer_token)
-      assert get_session(conn, :live_socket_id) == "influencers_sessions:#{Base.url_encode64(token)}"
+
+      assert get_session(conn, :live_socket_id) ==
+               "influencers_sessions:#{Base.url_encode64(token)}"
+
       assert redirected_to(conn) == "/"
       assert Influencers.get_influencer_by_session_token(token)
     end
 
-    test "clears everything previously stored in the session", %{conn: conn, influencer: influencer} do
-      conn = conn |> put_session(:to_be_removed, "value") |> InfluencerAuth.log_in_influencer(influencer)
+    test "clears everything previously stored in the session", %{
+      conn: conn,
+      influencer: influencer
+    } do
+      conn =
+        conn
+        |> put_session(:to_be_removed, "value")
+        |> InfluencerAuth.log_in_influencer(influencer)
+
       refute get_session(conn, :to_be_removed)
     end
 
     test "redirects to the configured path", %{conn: conn, influencer: influencer} do
-      conn = conn |> put_session(:influencer_return_to, "/hello") |> InfluencerAuth.log_in_influencer(influencer)
+      conn =
+        conn
+        |> put_session(:influencer_return_to, "/hello")
+        |> InfluencerAuth.log_in_influencer(influencer)
+
       assert redirected_to(conn) == "/hello"
     end
 
     test "writes a cookie if remember_me is configured", %{conn: conn, influencer: influencer} do
-      conn = conn |> fetch_cookies() |> InfluencerAuth.log_in_influencer(influencer, %{"remember_me" => "true"})
+      conn =
+        conn
+        |> fetch_cookies()
+        |> InfluencerAuth.log_in_influencer(influencer, %{"remember_me" => "true"})
+
       assert get_session(conn, :influencer_token) == conn.cookies[@remember_me_cookie]
 
       assert %{value: signed_token, max_age: max_age} = conn.resp_cookies[@remember_me_cookie]
@@ -85,13 +103,20 @@ defmodule AllThingsSocialWeb.InfluencerAuthTest do
   describe "fetch_current_influencer/2" do
     test "authenticates influencer from session", %{conn: conn, influencer: influencer} do
       influencer_token = Influencers.generate_influencer_session_token(influencer)
-      conn = conn |> put_session(:influencer_token, influencer_token) |> InfluencerAuth.fetch_current_influencer([])
+
+      conn =
+        conn
+        |> put_session(:influencer_token, influencer_token)
+        |> InfluencerAuth.fetch_current_influencer([])
+
       assert conn.assigns.current_influencer.id == influencer.id
     end
 
     test "authenticates influencer from cookies", %{conn: conn, influencer: influencer} do
       logged_in_conn =
-        conn |> fetch_cookies() |> InfluencerAuth.log_in_influencer(influencer, %{"remember_me" => "true"})
+        conn
+        |> fetch_cookies()
+        |> InfluencerAuth.log_in_influencer(influencer, %{"remember_me" => "true"})
 
       influencer_token = logged_in_conn.cookies[@remember_me_cookie]
       %{value: signed_token} = logged_in_conn.resp_cookies[@remember_me_cookie]
@@ -115,7 +140,11 @@ defmodule AllThingsSocialWeb.InfluencerAuthTest do
 
   describe "redirect_if_influencer_is_authenticated/2" do
     test "redirects if influencer is authenticated", %{conn: conn, influencer: influencer} do
-      conn = conn |> assign(:current_influencer, influencer) |> InfluencerAuth.redirect_if_influencer_is_authenticated([])
+      conn =
+        conn
+        |> assign(:current_influencer, influencer)
+        |> InfluencerAuth.redirect_if_influencer_is_authenticated([])
+
       assert conn.halted
       assert redirected_to(conn) == "/"
     end
@@ -162,7 +191,11 @@ defmodule AllThingsSocialWeb.InfluencerAuthTest do
     end
 
     test "does not redirect if influencer is authenticated", %{conn: conn, influencer: influencer} do
-      conn = conn |> assign(:current_influencer, influencer) |> InfluencerAuth.require_authenticated_influencer([])
+      conn =
+        conn
+        |> assign(:current_influencer, influencer)
+        |> InfluencerAuth.require_authenticated_influencer([])
+
       refute conn.halted
       refute conn.status
     end

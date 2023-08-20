@@ -28,7 +28,10 @@ defmodule AllThingsSocialWeb.InfluencerAccountLive.FormComponent do
   end
 
   defp save_influencer_account(socket, :edit, influencer_account_params) do
-    case InfluencerAccounts.update_influencer_account(socket.assigns.influencer_account, influencer_account_params) do
+    case InfluencerAccounts.update_influencer_account(
+           socket.assigns.influencer_account,
+           influencer_account_params
+         ) do
       {:ok, _influencer_account} ->
         {:noreply,
          socket

@@ -27,7 +27,9 @@ defmodule AllThingsSocialWeb.InfluencerResetPasswordControllerTest do
 
       assert redirected_to(conn) == "/"
       assert get_flash(conn, :info) =~ "If your email is in our system"
-      assert Repo.get_by!(Influencers.InfluencerToken, influencer_id: influencer.id).context == "reset_password"
+
+      assert Repo.get_by!(Influencers.InfluencerToken, influencer_id: influencer.id).context ==
+               "reset_password"
     end
 
     test "does not send reset password token if email is invalid", %{conn: conn} do
@@ -86,7 +88,11 @@ defmodule AllThingsSocialWeb.InfluencerResetPasswordControllerTest do
       assert redirected_to(conn) == Routes.influencer_session_path(conn, :new)
       refute get_session(conn, :influencer_token)
       assert get_flash(conn, :info) =~ "Password reset successfully"
-      assert Influencers.get_influencer_by_email_and_password(influencer.email, "new valid password")
+
+      assert Influencers.get_influencer_by_email_and_password(
+               influencer.email,
+               "new valid password"
+             )
     end
 
     test "does not reset password on invalid data", %{conn: conn, token: token} do

@@ -115,7 +115,9 @@ defmodule AllThingsSocialWeb.BrandAuthTest do
 
   describe "redirect_if_brand_is_authenticated/2" do
     test "redirects if brand is authenticated", %{conn: conn, brand: brand} do
-      conn = conn |> assign(:current_brand, brand) |> BrandAuth.redirect_if_brand_is_authenticated([])
+      conn =
+        conn |> assign(:current_brand, brand) |> BrandAuth.redirect_if_brand_is_authenticated([])
+
       assert conn.halted
       assert redirected_to(conn) == "/"
     end

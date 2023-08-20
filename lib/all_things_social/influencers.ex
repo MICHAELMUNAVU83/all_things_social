@@ -154,7 +154,10 @@ defmodule AllThingsSocial.Influencers do
 
     Ecto.Multi.new()
     |> Ecto.Multi.update(:influencer, changeset)
-    |> Ecto.Multi.delete_all(:tokens, InfluencerToken.influencer_and_contexts_query(influencer, [context]))
+    |> Ecto.Multi.delete_all(
+      :tokens,
+      InfluencerToken.influencer_and_contexts_query(influencer, [context])
+    )
   end
 
   @doc """
@@ -166,12 +169,21 @@ defmodule AllThingsSocial.Influencers do
       {:ok, %{to: ..., body: ...}}
 
   """
-  def deliver_update_email_instructions(%Influencer{} = influencer, current_email, update_email_url_fun)
+  def deliver_update_email_instructions(
+        %Influencer{} = influencer,
+        current_email,
+        update_email_url_fun
+      )
       when is_function(update_email_url_fun, 1) do
-    {encoded_token, influencer_token} = InfluencerToken.build_email_token(influencer, "change:#{current_email}")
+    {encoded_token, influencer_token} =
+      InfluencerToken.build_email_token(influencer, "change:#{current_email}")
 
     Repo.insert!(influencer_token)
-    InfluencerNotifier.deliver_update_email_instructions(influencer, update_email_url_fun.(encoded_token))
+
+    InfluencerNotifier.deliver_update_email_instructions(
+      influencer,
+      update_email_url_fun.(encoded_token)
+    )
   end
 
   @doc """
@@ -207,7 +219,10 @@ defmodule AllThingsSocial.Influencers do
 
     Ecto.Multi.new()
     |> Ecto.Multi.update(:influencer, changeset)
-    |> Ecto.Multi.delete_all(:tokens, InfluencerToken.influencer_and_contexts_query(influencer, :all))
+    |> Ecto.Multi.delete_all(
+      :tokens,
+      InfluencerToken.influencer_and_contexts_query(influencer, :all)
+    )
     |> Repo.transaction()
     |> case do
       {:ok, %{influencer: influencer}} -> {:ok, influencer}
@@ -256,14 +271,21 @@ defmodule AllThingsSocial.Influencers do
       {:error, :already_confirmed}
 
   """
-  def deliver_influencer_confirmation_instructions(%Influencer{} = influencer, confirmation_url_fun)
+  def deliver_influencer_confirmation_instructions(
+        %Influencer{} = influencer,
+        confirmation_url_fun
+      )
       when is_function(confirmation_url_fun, 1) do
     if influencer.confirmed_at do
       {:error, :already_confirmed}
     else
       {encoded_token, influencer_token} = InfluencerToken.build_email_token(influencer, "confirm")
       Repo.insert!(influencer_token)
-      InfluencerNotifier.deliver_confirmation_instructions(influencer, confirmation_url_fun.(encoded_token))
+
+      InfluencerNotifier.deliver_confirmation_instructions(
+        influencer,
+        confirmation_url_fun.(encoded_token)
+      )
     end
   end
 
@@ -276,7 +298,8 @@ defmodule AllThingsSocial.Influencers do
   def confirm_influencer(token) do
     with {:ok, query} <- InfluencerToken.verify_email_token_query(token, "confirm"),
          %Influencer{} = influencer <- Repo.one(query),
-         {:ok, %{influencer: influencer}} <- Repo.transaction(confirm_influencer_multi(influencer)) do
+         {:ok, %{influencer: influencer}} <-
+           Repo.transaction(confirm_influencer_multi(influencer)) do
       {:ok, influencer}
     else
       _ -> :error
@@ -286,7 +309,10 @@ defmodule AllThingsSocial.Influencers do
   defp confirm_influencer_multi(influencer) do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:influencer, Influencer.confirm_changeset(influencer))
-    |> Ecto.Multi.delete_all(:tokens, InfluencerToken.influencer_and_contexts_query(influencer, ["confirm"]))
+    |> Ecto.Multi.delete_all(
+      :tokens,
+      InfluencerToken.influencer_and_contexts_query(influencer, ["confirm"])
+    )
   end
 
   ## Reset password
@@ -300,11 +326,20 @@ defmodule AllThingsSocial.Influencers do
       {:ok, %{to: ..., body: ...}}
 
   """
-  def deliver_influencer_reset_password_instructions(%Influencer{} = influencer, reset_password_url_fun)
+  def deliver_influencer_reset_password_instructions(
+        %Influencer{} = influencer,
+        reset_password_url_fun
+      )
       when is_function(reset_password_url_fun, 1) do
-    {encoded_token, influencer_token} = InfluencerToken.build_email_token(influencer, "reset_password")
+    {encoded_token, influencer_token} =
+      InfluencerToken.build_email_token(influencer, "reset_password")
+
     Repo.insert!(influencer_token)
-    InfluencerNotifier.deliver_reset_password_instructions(influencer, reset_password_url_fun.(encoded_token))
+
+    InfluencerNotifier.deliver_reset_password_instructions(
+      influencer,
+      reset_password_url_fun.(encoded_token)
+    )
   end
 
   @doc """
@@ -343,7 +378,10 @@ defmodule AllThingsSocial.Influencers do
   def reset_influencer_password(influencer, attrs) do
     Ecto.Multi.new()
     |> Ecto.Multi.update(:influencer, Influencer.password_changeset(influencer, attrs))
-    |> Ecto.Multi.delete_all(:tokens, InfluencerToken.influencer_and_contexts_query(influencer, :all))
+    |> Ecto.Multi.delete_all(
+      :tokens,
+      InfluencerToken.influencer_and_contexts_query(influencer, :all)
+    )
     |> Repo.transaction()
     |> case do
       {:ok, %{influencer: influencer}} -> {:ok, influencer}

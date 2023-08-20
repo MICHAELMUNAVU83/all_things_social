@@ -4,8 +4,16 @@ defmodule AllThingsSocialWeb.RateLiveTest do
   import Phoenix.LiveViewTest
   import AllThingsSocial.RatesFixtures
 
-  @create_attrs %{description: "some description", platform: "some platform", amount: "some amount"}
-  @update_attrs %{description: "some updated description", platform: "some updated platform", amount: "some updated amount"}
+  @create_attrs %{
+    description: "some description",
+    platform: "some platform",
+    amount: "some amount"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    platform: "some updated platform",
+    amount: "some updated amount"
+  }
   @invalid_attrs %{description: nil, platform: nil, amount: nil}
 
   defp create_rate(_) do

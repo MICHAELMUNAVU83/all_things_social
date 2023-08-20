@@ -19,7 +19,10 @@ defmodule AllThingsSocial.InfluencersTest do
 
   describe "get_influencer_by_email_and_password/2" do
     test "does not return the influencer if the email does not exist" do
-      refute Influencers.get_influencer_by_email_and_password("unknown@example.com", "hello world!")
+      refute Influencers.get_influencer_by_email_and_password(
+               "unknown@example.com",
+               "hello world!"
+             )
     end
 
     test "does not return the influencer if the password is not valid" do
@@ -31,7 +34,10 @@ defmodule AllThingsSocial.InfluencersTest do
       %{id: id} = influencer = influencer_fixture()
 
       assert %Influencer{id: ^id} =
-               Influencers.get_influencer_by_email_and_password(influencer.email, valid_influencer_password())
+               Influencers.get_influencer_by_email_and_password(
+                 influencer.email,
+                 valid_influencer_password()
+               )
     end
   end
 
@@ -59,7 +65,8 @@ defmodule AllThingsSocial.InfluencersTest do
     end
 
     test "validates email and password when given" do
-      {:error, changeset} = Influencers.register_influencer(%{email: "not valid", password: "not valid"})
+      {:error, changeset} =
+        Influencers.register_influencer(%{email: "not valid", password: "not valid"})
 
       assert %{
                email: ["must have the @ sign and no spaces"],
@@ -69,7 +76,10 @@ defmodule AllThingsSocial.InfluencersTest do
 
     test "validates maximum values for email and password for security" do
       too_long = String.duplicate("db", 100)
-      {:error, changeset} = Influencers.register_influencer(%{email: too_long, password: too_long})
+
+      {:error, changeset} =
+        Influencers.register_influencer(%{email: too_long, password: too_long})
+
       assert "should be at most 160 character(s)" in errors_on(changeset).email
       assert "should be at most 72 character(s)" in errors_on(changeset).password
     end
@@ -86,7 +96,10 @@ defmodule AllThingsSocial.InfluencersTest do
 
     test "registers influencers with a hashed password" do
       email = unique_influencer_email()
-      {:ok, influencer} = Influencers.register_influencer(valid_influencer_attributes(email: email))
+
+      {:ok, influencer} =
+        Influencers.register_influencer(valid_influencer_attributes(email: email))
+
       assert influencer.email == email
       assert is_binary(influencer.hashed_password)
       assert is_nil(influencer.confirmed_at)
@@ -96,7 +109,9 @@ defmodule AllThingsSocial.InfluencersTest do
 
   describe "change_influencer_registration/2" do
     test "returns a changeset" do
-      assert %Ecto.Changeset{} = changeset = Influencers.change_influencer_registration(%Influencer{})
+      assert %Ecto.Changeset{} =
+               changeset = Influencers.change_influencer_registration(%Influencer{})
+
       assert changeset.required == [:password, :email]
     end
 
@@ -130,13 +145,17 @@ defmodule AllThingsSocial.InfluencersTest do
     end
 
     test "requires email to change", %{influencer: influencer} do
-      {:error, changeset} = Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{})
+      {:error, changeset} =
+        Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{})
+
       assert %{email: ["did not change"]} = errors_on(changeset)
     end
 
     test "validates email", %{influencer: influencer} do
       {:error, changeset} =
-        Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{email: "not valid"})
+        Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{
+          email: "not valid"
+        })
 
       assert %{email: ["must have the @ sign and no spaces"]} = errors_on(changeset)
     end
@@ -145,7 +164,9 @@ defmodule AllThingsSocial.InfluencersTest do
       too_long = String.duplicate("db", 100)
 
       {:error, changeset} =
-        Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{email: too_long})
+        Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{
+          email: too_long
+        })
 
       assert "should be at most 160 character(s)" in errors_on(changeset).email
     end
@@ -154,21 +175,30 @@ defmodule AllThingsSocial.InfluencersTest do
       %{email: email} = influencer_fixture()
 
       {:error, changeset} =
-        Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{email: email})
+        Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{
+          email: email
+        })
 
       assert "has already been taken" in errors_on(changeset).email
     end
 
     test "validates current password", %{influencer: influencer} do
       {:error, changeset} =
-        Influencers.apply_influencer_email(influencer, "invalid", %{email: unique_influencer_email()})
+        Influencers.apply_influencer_email(influencer, "invalid", %{
+          email: unique_influencer_email()
+        })
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
     end
 
     test "applies the email without persisting it", %{influencer: influencer} do
       email = unique_influencer_email()
-      {:ok, influencer} = Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{email: email})
+
+      {:ok, influencer} =
+        Influencers.apply_influencer_email(influencer, valid_influencer_password(), %{
+          email: email
+        })
+
       assert influencer.email == email
       assert Influencers.get_influencer!(influencer.id).email != email
     end
@@ -200,13 +230,21 @@ defmodule AllThingsSocial.InfluencersTest do
 
       token =
         extract_influencer_token(fn url ->
-          Influencers.deliver_update_email_instructions(%{influencer | email: email}, influencer.email, url)
+          Influencers.deliver_update_email_instructions(
+            %{influencer | email: email},
+            influencer.email,
+            url
+          )
         end)
 
       %{influencer: influencer, token: token, email: email}
     end
 
-    test "updates the email with a valid token", %{influencer: influencer, token: token, email: email} do
+    test "updates the email with a valid token", %{
+      influencer: influencer,
+      token: token,
+      email: email
+    } do
       assert Influencers.update_influencer_email(influencer, token) == :ok
       changed_influencer = Repo.get!(Influencer, influencer.id)
       assert changed_influencer.email != influencer.email
@@ -222,8 +260,15 @@ defmodule AllThingsSocial.InfluencersTest do
       assert Repo.get_by(InfluencerToken, influencer_id: influencer.id)
     end
 
-    test "does not update email if influencer email changed", %{influencer: influencer, token: token} do
-      assert Influencers.update_influencer_email(%{influencer | email: "current@example.com"}, token) == :error
+    test "does not update email if influencer email changed", %{
+      influencer: influencer,
+      token: token
+    } do
+      assert Influencers.update_influencer_email(
+               %{influencer | email: "current@example.com"},
+               token
+             ) == :error
+
       assert Repo.get!(Influencer, influencer.id).email == influencer.email
       assert Repo.get_by(InfluencerToken, influencer_id: influencer.id)
     end
@@ -276,14 +321,18 @@ defmodule AllThingsSocial.InfluencersTest do
       too_long = String.duplicate("db", 100)
 
       {:error, changeset} =
-        Influencers.update_influencer_password(influencer, valid_influencer_password(), %{password: too_long})
+        Influencers.update_influencer_password(influencer, valid_influencer_password(), %{
+          password: too_long
+        })
 
       assert "should be at most 72 character(s)" in errors_on(changeset).password
     end
 
     test "validates current password", %{influencer: influencer} do
       {:error, changeset} =
-        Influencers.update_influencer_password(influencer, "invalid", %{password: valid_influencer_password()})
+        Influencers.update_influencer_password(influencer, "invalid", %{
+          password: valid_influencer_password()
+        })
 
       assert %{current_password: ["is not valid"]} = errors_on(changeset)
     end
@@ -295,7 +344,11 @@ defmodule AllThingsSocial.InfluencersTest do
         })
 
       assert is_nil(influencer.password)
-      assert Influencers.get_influencer_by_email_and_password(influencer.email, "new valid password")
+
+      assert Influencers.get_influencer_by_email_and_password(
+               influencer.email,
+               "new valid password"
+             )
     end
 
     test "deletes all tokens for the given influencer", %{influencer: influencer} do
@@ -456,7 +509,10 @@ defmodule AllThingsSocial.InfluencersTest do
       assert Repo.get_by(InfluencerToken, influencer_id: influencer.id)
     end
 
-    test "does not return the influencer if token expired", %{influencer: influencer, token: token} do
+    test "does not return the influencer if token expired", %{
+      influencer: influencer,
+      token: token
+    } do
       {1, nil} = Repo.update_all(InfluencerToken, set: [inserted_at: ~N[2020-01-01 00:00:00]])
       refute Influencers.get_influencer_by_reset_password_token(token)
       assert Repo.get_by(InfluencerToken, influencer_id: influencer.id)
@@ -483,19 +539,31 @@ defmodule AllThingsSocial.InfluencersTest do
 
     test "validates maximum values for password for security", %{influencer: influencer} do
       too_long = String.duplicate("db", 100)
-      {:error, changeset} = Influencers.reset_influencer_password(influencer, %{password: too_long})
+
+      {:error, changeset} =
+        Influencers.reset_influencer_password(influencer, %{password: too_long})
+
       assert "should be at most 72 character(s)" in errors_on(changeset).password
     end
 
     test "updates the password", %{influencer: influencer} do
-      {:ok, updated_influencer} = Influencers.reset_influencer_password(influencer, %{password: "new valid password"})
+      {:ok, updated_influencer} =
+        Influencers.reset_influencer_password(influencer, %{password: "new valid password"})
+
       assert is_nil(updated_influencer.password)
-      assert Influencers.get_influencer_by_email_and_password(influencer.email, "new valid password")
+
+      assert Influencers.get_influencer_by_email_and_password(
+               influencer.email,
+               "new valid password"
+             )
     end
 
     test "deletes all tokens for the given influencer", %{influencer: influencer} do
       _ = Influencers.generate_influencer_session_token(influencer)
-      {:ok, _} = Influencers.reset_influencer_password(influencer, %{password: "new valid password"})
+
+      {:ok, _} =
+        Influencers.reset_influencer_password(influencer, %{password: "new valid password"})
+
       refute Repo.get_by(InfluencerToken, influencer_id: influencer.id)
     end
   end

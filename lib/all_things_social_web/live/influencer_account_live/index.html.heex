@@ -27,13 +27,32 @@
         <td><%= influencer_account.column %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.influencer_account_show_path(@socket, :show, influencer_account) %></span>
-          <span><%= live_patch "Edit", to: Routes.influencer_account_index_path(@socket, :edit, influencer_account) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: influencer_account.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show",
+              to: Routes.influencer_account_show_path(@socket, :show, influencer_account)
+            ) %>
+          </span>
+          <span>
+            <%= live_patch("Edit",
+              to: Routes.influencer_account_index_path(@socket, :edit, influencer_account)
+            ) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: influencer_account.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Influencer account", to: Routes.influencer_account_index_path(@socket, :new) %></span>
+<span>
+  <%= live_patch("New Influencer account",
+    to: Routes.influencer_account_index_path(@socket, :new)
+  ) %>
+</span>

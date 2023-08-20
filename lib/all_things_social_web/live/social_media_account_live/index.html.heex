@@ -29,13 +29,32 @@
         <td><%= social_media_account.platform %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.social_media_account_show_path(@socket, :show, social_media_account) %></span>
-          <span><%= live_patch "Edit", to: Routes.social_media_account_index_path(@socket, :edit, social_media_account) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: social_media_account.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show",
+              to: Routes.social_media_account_show_path(@socket, :show, social_media_account)
+            ) %>
+          </span>
+          <span>
+            <%= live_patch("Edit",
+              to: Routes.social_media_account_index_path(@socket, :edit, social_media_account)
+            ) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: social_media_account.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Social media account", to: Routes.social_media_account_index_path(@socket, :new) %></span>
+<span>
+  <%= live_patch("New Social media account",
+    to: Routes.social_media_account_index_path(@socket, :new)
+  ) %>
+</span>

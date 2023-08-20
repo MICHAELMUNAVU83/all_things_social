@@ -16,7 +16,10 @@ defmodule AllThingsSocialWeb.SocialMediaAccountLiveTest do
   describe "Index" do
     setup [:create_social_media_account]
 
-    test "lists all social_media_accounts", %{conn: conn, social_media_account: social_media_account} do
+    test "lists all social_media_accounts", %{
+      conn: conn,
+      social_media_account: social_media_account
+    } do
       {:ok, _index_live, html} = live(conn, Routes.social_media_account_index_path(conn, :index))
 
       assert html =~ "Listing Social media accounts"
@@ -45,13 +48,21 @@ defmodule AllThingsSocialWeb.SocialMediaAccountLiveTest do
       assert html =~ "some account_url"
     end
 
-    test "updates social_media_account in listing", %{conn: conn, social_media_account: social_media_account} do
+    test "updates social_media_account in listing", %{
+      conn: conn,
+      social_media_account: social_media_account
+    } do
       {:ok, index_live, _html} = live(conn, Routes.social_media_account_index_path(conn, :index))
 
-      assert index_live |> element("#social_media_account-#{social_media_account.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#social_media_account-#{social_media_account.id} a", "Edit")
+             |> render_click() =~
                "Edit Social media account"
 
-      assert_patch(index_live, Routes.social_media_account_index_path(conn, :edit, social_media_account))
+      assert_patch(
+        index_live,
+        Routes.social_media_account_index_path(conn, :edit, social_media_account)
+      )
 
       assert index_live
              |> form("#social_media_account-form", social_media_account: @invalid_attrs)
@@ -67,10 +78,16 @@ defmodule AllThingsSocialWeb.SocialMediaAccountLiveTest do
       assert html =~ "some updated account_url"
     end
 
-    test "deletes social_media_account in listing", %{conn: conn, social_media_account: social_media_account} do
+    test "deletes social_media_account in listing", %{
+      conn: conn,
+      social_media_account: social_media_account
+    } do
       {:ok, index_live, _html} = live(conn, Routes.social_media_account_index_path(conn, :index))
 
-      assert index_live |> element("#social_media_account-#{social_media_account.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#social_media_account-#{social_media_account.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#social_media_account-#{social_media_account.id}")
     end
   end
@@ -78,20 +95,31 @@ defmodule AllThingsSocialWeb.SocialMediaAccountLiveTest do
   describe "Show" do
     setup [:create_social_media_account]
 
-    test "displays social_media_account", %{conn: conn, social_media_account: social_media_account} do
-      {:ok, _show_live, html} = live(conn, Routes.social_media_account_show_path(conn, :show, social_media_account))
+    test "displays social_media_account", %{
+      conn: conn,
+      social_media_account: social_media_account
+    } do
+      {:ok, _show_live, html} =
+        live(conn, Routes.social_media_account_show_path(conn, :show, social_media_account))
 
       assert html =~ "Show Social media account"
       assert html =~ social_media_account.account_url
     end
 
-    test "updates social_media_account within modal", %{conn: conn, social_media_account: social_media_account} do
-      {:ok, show_live, _html} = live(conn, Routes.social_media_account_show_path(conn, :show, social_media_account))
+    test "updates social_media_account within modal", %{
+      conn: conn,
+      social_media_account: social_media_account
+    } do
+      {:ok, show_live, _html} =
+        live(conn, Routes.social_media_account_show_path(conn, :show, social_media_account))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Social media account"
 
-      assert_patch(show_live, Routes.social_media_account_show_path(conn, :edit, social_media_account))
+      assert_patch(
+        show_live,
+        Routes.social_media_account_show_path(conn, :edit, social_media_account)
+      )
 
       assert show_live
              |> form("#social_media_account-form", social_media_account: @invalid_attrs)
@@ -101,7 +129,10 @@ defmodule AllThingsSocialWeb.SocialMediaAccountLiveTest do
         show_live
         |> form("#social_media_account-form", social_media_account: @update_attrs)
         |> render_submit()
-        |> follow_redirect(conn, Routes.social_media_account_show_path(conn, :show, social_media_account))
+        |> follow_redirect(
+          conn,
+          Routes.social_media_account_show_path(conn, :show, social_media_account)
+        )
 
       assert html =~ "Social media account updated successfully"
       assert html =~ "some updated account_url"
