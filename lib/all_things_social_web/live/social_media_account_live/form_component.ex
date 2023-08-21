@@ -43,7 +43,7 @@ defmodule AllThingsSocialWeb.SocialMediaAccountLive.FormComponent do
     end
   end
 
-  defp save_social_media_account(socket, :new, social_media_account_params) do
+  defp save_social_media_account(socket, :add_social_media_account, social_media_account_params) do
     case SocialMediaAccounts.create_social_media_account(social_media_account_params) do
       {:ok, _social_media_account} ->
         {:noreply,

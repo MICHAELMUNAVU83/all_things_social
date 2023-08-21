@@ -40,7 +40,7 @@ defmodule AllThingsSocialWeb.NicheLive.FormComponent do
     end
   end
 
-  defp save_niche(socket, :new, niche_params) do
+  defp save_niche(socket, :add_niche, niche_params) do
     case Niches.create_niche(niche_params) do
       {:ok, _niche} ->
         {:noreply,

@@ -24,6 +24,14 @@ defmodule AllThingsSocialWeb.Router do
     pipe_through :browser
 
     live "/", PageLive.Index, :index
+    live "/influencer_dashboard", InfluencerDashboardLive.Index, :index
+
+    live "/influencer_dashboard/add_social_media_account",
+         InfluencerDashboardLive.Index,
+         :add_social_media_account
+
+    live "/influencer_dashboard/add_rate", InfluencerDashboardLive.Index, :add_rate
+    live "/influencer_dashboard/add_niche", InfluencerDashboardLive.Index, :add_niche
     live "/all_influencers", AllInfluencersLive.Index, :index
 
     live "/my_influencers", MyInfluencersLive.Index, :index

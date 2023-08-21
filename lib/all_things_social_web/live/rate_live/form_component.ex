@@ -40,7 +40,7 @@ defmodule AllThingsSocialWeb.RateLive.FormComponent do
     end
   end
 
-  defp save_rate(socket, :new, rate_params) do
+  defp save_rate(socket, :add_rate, rate_params) do
     case Rates.create_rate(rate_params) do
       {:ok, _rate} ->
         {:noreply,

@@ -1,0 +1,344 @@
+<%= if @live_action in [:add_social_media_account] do %>
+  <.modal return_to={Routes.influencer_dashboard_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.SocialMediaAccountLive.FormComponent}
+      id={@social_media_account.id || :new}
+      title={@page_title}
+      action={@live_action}
+      logged_in_influencer={@logged_in_influencer}
+      social_media_account={@social_media_account}
+      return_to={Routes.influencer_dashboard_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<%= if @live_action in [:add_rate] do %>
+  <.modal return_to={Routes.influencer_dashboard_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.RateLive.FormComponent}
+      id={@rate.id || :new}
+      title={@page_title}
+      action={@live_action}
+      rate={@rate}
+      logged_in_influencer={@logged_in_influencer}
+      return_to={Routes.influencer_dashboard_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<%= if @live_action in [:add_niche] do %>
+  <.modal return_to={Routes.influencer_dashboard_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.NicheLive.FormComponent}
+      id={@niche.id || :new}
+      title={@page_title}
+      action={@live_action}
+      logged_in_influencer={@logged_in_influencer}
+      niche={@niche}
+      return_to={Routes.influencer_dashboard_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<div class="flex flex-col gap-4  bg-gradient-to-br from-purple-100 py-4 px-2 via-purple-100 to-white">
+  <div class="flex justify-between items-center ">
+    <p class="dancing text-[#887CF2]">All Things Social</p>
+
+    <div class="flex gap-2 items-center">
+      <p>Michael Munavu</p>
+
+      <%= Heroicons.icon("chevron-down", type: "outline", class: "h-4 w-4") %>
+    </div>
+  </div>
+  <div class="flex justify-between items-center ">
+    <div class="flex gap-8  text-[#595959] text-xs font-bold uppercase items-center">
+      <p>My Dashboard</p>
+    </div>
+  </div>
+
+  <div class="flex justify-between  pt-4  items-start">
+    <div class="flex flex-col h-[400px] bg-white p-4 shadow-md rounded-xl shadow-gray-400 w-[25%] gap-4">
+      <div class="flex gap-2 flex-col items-center">
+        <div class="w-[50px] h-[50px] rounded-full bg-[#887CF2]"></div>
+        <div class="flex flex-col">
+          <p class="text-sm font-bold">Michael Munavu</p>
+          <p class="text-xs text-[#595959]">michaelmunavu</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-3 p-4 gap-4">
+        <div class="w-[100%] flex justify-center items-center flex-col gap-1 ">
+          <p class="text-[#595959] font-semibold">
+            52
+          </p>
+          <p>
+            Followers
+          </p>
+        </div>
+
+        <div class="w-[100%] flex justify-center items-center flex-col gap-1 ">
+          <p class="text-[#595959] font-semibold">
+            52
+          </p>
+          <p>
+            Followers
+          </p>
+        </div>
+        <div class="w-[100%] flex justify-center items-center flex-col gap-1 ">
+          <p class="text-[#595959] font-semibold">
+            52
+          </p>
+          <p>
+            Followers
+          </p>
+        </div>
+      </div>
+
+      <%= live_redirect to: Routes.influencer_dashboard_index_path(@socket, :add_social_media_account) do %>
+        <div class="bg-[#FFF9E6] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
+          <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#F59E0B] font-semibold w-4") %>
+          <p class="text-[#F59E0B] font-semibold">
+            Add Social Media Account
+          </p>
+        </div>
+      <% end %>
+
+      <%= live_redirect to: Routes.influencer_dashboard_index_path(@socket, :add_rate) do %>
+        <div class="bg-[#FFF9E6] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
+          <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#F59E0B] font-semibold w-4") %>
+          <p class="text-[#F59E0B] font-semibold">
+            Add Rates
+          </p>
+        </div>
+      <% end %>
+
+      <%= live_redirect to: Routes.influencer_dashboard_index_path(@socket, :add_niche) do %>
+        <div class="bg-[#FFF9E6] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
+          <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#F59E0B] font-semibold w-4") %>
+          <p class="text-[#F59E0B] font-semibold">
+            Add Niches
+          </p>
+        </div>
+      <% end %>
+
+      <%!-- <div class="bg-[#E8D8F4] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
+        <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#887CF2] font-semibold w-4") %>
+        <p class="text-[#887CF2] font-semibold">
+          Chat with <%= @influencer_account.influencer.email %>
+        </p>
+      </div> --%>
+    </div>
+
+    <div class="flex flex-col bg-white  h-[90vh] p-4  shadow-md rounded-xl shadow-gray-400  w-[70%] gap-4">
+      <%!-- <div class="flex items-center gap-5">
+        <%= if @state == "analytics" do %>
+          <div
+            phx-click="change_state"
+            phx-value-id="analytics"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+          >
+            Analytics
+          </div>
+        <% else %>
+          <div
+            phx-click="change_state"
+            phx-value-id="analytics"
+            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+          >
+            Analytics
+          </div>
+        <% end %>
+        <%= if @state == "tasks" do %>
+          <div
+            phx-click="change_state"
+            phx-value-id="tasks"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+          >
+            Tasks
+          </div>
+        <% else %>
+          <div
+            phx-click="change_state"
+            phx-value-id="tasks"
+            class="bg-gray-100 px-4 py-2 cursor-pointer text-black rounded-3xl"
+          >
+            Tasks
+          </div>
+        <% end %>
+        <%= if @state == "chats" do %>
+          <div
+            phx-click="change_state"
+            phx-value-id="chats"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+          >
+            Chats
+          </div>
+        <% else %>
+          <div
+            phx-click="change_state"
+            phx-value-id="chats"
+            class="bg-gray-100 px-4 py-2  cursor-pointer text-black rounded-3xl"
+          >
+            Chats
+          </div>
+        <% end %>
+        <%= if @state == "payments" do %>
+          <div
+            phx-click="change_state"
+            phx-value-id="payments"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+          >
+            Payments
+          </div>
+        <% else %>
+          <div
+            phx-click="change_state"
+            phx-value-id="payments"
+            class="bg-gray-100 px-4 py-2  cursor-pointer text-black rounded-3xl"
+          >
+            Payments
+          </div>
+        <% end %>
+      </div> --%>
+      <%!-- 
+      <%= if @state == "chats" do %>
+        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+          <div class="border-gray-200 border-b-2 rounded-t-xl bg-gray-100 shadow-gray-300 flex justify-between items-center  p-4   w-[100%]">
+            <div class="flex gap-2 items-center">
+              <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
+              <p class="text-[#887CF2] text-sm poppins-regular">
+                <%= @influencer_account.influencer.email %>
+              </p>
+            </div>
+
+            <div class="flex text-white items-center gap-2"></div>
+          </div>
+          <div class="bg-gray-100 h-[80%] flex flex-col-reverse overflow-y-scroll  md:p-4 p-2  w-[100%]">
+            <div class="flex flex-col w-[100%]   gap-2">
+              <%= for chat <- @chats do %>
+                <%= if chat.sender == "brand" do %>
+                  <div class="flex  justify-end   ">
+                    <p class="  text-[#E3E6EB] p-2 md:h-[70px] text-xs bg-[#F59E0B] w-[200px]">
+                      <%= chat.message %>
+                    </p>
+                  </div>
+                <% else %>
+                  <div class="flex  justify-end   ">
+                    <p class="  text-[#E3E6EB] p-2 md:h-[70px] text-xs bg-[#887CF2] w-[200px]">
+                      <%= chat.message %>
+                    </p>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="bg-gray-100 rounded-b-xl border-gray-200 border-t-2  pb-8  p-4   w-[100%]">
+            <.form let={f} for={@changeset} id="message-form" phx-submit="save">
+              <div class="flex justify-between  w-[100%] items-center">
+                <div class="md:w-[85%] w-[75%] text-[#A8B1CF] ">
+                  <%= text_input(f, :message,
+                    class:
+                      "w-[100%] md:h-[90%] h-[50%]  border border-transparent text-[#A8B1CF]  focus:ring-0 border-none  p-4 bg-white shadow-gray-300 shadow-md",
+                    placeholder: "Enter message..."
+                  ) %>
+                </div>
+
+                <div class="p-2 flex justify-center items-center hover:scale-105 transition-all duration-500 ease-in-out rounded-md bg-[#7269EF] ">
+                  <%= submit do %>
+                    <%= Heroicons.icon("paper-airplane",
+                      type: "solid",
+                      class: "h-6 text-white w-6"
+                    ) %>
+                  <% end %>
+                </div>
+              </div>
+            </.form>
+          </div>
+        </div>
+      <% end %>
+
+      <%= if @state == "tasks" do %>
+        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+          <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
+            <div class="flex gap-2 items-center">
+              <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
+              <p class="text-[#887CF2] text-sm poppins-regular">
+                <%= @influencer_account.influencer.email %>
+              </p>
+            </div>
+            <div class="grid grid-cols-2 py-4 gap-8">
+              <%= for task <- @tasks do %>
+                <div class="h-[250px] hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
+                  <div class="flex flex-col w-[100%]">
+                    <div class="p-2 flex justify-between w-[100%] items-center">
+                      <p class="text-sm font-bold"><%= task.name %></p>
+
+                      <p class="text-[#887CF2]">....</p>
+                    </div>
+                    <p class="bg-[#887CF2] w-[100%] h-[1px]" />
+                  </div>
+
+                  <div class="flex flex-col gap-1">
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("rectangle-stack",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= task.description %>
+                      </p>
+                    </div>
+
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("banknotes",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= task.price %> KSH
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex px-4 ">
+                    <button class="text-white bg-[#887CF2] p-2 rounded-md">
+                      <%= if task.status == "pending" do %>
+                        Pending
+                      <% end %>
+                    </button>
+                  </div>
+
+                  <div class="flex gap-4 px-4">
+                    <%= live_patch(
+              to: Routes.my_influencers_show_path(@socket, :edit_task,  @influencer_account.id, task )
+            ) do %>
+                      <%= Heroicons.icon("pencil",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+                    <% end %>
+
+                    <%= link(
+              to: "#",
+              phx_click: "delete_task",
+              phx_value_id: task.id,
+              data: [confirm: "Are you sure?"]
+            )  do %>
+                      <%= Heroicons.icon("trash",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %> --%>
+    </div>
+  </div>
+</div>
