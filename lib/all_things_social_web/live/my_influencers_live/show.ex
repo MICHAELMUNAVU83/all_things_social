@@ -6,6 +6,9 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
   alias AllThingsSocial.Chats.Chat
   alias AllThingsSocial.Tasks
   alias AllThingsSocial.Tasks.Task
+  alias AllThingsSocial.SocialMediaAccounts
+  alias AllThingsSocial.Rates
+  alias AllThingsSocial.Niches
 
   def mount(_params, session, socket) do
     logged_in_brand = Brands.get_brand_by_session_token(session["brand_token"])
@@ -51,11 +54,32 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
     influencer_id = influencer_account.influencer_id
     brand_id = influencer_account.brand_id
 
+    social_media_accounts =
+      SocialMediaAccounts.list_social_media_accounts()
+      |> Enum.filter(fn social_media_account ->
+        social_media_account.influencer_id == influencer_id
+      end)
+
+    rates =
+      Rates.list_rates()
+      |> Enum.filter(fn rate ->
+        rate.influencer_id == influencer_id
+      end)
+
+    niches =
+      Niches.list_niches()
+      |> Enum.filter(fn niche ->
+        niche.influencer_id == influencer_id
+      end)
+
     {:noreply,
      socket
      |> assign(:influencer_account, InfluencerAccounts.get_influencer_account!(id))
      |> assign(:changeset, Chats.change_chat(%Chat{}))
      |> assign(:chats, chats)
+     |> assign(:social_media_accounts, social_media_accounts)
+     |> assign(:rates, rates)
+     |> assign(:niches, niches)
      |> assign(:tasks, tasks)
      |> assign(:page_title, "New Task")
      |> assign(:content_board_id, content_board_id)
