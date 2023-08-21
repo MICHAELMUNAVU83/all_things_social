@@ -441,6 +441,31 @@
           </div>
         </div>
       <% end %>
+
+      <%= if @state == "niches" do %>
+        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+          <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
+            <div class="grid grid-cols-2 py-4 gap-8">
+              <%= for niche <- @niches do %>
+                <div class="h-[100px] p-2 hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
+                  <div class="flex flex-col gap-1">
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("calendar",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= niche.name %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

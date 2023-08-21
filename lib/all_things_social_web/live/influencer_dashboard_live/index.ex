@@ -29,6 +29,12 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
         rate.influencer_id == logged_in_influencer.id
       end)
 
+    niches =
+      Niches.list_niches()
+      |> Enum.filter(fn niche ->
+        niche.influencer_id == logged_in_influencer.id
+      end)
+
     {:ok,
      socket
      |> assign(:social_media_account, %SocialMediaAccount{})
@@ -37,6 +43,7 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
      |> assign(:tasks, tasks)
      |> assign(:state, "social_media_accounts")
      |> assign(:rates, rates)
+     |> assign(:niches, niches)
      |> assign(:social_media_accounts, social_media_accounts)
      |> assign(:logged_in_influencer, logged_in_influencer)}
   end
