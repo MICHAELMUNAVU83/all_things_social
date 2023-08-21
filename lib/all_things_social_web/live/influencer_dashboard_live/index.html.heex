@@ -130,7 +130,7 @@
     </div>
 
     <div class="flex flex-col bg-white  h-[90vh] p-4  shadow-md rounded-xl shadow-gray-400  w-[70%] gap-4">
-      <%!-- <div class="flex items-center gap-5">
+      <div class="flex items-center gap-5">
         <%= if @state == "analytics" do %>
           <div
             phx-click="change_state"
@@ -148,6 +148,7 @@
             Analytics
           </div>
         <% end %>
+
         <%= if @state == "tasks" do %>
           <div
             phx-click="change_state"
@@ -199,84 +200,87 @@
             Payments
           </div>
         <% end %>
-      </div> --%>
-      <%!-- 
-      <%= if @state == "chats" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
-          <div class="border-gray-200 border-b-2 rounded-t-xl bg-gray-100 shadow-gray-300 flex justify-between items-center  p-4   w-[100%]">
-            <div class="flex gap-2 items-center">
-              <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
-              <p class="text-[#887CF2] text-sm poppins-regular">
-                <%= @influencer_account.influencer.email %>
-              </p>
-            </div>
 
-            <div class="flex text-white items-center gap-2"></div>
+        <%= if @state == "social_media_accounts" do %>
+          <div
+            phx-click="change_state"
+            phx-value-id="social_media_accounts"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+          >
+            Social Media Accounts
           </div>
-          <div class="bg-gray-100 h-[80%] flex flex-col-reverse overflow-y-scroll  md:p-4 p-2  w-[100%]">
-            <div class="flex flex-col w-[100%]   gap-2">
-              <%= for chat <- @chats do %>
-                <%= if chat.sender == "brand" do %>
-                  <div class="flex  justify-end   ">
-                    <p class="  text-[#E3E6EB] p-2 md:h-[70px] text-xs bg-[#F59E0B] w-[200px]">
-                      <%= chat.message %>
-                    </p>
-                  </div>
-                <% else %>
-                  <div class="flex  justify-end   ">
-                    <p class="  text-[#E3E6EB] p-2 md:h-[70px] text-xs bg-[#887CF2] w-[200px]">
-                      <%= chat.message %>
-                    </p>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
+        <% else %>
+          <div
+            phx-click="change_state"
+            phx-value-id="social_media_accounts"
+            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+          >
+            Social Media Accounts
           </div>
+        <% end %>
 
-          <div class="bg-gray-100 rounded-b-xl border-gray-200 border-t-2  pb-8  p-4   w-[100%]">
-            <.form let={f} for={@changeset} id="message-form" phx-submit="save">
-              <div class="flex justify-between  w-[100%] items-center">
-                <div class="md:w-[85%] w-[75%] text-[#A8B1CF] ">
-                  <%= text_input(f, :message,
-                    class:
-                      "w-[100%] md:h-[90%] h-[50%]  border border-transparent text-[#A8B1CF]  focus:ring-0 border-none  p-4 bg-white shadow-gray-300 shadow-md",
-                    placeholder: "Enter message..."
-                  ) %>
-                </div>
-
-                <div class="p-2 flex justify-center items-center hover:scale-105 transition-all duration-500 ease-in-out rounded-md bg-[#7269EF] ">
-                  <%= submit do %>
-                    <%= Heroicons.icon("paper-airplane",
-                      type: "solid",
-                      class: "h-6 text-white w-6"
-                    ) %>
-                  <% end %>
-                </div>
-              </div>
-            </.form>
+        <%= if @state == "rates" do %>
+          <div
+            phx-click="change_state"
+            phx-value-id="rates"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+          >
+            Rates
           </div>
-        </div>
-      <% end %>
+        <% else %>
+          <div
+            phx-click="change_state"
+            phx-value-id="rates"
+            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+          >
+            Rates
+          </div>
+        <% end %>
+
+        <%= if @state == "niches" do %>
+          <div
+            phx-click="change_state"
+            phx-value-id="niches"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+          >
+            Niches
+          </div>
+        <% else %>
+          <div
+            phx-click="change_state"
+            phx-value-id="niches"
+            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+          >
+            Niches
+          </div>
+        <% end %>
+      </div>
 
       <%= if @state == "tasks" do %>
         <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
-            <div class="flex gap-2 items-center">
-              <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
-              <p class="text-[#887CF2] text-sm poppins-regular">
-                <%= @influencer_account.influencer.email %>
-              </p>
-            </div>
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for task <- @tasks do %>
                 <div class="h-[250px] hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
                   <div class="flex flex-col w-[100%]">
                     <div class="p-2 flex justify-between w-[100%] items-center">
-                      <p class="text-sm font-bold"><%= task.name %></p>
+                      <p class="text-sm font-bold"><%= task.name %> by <%= task.brand.email %></p>
 
                       <p class="text-[#887CF2]">....</p>
                     </div>
                     <p class="bg-[#887CF2] w-[100%] h-[1px]" />
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("calendar",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        Content Board  : <%= task.content_board.name %>
+                      </p>
+                    </div>
                   </div>
 
                   <div class="flex flex-col gap-1">
@@ -304,33 +308,14 @@
                   </div>
 
                   <div class="flex px-4 ">
-                    <button class="text-white bg-[#887CF2] p-2 rounded-md">
-                      <%= if task.status == "pending" do %>
-                        Pending
-                      <% end %>
-                    </button>
-                  </div>
-
-                  <div class="flex gap-4 px-4">
-                    <%= live_patch(
-              to: Routes.my_influencers_show_path(@socket, :edit_task,  @influencer_account.id, task )
-            ) do %>
-                      <%= Heroicons.icon("pencil",
-                        type: "solid",
-                        class: "h-6 text-[#887CF2]  w-6"
-                      ) %>
-                    <% end %>
-
-                    <%= link(
-              to: "#",
-              phx_click: "delete_task",
-              phx_value_id: task.id,
-              data: [confirm: "Are you sure?"]
-            )  do %>
-                      <%= Heroicons.icon("trash",
-                        type: "solid",
-                        class: "h-6 text-[#887CF2]  w-6"
-                      ) %>
+                    <%= if task.status == "pending" do %>
+                      <button
+                        phx-click="accept"
+                        class="w-[100%] text-white bg-[#887CF2] p-2 rounded-md"
+                        phx-value-id={task.id}
+                      >
+                        Accept
+                      </button>
                     <% end %>
                   </div>
                 </div>
@@ -338,7 +323,7 @@
             </div>
           </div>
         </div>
-      <% end %> --%>
+      <% end %>
     </div>
   </div>
 </div>

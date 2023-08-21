@@ -19,6 +19,8 @@ defmodule AllThingsSocial.Tasks do
   """
   def list_tasks do
     Repo.all(Task)
+    |> Repo.preload(:brand)
+    |> Repo.preload(:content_board)
   end
 
   def list_tasks_for_a_brand_and_influencer(brand_id, influencer_id) do

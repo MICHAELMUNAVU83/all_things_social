@@ -7,16 +7,23 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   alias AllThingsSocial.Rates.Rate
   alias AllThingsSocial.Niches
   alias AllThingsSocial.Niches.Niche
+  alias AllThingsSocial.Tasks
 
   def mount(params, session, socket) do
     logged_in_influencer =
       Influencers.get_influencer_by_session_token(session["influencer_token"])
+
+    tasks =
+      Tasks.list_tasks()
+      |> Enum.filter(fn task -> task.influencer_id == logged_in_influencer.id end)
 
     {:ok,
      socket
      |> assign(:social_media_account, %SocialMediaAccount{})
      |> assign(:rate, %Rate{})
      |> assign(:niche, %Niche{})
+     |> assign(:tasks, tasks)
+     |> assign(:state, "tasks")
      |> assign(:logged_in_influencer, logged_in_influencer)}
   end
 
@@ -24,6 +31,25 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))}
+  end
+
+  def handle_event("change_state", %{"id" => id}, socket) do
+    {:noreply,
+     socket
+     |> assign(:state, id)}
+  end
+
+  def handle_event("accept", %{"id" => id}, socket) do
+    task = Tasks.get_task!(id)
+    {:ok, _} = Tasks.update_task(task, %{status: "accepted"})
+
+    tasks =
+      Tasks.list_tasks()
+      |> Enum.filter(fn task -> task.influencer_id == socket.assigns.logged_in_influencer.id end)
+
+    {:noreply,
+     socket
+     |> assign(:tasks, tasks)}
   end
 
   defp page_title(:add_social_media_account), do: "Add Social media account"
