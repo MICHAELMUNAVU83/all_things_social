@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @task.name %>
@@ -34,8 +33,10 @@
     <strong>Status:</strong>
     <%= @task.status %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.task_show_path(@socket, :edit, @task), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.task_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.task_show_path(@socket, :edit, @task), class: "button") %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.task_index_path(@socket, :index)) %></span>

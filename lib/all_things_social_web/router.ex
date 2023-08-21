@@ -29,6 +29,7 @@ defmodule AllThingsSocialWeb.Router do
     live "/my_influencers", MyInfluencersLive.Index, :index
     live "/my_influencers/:id", MyInfluencersLive.Show, :show
     live "/my_influencers/:id/add_task", MyInfluencersLive.Show, :add_task
+    live "/my_influencers/:id/:task_id/edit_task", MyInfluencersLive.Show, :edit_task
 
     live "/all_influencers/:id", AllInfluencersLive.Index, :show
 

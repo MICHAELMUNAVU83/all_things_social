@@ -4,8 +4,18 @@ defmodule AllThingsSocialWeb.TaskLiveTest do
   import Phoenix.LiveViewTest
   import AllThingsSocial.TasksFixtures
 
-  @create_attrs %{name: "some name", status: "some status", description: "some description", price: "some price"}
-  @update_attrs %{name: "some updated name", status: "some updated status", description: "some updated description", price: "some updated price"}
+  @create_attrs %{
+    name: "some name",
+    status: "some status",
+    description: "some description",
+    price: "some price"
+  }
+  @update_attrs %{
+    name: "some updated name",
+    status: "some updated status",
+    description: "some updated description",
+    price: "some updated price"
+  }
   @invalid_attrs %{name: nil, status: nil, description: nil, price: nil}
 
   defp create_task(_) do

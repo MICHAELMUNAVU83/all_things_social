@@ -21,6 +21,14 @@ defmodule AllThingsSocial.Tasks do
     Repo.all(Task)
   end
 
+  def list_tasks_for_a_brand_and_influencer(brand_id, influencer_id) do
+    from(task in Task,
+      where: task.brand_id == ^brand_id and task.influencer_id == ^influencer_id,
+      order_by: [asc: task.id]
+    )
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single task.
 

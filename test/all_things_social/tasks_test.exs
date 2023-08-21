@@ -21,7 +21,12 @@ defmodule AllThingsSocial.TasksTest do
     end
 
     test "create_task/1 with valid data creates a task" do
-      valid_attrs = %{name: "some name", status: "some status", description: "some description", price: "some price"}
+      valid_attrs = %{
+        name: "some name",
+        status: "some status",
+        description: "some description",
+        price: "some price"
+      }
 
       assert {:ok, %Task{} = task} = Tasks.create_task(valid_attrs)
       assert task.name == "some name"
@@ -36,7 +41,13 @@ defmodule AllThingsSocial.TasksTest do
 
     test "update_task/2 with valid data updates the task" do
       task = task_fixture()
-      update_attrs = %{name: "some updated name", status: "some updated status", description: "some updated description", price: "some updated price"}
+
+      update_attrs = %{
+        name: "some updated name",
+        status: "some updated status",
+        description: "some updated description",
+        price: "some updated price"
+      }
 
       assert {:ok, %Task{} = task} = Tasks.update_task(task, update_attrs)
       assert task.name == "some updated name"
