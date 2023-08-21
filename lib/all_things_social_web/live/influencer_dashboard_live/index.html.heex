@@ -317,6 +317,28 @@
                         Accept
                       </button>
                     <% end %>
+                    <%= if task.status == "accepted" do %>
+                      <div class="flex flex-col gap-1">
+                        <p class="text-sm text-center font-semibold">
+                          You have accepted this task , once done , you  can ask for a review
+                          by clicking the button below
+                        </p>
+                        <button
+                          phx-click="ask_for_review"
+                          class="w-[100%] text-white bg-[#887CF2] p-2 rounded-md"
+                          phx-value-id={task.id}
+                        >
+                          Ask For A Review
+                        </button>
+                      </div>
+                    <% end %>
+                    <%= if task.status == "in_review" do %>
+                      <div class="flex flex-col gap-1">
+                        <p class="text-sm text-center font-semibold">
+                          This task is in review , once approved , you will can claim your paymnent
+                        </p>
+                      </div>
+                    <% end %>
                   </div>
                 </div>
               <% end %>

@@ -52,6 +52,19 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
      |> assign(:tasks, tasks)}
   end
 
+  def handle_event("ask_for_review", %{"id" => id, "value" => value}, socket) do
+    task = Tasks.get_task!(id)
+    {:ok, _} = Tasks.update_task(task, %{status: "in_review"})
+
+    tasks =
+      Tasks.list_tasks()
+      |> Enum.filter(fn task -> task.influencer_id == socket.assigns.logged_in_influencer.id end)
+
+    {:noreply,
+     socket
+     |> assign(:tasks, tasks)}
+  end
+
   defp page_title(:add_social_media_account), do: "Add Social media account"
   defp page_title(:index), do: "Index"
   defp page_title(:add_rate), do: "Add Rate"
