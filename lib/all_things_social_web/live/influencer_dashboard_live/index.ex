@@ -35,11 +35,25 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
         niche.influencer_id == logged_in_influencer.id
       end)
 
+    niche =
+      if params["niche_id"] do
+        Niches.get_niche!(params["niche_id"])
+      else
+        %Niche{}
+      end
+
+    social_media_account =
+      if params["social_media_account_id"] do
+        SocialMediaAccounts.get_social_media_account!(params["social_media_account_id"])
+      else
+        %SocialMediaAccount{}
+      end
+
     {:ok,
      socket
-     |> assign(:social_media_account, %SocialMediaAccount{})
+     |> assign(:social_media_account, social_media_account)
      |> assign(:rate, %Rate{})
-     |> assign(:niche, %Niche{})
+     |> assign(:niche, niche)
      |> assign(:tasks, tasks)
      |> assign(:state, "social_media_accounts")
      |> assign(:rates, rates)
@@ -86,8 +100,41 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
      |> assign(:tasks, tasks)}
   end
 
+  def handle_event("delete_niche", %{"id" => id}, socket) do
+    niche = Niches.get_niche!(id)
+    {:ok, _} = Niches.delete_niche(niche)
+
+    niches =
+      Niches.list_niches()
+      |> Enum.filter(fn niche ->
+        niche.influencer_id == socket.assigns.logged_in_influencer.id
+      end)
+
+    {:noreply,
+     socket
+     |> assign(:niches, niches)}
+  end
+
+  def handle_event("delete_social_media_account", %{"id" => id}, socket) do
+    social_media_account = SocialMediaAccounts.get_social_media_account!(id)
+    {:ok, _} = SocialMediaAccounts.delete_social_media_account(social_media_account)
+
+    social_media_accounts =
+      SocialMediaAccounts.list_social_media_accounts()
+      |> Enum.filter(fn social_media_account ->
+        social_media_account.influencer_id == socket.assigns.logged_in_influencer.id
+      end)
+
+    {:noreply,
+     socket
+     |> assign(:social_media_accounts, social_media_accounts)}
+  end
+
   defp page_title(:add_social_media_account), do: "Add Social media account"
+
+  defp page_title(:edit_social_media_account), do: "Edit Social media account"
   defp page_title(:index), do: "Index"
   defp page_title(:add_rate), do: "Add Rate"
   defp page_title(:add_niche), do: "Add Niche"
+  defp page_title(:edit_niche), do: "Edit Niche"
 end

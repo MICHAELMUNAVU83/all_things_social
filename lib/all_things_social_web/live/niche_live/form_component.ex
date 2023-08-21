@@ -27,7 +27,7 @@ defmodule AllThingsSocialWeb.NicheLive.FormComponent do
     save_niche(socket, socket.assigns.action, niche_params)
   end
 
-  defp save_niche(socket, :edit, niche_params) do
+  defp save_niche(socket, :edit_niche, niche_params) do
     case Niches.update_niche(socket.assigns.niche, niche_params) do
       {:ok, _niche} ->
         {:noreply,
