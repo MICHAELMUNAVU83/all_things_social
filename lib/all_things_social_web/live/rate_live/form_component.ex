@@ -27,7 +27,7 @@ defmodule AllThingsSocialWeb.RateLive.FormComponent do
     save_rate(socket, socket.assigns.action, rate_params)
   end
 
-  defp save_rate(socket, :edit, rate_params) do
+  defp save_rate(socket, :edit_rate, rate_params) do
     case Rates.update_rate(socket.assigns.rate, rate_params) do
       {:ok, _rate} ->
         {:noreply,

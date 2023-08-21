@@ -10,6 +10,8 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   alias AllThingsSocial.Tasks
 
   def mount(params, session, socket) do
+    IO.inspect(params)
+
     logged_in_influencer =
       Influencers.get_influencer_by_session_token(session["influencer_token"])
 
@@ -35,6 +37,17 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
         niche.influencer_id == logged_in_influencer.id
       end)
 
+    {:ok,
+     socket
+     |> assign(:tasks, tasks)
+     |> assign(:state, "social_media_accounts")
+     |> assign(:rates, rates)
+     |> assign(:niches, niches)
+     |> assign(:social_media_accounts, social_media_accounts)
+     |> assign(:logged_in_influencer, logged_in_influencer)}
+  end
+
+  def handle_params(params, _url, socket) do
     niche =
       if params["niche_id"] do
         Niches.get_niche!(params["niche_id"])
@@ -49,22 +62,18 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
         %SocialMediaAccount{}
       end
 
-    {:ok,
-     socket
-     |> assign(:social_media_account, social_media_account)
-     |> assign(:rate, %Rate{})
-     |> assign(:niche, niche)
-     |> assign(:tasks, tasks)
-     |> assign(:state, "social_media_accounts")
-     |> assign(:rates, rates)
-     |> assign(:niches, niches)
-     |> assign(:social_media_accounts, social_media_accounts)
-     |> assign(:logged_in_influencer, logged_in_influencer)}
-  end
+    rate =
+      if params["rate_id"] do
+        Rates.get_rate!(params["rate_id"])
+      else
+        %Rate{}
+      end
 
-  def handle_params(params, _url, socket) do
     {:noreply,
      socket
+     |> assign(:social_media_account, social_media_account)
+     |> assign(:rate, rate)
+     |> assign(:niche, niche)
      |> assign(:page_title, page_title(socket.assigns.live_action))}
   end
 
@@ -115,6 +124,21 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
      |> assign(:niches, niches)}
   end
 
+  def handle_event("delete_rate", %{"id" => id}, socket) do
+    rate = Rates.get_rate!(id)
+    {:ok, _} = Rates.delete_rate(rate)
+
+    rates =
+      Rates.list_rates()
+      |> Enum.filter(fn rate ->
+        rate.influencer_id == socket.assigns.logged_in_influencer.id
+      end)
+
+    {:noreply,
+     socket
+     |> assign(:rates, rates)}
+  end
+
   def handle_event("delete_social_media_account", %{"id" => id}, socket) do
     social_media_account = SocialMediaAccounts.get_social_media_account!(id)
     {:ok, _} = SocialMediaAccounts.delete_social_media_account(social_media_account)
@@ -135,6 +159,7 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   defp page_title(:edit_social_media_account), do: "Edit Social media account"
   defp page_title(:index), do: "Index"
   defp page_title(:add_rate), do: "Add Rate"
+  defp page_title(:edit_rate), do: "Edit Rate"
   defp page_title(:add_niche), do: "Add Niche"
   defp page_title(:edit_niche), do: "Edit Niche"
 end

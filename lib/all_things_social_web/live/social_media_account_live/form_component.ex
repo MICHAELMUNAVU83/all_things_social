@@ -27,7 +27,7 @@ defmodule AllThingsSocialWeb.SocialMediaAccountLive.FormComponent do
     save_social_media_account(socket, socket.assigns.action, social_media_account_params)
   end
 
-  defp save_social_media_account(socket, :edit, social_media_account_params) do
+  defp save_social_media_account(socket, :edit_social_media_account, social_media_account_params) do
     case SocialMediaAccounts.update_social_media_account(
            socket.assigns.social_media_account,
            social_media_account_params

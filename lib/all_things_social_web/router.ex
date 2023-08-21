@@ -33,6 +33,7 @@ defmodule AllThingsSocialWeb.Router do
     live "/influencer_dashboard/add_rate", InfluencerDashboardLive.Index, :add_rate
     live "/influencer_dashboard/add_niche", InfluencerDashboardLive.Index, :add_niche
     live "/influencer_dashboard/:niche_id/edit_niche", InfluencerDashboardLive.Index, :edit_niche
+    live "/influencer_dashboard/:rate_id/edit_rate", InfluencerDashboardLive.Index, :edit_rate
 
     live "/influencer_dashboard/:social_media_account_id/edit_social_media_account",
          InfluencerDashboardLive.Index,
