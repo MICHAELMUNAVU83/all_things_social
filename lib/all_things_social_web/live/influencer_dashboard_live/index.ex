@@ -17,13 +17,27 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
       Tasks.list_tasks()
       |> Enum.filter(fn task -> task.influencer_id == logged_in_influencer.id end)
 
+    social_media_accounts =
+      SocialMediaAccounts.list_social_media_accounts()
+      |> Enum.filter(fn social_media_account ->
+        social_media_account.influencer_id == logged_in_influencer.id
+      end)
+
+    rates =
+      Rates.list_rates()
+      |> Enum.filter(fn rate ->
+        rate.influencer_id == logged_in_influencer.id
+      end)
+
     {:ok,
      socket
      |> assign(:social_media_account, %SocialMediaAccount{})
      |> assign(:rate, %Rate{})
      |> assign(:niche, %Niche{})
      |> assign(:tasks, tasks)
-     |> assign(:state, "tasks")
+     |> assign(:state, "social_media_accounts")
+     |> assign(:rates, rates)
+     |> assign(:social_media_accounts, social_media_accounts)
      |> assign(:logged_in_influencer, logged_in_influencer)}
   end
 
