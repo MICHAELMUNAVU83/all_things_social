@@ -24,6 +24,66 @@ defmodule AllThingsSocialWeb.Router do
     pipe_through :browser
 
     live "/", PageLive.Index, :index
+
+    live "/chats", ChatLive.Index, :index
+    live "/chats/new", ChatLive.Index, :new
+    live "/chats/:id/edit", ChatLive.Index, :edit
+
+    live "/chats/:id", ChatLive.Show, :show
+    live "/chats/:id/show/edit", ChatLive.Show, :edit
+
+    live "/payments", PaymentLive.Index, :index
+    live "/payments/new", PaymentLive.Index, :new
+    live "/payments/:id/edit", PaymentLive.Index, :edit
+
+    live "/payments/:id", PaymentLive.Show, :show
+    live "/payments/:id/show/edit", PaymentLive.Show, :edit
+  end
+
+  scope "/", AllThingsSocialWeb do
+    pipe_through [:browser, :redirect_if_brand_is_authenticated]
+
+    live "/content_boards", ContentBoardLive.Index, :index
+    live "/content_boards/new", ContentBoardLive.Index, :new
+    live "/content_boards/:id/edit", ContentBoardLive.Index, :edit
+
+    live "/content_boards/:id", ContentBoardLive.Show, :show
+    live "/content_boards/:id/show/edit", ContentBoardLive.Show, :edit
+
+    live "/influencer_accounts", InfluencerAccountLive.Index, :index
+    live "/influencer_accounts/new", InfluencerAccountLive.Index, :new
+
+    live "/influencer_accounts/:id", InfluencerAccountLive.Show, :show
+    live "/influencer_accounts/:id/show/edit", InfluencerAccountLive.Show, :edit
+
+    live "/tasks", TaskLive.Index, :index
+    live "/tasks/new", TaskLive.Index, :new
+    live "/tasks/:id/edit", TaskLive.Index, :edit
+
+    live "/tasks/:id", TaskLive.Show, :show
+    live "/tasks/:id/show/edit", TaskLive.Show, :edit
+
+    live "/all_influencers", AllInfluencersLive.Index, :index
+
+    live "/my_influencers", MyInfluencersLive.Index, :index
+    live "/my_influencers/:id", MyInfluencersLive.Show, :show
+    live "/my_influencers/:id/add_task", MyInfluencersLive.Show, :add_task
+    live "/my_influencers/:id/:task_id/edit_task", MyInfluencersLive.Show, :edit_task
+
+    live "/all_influencers/:id", AllInfluencersLive.Index, :show
+
+    live "/all_influencers/:id/add_influencer_account",
+         AllInfluencersLive.Index,
+         :add_influencer_account
+
+    live "/influencer_accounts/:id/:influencer_account_id/edit",
+         ContentBoardLive.Show,
+         :editinfluenceraccount
+  end
+
+  scope "/", AllThingsSocialWeb do
+    pipe_through [:browser, :redirect_if_influencer_is_authenticated]
+
     live "/influencer_dashboard", InfluencerDashboardLive.Index, :index
 
     live "/influencer_dashboard/add_social_media_account",
@@ -42,36 +102,6 @@ defmodule AllThingsSocialWeb.Router do
     live "/influencer_dashboard/:social_media_account_id/edit_social_media_account",
          InfluencerDashboardLive.Index,
          :edit_social_media_account
-
-    live "/all_influencers", AllInfluencersLive.Index, :index
-
-    live "/my_influencers", MyInfluencersLive.Index, :index
-    live "/my_influencers/:id", MyInfluencersLive.Show, :show
-    live "/my_influencers/:id/add_task", MyInfluencersLive.Show, :add_task
-    live "/my_influencers/:id/:task_id/edit_task", MyInfluencersLive.Show, :edit_task
-
-    live "/all_influencers/:id", AllInfluencersLive.Index, :show
-
-    live "/all_influencers/:id/add_influencer_account",
-         AllInfluencersLive.Index,
-         :add_influencer_account
-
-    live "/influencer_accounts/:id/:influencer_account_id/edit",
-         ContentBoardLive.Show,
-         :editinfluenceraccount
-
-    live "/content_boards", ContentBoardLive.Index, :index
-    live "/content_boards/new", ContentBoardLive.Index, :new
-    live "/content_boards/:id/edit", ContentBoardLive.Index, :edit
-
-    live "/content_boards/:id", ContentBoardLive.Show, :show
-    live "/content_boards/:id/show/edit", ContentBoardLive.Show, :edit
-
-    live "/influencer_accounts", InfluencerAccountLive.Index, :index
-    live "/influencer_accounts/new", InfluencerAccountLive.Index, :new
-
-    live "/influencer_accounts/:id", InfluencerAccountLive.Show, :show
-    live "/influencer_accounts/:id/show/edit", InfluencerAccountLive.Show, :edit
 
     live "/niches", NicheLive.Index, :index
     live "/niches/new", NicheLive.Index, :new
@@ -92,27 +122,6 @@ defmodule AllThingsSocialWeb.Router do
 
     live "/rates/:id", RateLive.Show, :show
     live "/rates/:id/show/edit", RateLive.Show, :edit
-
-    live "/chats", ChatLive.Index, :index
-    live "/chats/new", ChatLive.Index, :new
-    live "/chats/:id/edit", ChatLive.Index, :edit
-
-    live "/chats/:id", ChatLive.Show, :show
-    live "/chats/:id/show/edit", ChatLive.Show, :edit
-
-    live "/tasks", TaskLive.Index, :index
-    live "/tasks/new", TaskLive.Index, :new
-    live "/tasks/:id/edit", TaskLive.Index, :edit
-
-    live "/tasks/:id", TaskLive.Show, :show
-    live "/tasks/:id/show/edit", TaskLive.Show, :edit
-
-    live "/payments", PaymentLive.Index, :index
-    live "/payments/new", PaymentLive.Index, :new
-    live "/payments/:id/edit", PaymentLive.Index, :edit
-
-    live "/payments/:id", PaymentLive.Show, :show
-    live "/payments/:id/show/edit", PaymentLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
