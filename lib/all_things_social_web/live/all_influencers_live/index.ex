@@ -3,6 +3,7 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.Index do
   alias AllThingsSocial.Influencers
   alias AllThingsSocial.Influencers.Influencer
   alias AllThingsSocial.Brands
+  alias AllThingsSocial.Niches
   alias AllThingsSocial.ContentBoards
   alias AllThingsSocial.InfluencerAccounts
   alias AllThingsSocial.InfluencerAccounts.InfluencerAccount
@@ -29,6 +30,16 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.Index do
 
     IO.inspect(content_boards)
 
+    niches =
+      Niches.list_niches()
+      |> Enum.uniq(fn niche -> niche.name end)
+      |> Enum.map(fn niche ->
+        niche
+        {niche.name, niche.name}
+      end)
+
+    niches = [{"All Niches", ""}] ++ niches
+
     {:ok,
      socket
      |> assign(:influencers, influencers)
@@ -39,6 +50,11 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.Index do
        :search_changeset,
        InfluencerAccounts.change_influencer_account(%InfluencerAccount{})
      )
+     |> assign(
+       :niche_changeset,
+       InfluencerAccounts.change_influencer_account(%InfluencerAccount{})
+     )
+     |> assign(:niches, niches)
      |> assign(:logged_in_brand, logged_in_brand)
      |> assign(:influencer_account, %InfluencerAccount{})}
   end
@@ -48,13 +64,20 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.Index do
   end
 
   def handle_event("search", %{"influencer_account" => influencer_account_params}, socket) do
-    IO.inspect(influencer_account_params["search"])
-
     {:noreply,
      socket
      |> assign(
        :influencers,
        Influencers.list_influencers_by_search(influencer_account_params["search"])
+     )}
+  end
+
+  def handle_event("search_niche", %{"influencer_account" => influencer_account_params}, socket) do
+    {:noreply,
+     socket
+     |> assign(
+       :influencers,
+       Influencers.list_influencers_by_niches(influencer_account_params["search"])
      )}
   end
 end

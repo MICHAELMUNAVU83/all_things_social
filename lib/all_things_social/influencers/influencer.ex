@@ -7,7 +7,11 @@ defmodule AllThingsSocial.Influencers.Influencer do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
-
+    has_many :influencer_accounts, AllThingsSocial.InfluencerAccounts.InfluencerAccount
+    has_many :social_media_accounts, AllThingsSocial.SocialMediaAccounts.SocialMediaAccount
+    has_many :rates, AllThingsSocial.Rates.Rate
+    has_many :niches, AllThingsSocial.Niches.Niche
+    has_many :tasks, AllThingsSocial.Tasks.Task
     timestamps()
   end
 

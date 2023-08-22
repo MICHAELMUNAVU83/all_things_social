@@ -38,6 +38,21 @@ defmodule AllThingsSocial.Influencers do
       end)
   end
 
+  def list_influencers_by_niches(niche) do
+    if niche == "" do
+      query =
+        Repo.all(Influencer)
+        |> Repo.preload(:niches)
+    else
+      query =
+        Repo.all(Influencer)
+        |> Repo.preload(:niches)
+        |> Enum.filter(fn influencer ->
+          Enum.any?(influencer.niches, fn n -> n.name == niche end)
+        end)
+    end
+  end
+
   @doc """
   Gets a influencer by email and password.
 

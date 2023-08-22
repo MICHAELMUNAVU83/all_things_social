@@ -92,9 +92,14 @@
         </div>
       </div>
       <div class="w-[20%]">
-        <select class="border-2 border-gray-300 rounded-md w-[100%] text-[#808AA2] font-bold  h-[50px] px-8 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-          <option value="All">Filter by NIche</option>
-        </select>
+        <.form let={f} id="search" phx-change="search_niche" for={@niche_changeset}>
+          <%= select(f, :search, @niches,
+            prompt: "Filter by Niche",
+            placeholder: "Search For an Influencer by Name",
+            class:
+              "w-full px-4 pl-10     focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent  border-gray-300 border-2 rounded-xl h-[50px]"
+          ) %>
+        </.form>
       </div>
     </div>
     <table class="table-auto w-full text-center  overflow-auto">
