@@ -15,6 +15,8 @@ defmodule AllThingsSocialWeb.ContentBoardLive.Show do
     id = params["id"]
     IO.inspect(params)
 
+    IO.inspect(InfluencerAccounts.list_influencer_accounts())
+
     potential_influencer_accounts =
       ContentBoards.list_potential_influencer_accounts_for_a_content_board(id)
 

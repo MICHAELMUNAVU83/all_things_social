@@ -20,8 +20,8 @@
       <div class="flex gap-2 flex-col items-center">
         <div class="w-[50px] h-[50px] rounded-full bg-[#887CF2]"></div>
         <div class="flex flex-col">
-          <p class="text-sm font-bold">Michael Munavu</p>
-          <p class="text-xs text-[#595959]">michaelmunavu</p>
+          <p class="text-sm font-bold"><%= @influencer_account.influencer.email %></p>
+          <p class="text-xs text-center text-[#595959]">michaelmunavu</p>
         </div>
       </div>
 
@@ -234,7 +234,7 @@
                 <div class="md:w-[85%] w-[75%] text-[#A8B1CF] ">
                   <%= text_input(f, :message,
                     class:
-                      "w-[100%] md:h-[90%] h-[50%]  border border-transparent   focus:ring-0 border-none  p-4 bg-white shadow-gray-300 shadow-md",
+                      "w-[100%] md:h-[90%] h-[50%]  border border-transparent   focus:ring-0 border-none text-black  p-4 bg-white shadow-gray-300 shadow-md",
                     placeholder: "Enter message..."
                   ) %>
                 </div>
@@ -355,7 +355,7 @@
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for social_media_account <- @social_media_accounts do %>
                 <%= if social_media_account.platform == "Instagram" do %>
-                  <div class="h-[120px] p-2 hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col gap-2  rounded-xl">
+                  <div class="h-[100px] p-2 hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col gap-2  rounded-xl">
                     <div class="flex gap-2 items-start">
                       <div class="bg-red-500 h-[50px] w-[50px] rounded-full"></div>
 
@@ -416,7 +416,7 @@
                     </div>
 
                     <div class="flex gap-2 px-4 items-start">
-                      <%= Heroicons.icon("calendar",
+                      <%= Heroicons.icon("briefcase",
                         type: "solid",
                         class: "h-6 text-[#887CF2]  w-6"
                       ) %>
@@ -427,7 +427,7 @@
                     </div>
 
                     <div class="flex gap-2 px-4 items-start">
-                      <%= Heroicons.icon("calendar",
+                      <%= Heroicons.icon("banknotes",
                         type: "solid",
                         class: "h-6 text-[#887CF2]  w-6"
                       ) %>
@@ -452,7 +452,7 @@
                 <div class="h-[100px] p-2 hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
                   <div class="flex flex-col gap-1">
                     <div class="flex gap-2 px-4 items-start">
-                      <%= Heroicons.icon("calendar",
+                      <%= Heroicons.icon("briefcase",
                         type: "solid",
                         class: "h-6 text-[#887CF2]  w-6"
                       ) %>
