@@ -20,11 +20,21 @@ defmodule AllThingsSocial.ContentBoards do
   """
   def list_content_boards do
     Repo.all(ContentBoard)
+    |> Repo.preload(:brand)
+    |> Repo.preload(:tasks)
+    |> Repo.preload(:payments)
+    |> Repo.preload(:influencer_accounts)
+    |> Repo.preload(:chats)
   end
 
   def list_content_boards_for_a_brand(brand_id) do
     from(c in ContentBoard, where: c.brand_id == ^brand_id)
     |> Repo.all()
+    |> Repo.preload(:brand)
+    |> Repo.preload(:tasks)
+    |> Repo.preload(:payments)
+    |> Repo.preload(:influencer_accounts)
+    |> Repo.preload(:chats)
   end
 
   def list_potential_influencer_accounts_for_a_content_board(content_board_id) do

@@ -15,6 +15,7 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   alias AllThingsSocial.Chats
   alias AllThingsSocial.Chats.Chat
   alias AllThingsSocial.Mpesas
+  alias AllThingsSocial.Payments
 
   def mount(params, session, socket) do
     IO.inspect(params)
@@ -50,6 +51,12 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
         influencer_account.influencer_id == logged_in_influencer.id
       end)
 
+    payments =
+      Payments.list_payments()
+      |> Enum.filter(fn payment ->
+        payment.influencer_id == logged_in_influencer.id
+      end)
+
     {:ok,
      socket
      |> assign(:tasks, tasks)
@@ -58,6 +65,7 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
      |> assign(:rates, rates)
      |> assign(:niches, niches)
      |> assign(:n, false)
+     |> assign(:payments, payments)
      |> assign(:success_modal, false)
      |> assign(:error_message, "")
      |> assign(:error_modal, false)
@@ -160,6 +168,17 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   def factorial(socket, n, string, id) when n == true do
     task = Tasks.get_task!(id)
     {:ok, _} = Tasks.update_task(task, %{status: "paid"})
+
+    payment_params = %{
+      "brand_id" => task.brand_id,
+      "influencer_id" => task.influencer_id,
+      "task_id" => task.id,
+      "content_board_id" => task.content_board_id,
+      "price" => task.price,
+      "status" => "received"
+    }
+
+    {:ok, _} = Payments.create_payment(payment_params)
 
     tasks =
       Tasks.list_tasks()

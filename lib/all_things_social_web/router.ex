@@ -106,6 +106,13 @@ defmodule AllThingsSocialWeb.Router do
 
     live "/tasks/:id", TaskLive.Show, :show
     live "/tasks/:id/show/edit", TaskLive.Show, :edit
+
+    live "/payments", PaymentLive.Index, :index
+    live "/payments/new", PaymentLive.Index, :new
+    live "/payments/:id/edit", PaymentLive.Index, :edit
+
+    live "/payments/:id", PaymentLive.Show, :show
+    live "/payments/:id/show/edit", PaymentLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

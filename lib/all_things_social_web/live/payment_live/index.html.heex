@@ -1,0 +1,52 @@
+<h1>Listing Payments</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.payment_index_path(@socket, :index)}>
+    <.live_component
+      module={AllThingsSocialWeb.PaymentLive.FormComponent}
+      id={@payment.id || :new}
+      title={@page_title}
+      action={@live_action}
+      payment={@payment}
+      return_to={Routes.payment_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Price</th>
+      <th>Status</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="payments">
+    <%= for payment <- @payments do %>
+      <tr id={"payment-#{payment.id}"}>
+        <td><%= payment.price %></td>
+        <td><%= payment.status %></td>
+
+        <td>
+          <span>
+            <%= live_redirect("Show", to: Routes.payment_show_path(@socket, :show, payment)) %>
+          </span>
+          <span>
+            <%= live_patch("Edit", to: Routes.payment_index_path(@socket, :edit, payment)) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: payment.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch("New Payment", to: Routes.payment_index_path(@socket, :new)) %></span>

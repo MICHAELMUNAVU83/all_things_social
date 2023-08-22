@@ -254,7 +254,7 @@
       <% end %>
 
       <%= if @state == "tasks" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="flex gap-2 items-center">
               <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
@@ -299,9 +299,25 @@
                   </div>
 
                   <div class="flex px-4 ">
-                    <button class="text-white bg-[#887CF2] p-2 rounded-md">
-                      <%= task.status %>
-                    </button>
+                    <%= if task.status == "pending" || task.status == "paid" || task.status == "approved" do %>
+                      <button class="text-white bg-[#887CF2] p-2 rounded-md">
+                        <%= task.status %>
+                      </button>
+                    <% else %>
+                      <div class="flex flex-col gap-2 items-center">
+                        <p class="text-xs text-center">
+                          <%= @influencer_account.influencer.email %> has completed the task , kindly go through it and when satisfied approve by clicking the button below
+                        </p>
+
+                        <button
+                          class="text-white bg-[#887CF2] p-2 rounded-md"
+                          phx-click="approve"
+                          phx-value-id={task.id}
+                        >
+                          Approve
+                        </button>
+                      </div>
+                    <% end %>
                   </div>
 
                   <div class="flex gap-4 px-4">
@@ -334,7 +350,7 @@
       <% end %>
 
       <%= if @state == "social_media_accounts" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for social_media_account <- @social_media_accounts do %>
@@ -382,7 +398,7 @@
       <% end %>
 
       <%= if @state == "rates" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for rate <- @rates do %>
@@ -429,7 +445,7 @@
       <% end %>
 
       <%= if @state == "niches" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for niche <- @niches do %>

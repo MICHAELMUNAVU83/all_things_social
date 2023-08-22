@@ -1,0 +1,32 @@
+<h1>Show Payment</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.payment_show_path(@socket, :show, @payment)}>
+    <.live_component
+      module={AllThingsSocialWeb.PaymentLive.FormComponent}
+      id={@payment.id}
+      title={@page_title}
+      action={@live_action}
+      payment={@payment}
+      return_to={Routes.payment_show_path(@socket, :show, @payment)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+  <li>
+    <strong>Price:</strong>
+    <%= @payment.price %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @payment.status %>
+  </li>
+</ul>
+
+<span>
+  <%= live_patch("Edit", to: Routes.payment_show_path(@socket, :edit, @payment), class: "button") %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.payment_index_path(@socket, :index)) %></span>

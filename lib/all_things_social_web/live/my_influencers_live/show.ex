@@ -118,6 +118,21 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
     end
   end
 
+  def handle_event("approve", %{"id" => id}, socket) do
+    task = Tasks.get_task!(id)
+    {:ok, _} = Tasks.update_task(task, %{status: "approved"})
+
+    tasks =
+      Tasks.list_tasks_for_a_brand_and_influencer(
+        socket.assigns.logged_in_brand.id,
+        socket.assigns.influencer_account.influencer_id
+      )
+
+    {:noreply,
+     socket
+     |> assign(:tasks, tasks)}
+  end
+
   def handle_event("delete_task", %{"id" => id}, socket) do
     task = Tasks.get_task!(id)
     {:ok, _} = Tasks.delete_task(task)

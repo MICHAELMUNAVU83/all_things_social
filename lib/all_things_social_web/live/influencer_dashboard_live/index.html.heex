@@ -350,7 +350,7 @@
       </div>
 
       <%= if @state == "tasks" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%] overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for task <- @tasks do %>
@@ -433,15 +433,6 @@
                       </div>
                     <% end %>
 
-                    <button
-                      class="w-[100%] text-white bg-[#887CF2] p-2 rounded-md"
-                      phx-click="pay"
-                      phx-disable-with="Submitting Payment.."
-                      phx-value-id={task.id}
-                    >
-                      bjnkml
-                    </button>
-
                     <%= if task.status == "approved" do %>
                       <div class="flex flex-col gap-1">
                         <p class="text-sm text-center font-semibold">
@@ -450,9 +441,10 @@
                         <button
                           class="w-[100%] text-white bg-[#887CF2] p-2 rounded-md"
                           phx-click="pay"
+                          phx-value-id={task.id}
                           phx-disable-with="Submitting Payment.."
                         >
-                          bjnkml
+                          Request for Payment of <%= task.price %> KSH
                         </button>
                       </div>
                     <% end %>
@@ -465,7 +457,7 @@
       <% end %>
 
       <%= if @state == "social_media_accounts" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%]  overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for social_media_account <- @social_media_accounts do %>
@@ -557,7 +549,7 @@
       <% end %>
 
       <%= if @state == "rates" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for rate <- @rates do %>
@@ -627,7 +619,7 @@
       <% end %>
 
       <%= if @state == "niches" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%]  overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for niche <- @niches do %>
@@ -675,7 +667,7 @@
       <% end %>
 
       <%= if @state == "chats" do %>
-        <div class="w-[100%]   overflow-hidden h-[100vh] flex flex-col">
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for influencer_account <- @influencer_accounts do %>
@@ -733,6 +725,68 @@
                     </div>
                   </div>
                 <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= if @state == "payments" do %>
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
+          <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
+            <div class="grid grid-cols-2 py-4 gap-8">
+              <%= for payment <- @payments do %>
+                <div class="h-[200px] p-2 hover:scale-105 transition-all ease-in-out duration-500  gap-2 w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
+                  <div class="flex flex-col gap-1">
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("banknotes",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= payment.price %>
+                      </p>
+                    </div>
+
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("calendar",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= payment.brand.email %>
+                      </p>
+                    </div>
+
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("calendar",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= payment.task.name %> KSH
+                      </p>
+                    </div>
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("calendar",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= payment.content_board.name %>
+                      </p>
+                    </div>
+                    <div class="flex flex-col justify-center items-center">
+                      <button class="w-[100%] text-white bg-[#887CF2] p-2 rounded-md">
+                        <%= payment.status %>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               <% end %>
             </div>
           </div>

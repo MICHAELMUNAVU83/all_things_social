@@ -5,6 +5,10 @@ defmodule AllThingsSocial.ContentBoards.ContentBoard do
   schema "content_boards" do
     field :name, :string
     belongs_to :brand, AllThingsSocial.Brands.Brand
+    has_many :tasks, AllThingsSocial.Tasks.Task
+    has_many :payments, AllThingsSocial.Payments.Payment
+    has_many :influencer_accounts, AllThingsSocial.InfluencerAccounts.InfluencerAccount
+    has_many :chats, AllThingsSocial.Chats.Chat
 
     timestamps()
   end
