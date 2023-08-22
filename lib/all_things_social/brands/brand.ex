@@ -5,6 +5,8 @@ defmodule AllThingsSocial.Brands.Brand do
   schema "brands" do
     field :email, :string
     field :password, :string, virtual: true, redact: true
+    field :username, :string
+    field :phone_number, :string
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
 
@@ -30,7 +32,8 @@ defmodule AllThingsSocial.Brands.Brand do
   """
   def registration_changeset(brand, attrs, opts \\ []) do
     brand
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :username, :phone_number])
+    |> validate_required([:username, :phone_number])
     |> validate_email()
     |> validate_password(opts)
   end

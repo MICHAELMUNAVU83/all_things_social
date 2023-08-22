@@ -8,6 +8,8 @@ defmodule AllThingsSocial.Repo.Migrations.CreateBrandsAuthTables do
       add :email, :citext, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
+      add :username, :string, null: false
+      add :phone_number, :string
       timestamps()
     end
 

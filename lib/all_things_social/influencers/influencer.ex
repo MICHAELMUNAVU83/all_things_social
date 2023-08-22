@@ -7,6 +7,9 @@ defmodule AllThingsSocial.Influencers.Influencer do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+
+    field :username, :string
+    field :phone_number, :string
     has_many :influencer_accounts, AllThingsSocial.InfluencerAccounts.InfluencerAccount
     has_many :social_media_accounts, AllThingsSocial.SocialMediaAccounts.SocialMediaAccount
     has_many :rates, AllThingsSocial.Rates.Rate
@@ -34,7 +37,8 @@ defmodule AllThingsSocial.Influencers.Influencer do
   """
   def registration_changeset(influencer, attrs, opts \\ []) do
     influencer
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :username, :phone_number])
+    |> validate_required([:username, :phone_number])
     |> validate_email()
     |> validate_password(opts)
   end

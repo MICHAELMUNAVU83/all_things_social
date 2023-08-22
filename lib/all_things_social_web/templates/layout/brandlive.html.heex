@@ -14,7 +14,9 @@
   <div class="flex flex-col">
     <div class="flex flex-col gap-4  bg-gradient-to-br from-purple-100 py-4 px-2 via-purple-100 to-white">
       <div class="flex justify-between items-center ">
-        <p class="dancing text-[#887CF2]">All Things Social</p>
+        <p class="dancing text-[#887CF2] ">
+          <%= live_redirect("All Things Social", to: Routes.page_index_path(@socket, :index)) %>
+        </p>
 
         <div class="flex gap-2 items-center">
           <p><%= @logged_in_brand.email %></p>
@@ -22,7 +24,7 @@
       </div>
       <div class="flex justify-between items-center ">
         <div class="flex gap-8  text-[#595959] text-xs font-bold uppercase items-center">
-          <%= live_redirect("Brands", to: Routes.content_board_index_path(@socket, :index)) %>
+          <%= live_redirect("Boards", to: Routes.content_board_index_path(@socket, :index)) %>
           <%= live_redirect("Discover Influencers",
             to: Routes.all_influencers_index_path(@socket, :index)
           ) %>

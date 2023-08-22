@@ -4,10 +4,15 @@ defmodule AllThingsSocialWeb.ContentBoardLive.Show do
   alias AllThingsSocial.ContentBoards
   alias AllThingsSocial.InfluencerAccounts
   alias AllThingsSocial.InfluencerAccounts.InfluencerAccount
+  alias AllThingsSocial.Brands
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, socket}
+  def mount(_params, session, socket) do
+    logged_in_brand = Brands.get_brand_by_session_token(session["brand_token"])
+
+    {:ok,
+     socket
+     |> assign(:logged_in_brand, logged_in_brand)}
   end
 
   @impl true

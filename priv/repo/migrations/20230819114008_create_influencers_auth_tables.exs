@@ -7,6 +7,8 @@ defmodule AllThingsSocial.Repo.Migrations.CreateInfluencersAuthTables do
     create table(:influencers) do
       add :email, :citext, null: false
       add :hashed_password, :string, null: false
+      add :username, :string, null: false
+      add :phone_number, :string
       add :confirmed_at, :naive_datetime
       timestamps()
     end

@@ -34,7 +34,7 @@ defmodule AllThingsSocial.Influencers do
     query =
       Repo.all(Influencer)
       |> Enum.filter(fn influencer ->
-        String.contains?(String.downcase(influencer.email), String.downcase(search))
+        String.contains?(String.downcase(influencer.username), String.downcase(search))
       end)
   end
 
