@@ -2,10 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Dancing+Script&family=Raleway:wght@200&display=swap");
+
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
+  font-family: "Raleway", sans-serif;
 }
 
+.dancing {
+  font-family: "Dancing Script", cursive;
+}
+
+.sans {
+  font-family: "DM Sans", sans-serif;
+}
+
+.raleway {
+  font-family: "Raleway", sans-serif;
+}
 /* This file is for your main application CSS */
 
 /* Alerts and form errors used by phx.new */

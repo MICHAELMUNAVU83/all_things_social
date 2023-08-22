@@ -35,8 +35,9 @@ defmodule AllThingsSocial.Brands.Brand do
     |> cast(attrs, [:email, :password, :username, :phone_number])
     |> validate_required([:username, :phone_number])
     |> validate_email()
-    |>validate_format(:phone_number, ~r/^254\d{9}$/, message: "Ensure the number starts with 254 and is 12 digits long")
-
+    |> validate_format(:phone_number, ~r/^254\d{9}$/,
+      message: "Ensure the number starts with 254 and is 12 digits long"
+    )
     |> validate_password(opts)
   end
 

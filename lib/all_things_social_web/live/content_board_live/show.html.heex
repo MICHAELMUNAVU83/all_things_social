@@ -91,27 +91,50 @@
 
     <div class="flex flex-col gap-2">
       <%= for account <- @outreached_influencer_accounts do %>
-        <%= live_patch("Edit",
-          to:
-            Routes.content_board_show_path(
-              @socket,
-              :editinfluenceraccount,
-              @content_board.id,
-              account
-            ),
-          class: "button"
-        ) %>
         <div class="border-[1px] border-[#887CF2] hover:bg-gray-50 transition-all ease-in-out duration-500 rounded-xl p-2 flex flex-col">
           <div class="flex  items-start gap-2">
             <img src="/images/instagram.jpg" class="w-[50px] h-[50px] rounded-full" alt="" />
             <div class="flex  flex-col">
               <p class="text-[#595959]">
-                Mike
+                <%= account.influencer.email %>
               </p>
               <div class="flex gap-2 items-center">
                 insta link
               </div>
             </div>
+          </div>
+          <div class="flex gap-6 mt-4 items-center">
+            <%= live_patch(
+            to:
+              Routes.content_board_show_path(
+                @socket,
+                :editinfluenceraccount,
+                @content_board.id,
+                account
+              )
+           
+          )  do %>
+              <%= Heroicons.icon("pencil",
+                type: "solid",
+                class: "h-6 text-[#887CF2]  w-6"
+              ) %>
+            <% end %>
+
+            <%= live_redirect(
+            to:
+              Routes.my_influencers_show_path(
+                @socket,
+                :show,
+                account.id
+                
+              )
+           
+          )  do %>
+              <%= Heroicons.icon("eye",
+                type: "solid",
+                class: "h-6 text-[#887CF2]  w-6"
+              ) %>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -131,27 +154,50 @@
 
     <div class="flex flex-col gap-2">
       <%= for account <- @negotiating_influencer_accounts do %>
-        <%= live_patch("Edit",
-          to:
-            Routes.content_board_show_path(
-              @socket,
-              :editinfluenceraccount,
-              @content_board.id,
-              account
-            ),
-          class: "button"
-        ) %>
         <div class="border-[1px] border-[#887CF2] hover:bg-gray-50 transition-all ease-in-out duration-500 rounded-xl p-2 flex flex-col">
           <div class="flex  items-start gap-2">
             <img src="/images/instagram.jpg" class="w-[50px] h-[50px] rounded-full" alt="" />
             <div class="flex  flex-col">
               <p class="text-[#595959]">
-                Mike
+                <%= account.influencer.email %>
               </p>
               <div class="flex gap-2 items-center">
                 insta link
               </div>
             </div>
+          </div>
+          <div class="flex gap-6 mt-4 items-center">
+            <%= live_patch(
+            to:
+              Routes.content_board_show_path(
+                @socket,
+                :editinfluenceraccount,
+                @content_board.id,
+                account
+              )
+           
+          )  do %>
+              <%= Heroicons.icon("pencil",
+                type: "solid",
+                class: "h-6 text-[#887CF2]  w-6"
+              ) %>
+            <% end %>
+
+            <%= live_redirect(
+            to:
+              Routes.my_influencers_show_path(
+                @socket,
+                :show,
+                account.id
+                
+              )
+           
+          )  do %>
+              <%= Heroicons.icon("eye",
+                type: "solid",
+                class: "h-6 text-[#887CF2]  w-6"
+              ) %>
+            <% end %>
           </div>
         </div>
       <% end %>
@@ -171,27 +217,50 @@
 
     <div class="flex flex-col gap-2">
       <%= for account <- @active_influencer_accounts do %>
-        <%= live_patch("Edit",
-          to:
-            Routes.content_board_show_path(
-              @socket,
-              :editinfluenceraccount,
-              @content_board.id,
-              account
-            ),
-          class: "button"
-        ) %>
-        <div class="border-[1px] border-[#887CF2] hover:bg-gray-50 transition-all ease-in-out duration-500 rounded-xl p-2 flex flex-col">
+         <div class="border-[1px] border-[#887CF2] hover:bg-gray-50 transition-all ease-in-out duration-500 rounded-xl p-2 flex flex-col">
           <div class="flex  items-start gap-2">
             <img src="/images/instagram.jpg" class="w-[50px] h-[50px] rounded-full" alt="" />
             <div class="flex  flex-col">
               <p class="text-[#595959]">
-                Mike
+                <%= account.influencer.email %>
               </p>
               <div class="flex gap-2 items-center">
                 insta link
               </div>
             </div>
+          </div>
+          <div class="flex gap-6 mt-4 items-center">
+            <%= live_patch(
+            to:
+              Routes.content_board_show_path(
+                @socket,
+                :editinfluenceraccount,
+                @content_board.id,
+                account
+              )
+           
+          )  do %>
+              <%= Heroicons.icon("pencil",
+                type: "solid",
+                class: "h-6 text-[#887CF2]  w-6"
+              ) %>
+            <% end %>
+
+            <%= live_redirect(
+            to:
+              Routes.my_influencers_show_path(
+                @socket,
+                :show,
+                account.id
+                
+              )
+           
+          )  do %>
+              <%= Heroicons.icon("eye",
+                type: "solid",
+                class: "h-6 text-[#887CF2]  w-6"
+              ) %>
+            <% end %>
           </div>
         </div>
       <% end %>

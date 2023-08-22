@@ -20,8 +20,7 @@
       <div class="flex gap-2 flex-col items-center">
         <div class="w-[50px] h-[50px] rounded-full bg-[#887CF2]"></div>
         <div class="flex flex-col">
-          <p class="text-sm font-bold"><%= @influencer_account.influencer.email %></p>
-          <p class="text-xs text-center text-[#595959]">michaelmunavu</p>
+          <p class="text-sm font-bold"><%= @influencer_account.influencer.username %></p>
         </div>
       </div>
 
@@ -43,7 +42,7 @@
       >
         <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#887CF2] font-semibold w-4") %>
         <p class="text-[#887CF2] font-semibold">
-          Chat with <%= @influencer_account.influencer.email %>
+          Chat with <%= @influencer_account.influencer.username %>
         </p>
       </div>
     </div>
@@ -163,7 +162,7 @@
             <div class="flex gap-2 items-center">
               <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
               <p class="text-[#887CF2] text-sm poppins-regular">
-                <%= @influencer_account.influencer.email %>
+                <%= @influencer_account.influencer.username %>
               </p>
             </div>
 
@@ -220,7 +219,7 @@
             <div class="flex gap-2 items-center">
               <div class=" w-[40px] bg-[#887CF2] rounded-full h-[40px]  "></div>
               <p class="text-[#887CF2] text-sm poppins-regular">
-                <%= @influencer_account.influencer.email %>
+                <%= @influencer_account.influencer.username %>
               </p>
             </div>
             <div class="grid grid-cols-2 py-4 gap-8">
@@ -455,7 +454,7 @@
                       ) %>
 
                       <p>
-                        <%= payment.influencer.email %>
+                        <%= payment.influencer.username %>
                       </p>
                     </div>
 

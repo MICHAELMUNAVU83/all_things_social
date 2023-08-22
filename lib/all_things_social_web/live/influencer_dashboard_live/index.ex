@@ -76,9 +76,13 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   def handle_event("pay", %{"id" => id}, socket) do
     IO.inspect(id)
 
+    task = Tasks.get_task!(id)
+
+    brand = Brands.get_brand!(task.brand_id)
+
     case Mpesas.make_request(
            1,
-           "254740769596",
+           brand.phone_number,
            "reference",
            "description"
          ) do
@@ -366,7 +370,9 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   def handle_event("close_success_modal", %{}, socket) do
     {:noreply,
      socket
-     |> assign(:success_modal, false)}
+
+     |> assign(:success_modal, false)
+     |> live_redirect(to: Routes.influencer_dashboard_index_path(socket, :index))}
   end
 
   def handle_event("close_error_modal", %{}, socket) do

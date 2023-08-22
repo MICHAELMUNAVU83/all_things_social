@@ -39,8 +39,7 @@ defmodule AllThingsSocial.Influencers.Influencer do
     influencer
     |> cast(attrs, [:email, :password, :username, :phone_number])
     |> validate_required([:username, :phone_number])
-    |>validate_format(:phone_number, ~r/^254\d{9}$/, message: "Invalid phone number")
-
+    |> validate_format(:phone_number, ~r/^254\d{9}$/, message: "Invalid phone number")
     |> validate_email()
     |> validate_password(opts)
   end
