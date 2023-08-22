@@ -30,6 +30,14 @@ defmodule AllThingsSocial.Influencers do
     Repo.all(Influencer)
   end
 
+  def list_influencers_by_search(search) do
+    query =
+      Repo.all(Influencer)
+      |> Enum.filter(fn influencer ->
+        String.contains?(String.downcase(influencer.email), String.downcase(search))
+      end)
+  end
+
   @doc """
   Gets a influencer by email and password.
 

@@ -81,10 +81,14 @@
               </path>
             </svg>
           </div>
-          <input
-            class="w-full px-4 pl-10     focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent  border-gray-300 border-2 rounded-xl h-[50px] "
-            placeholder="Search For an Influencer by Name"
-          />
+
+          <.form let={f} id="search" phx-change="search" for={@search_changeset}>
+            <%= text_input(f, :search,
+              placeholder: "Search For an Influencer by Name",
+              class:
+                "w-full px-4 pl-10     focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent  border-gray-300 border-2 rounded-xl h-[50px]"
+            ) %>
+          </.form>
         </div>
       </div>
       <div class="w-[20%]">
