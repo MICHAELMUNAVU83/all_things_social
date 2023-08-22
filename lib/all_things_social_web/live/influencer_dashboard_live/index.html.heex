@@ -41,7 +41,7 @@
 <% end %>
 
 <%= if @live_action in [:chat] do %>
-  <.modal return_to={Routes.all_influencers_index_path(@socket, :index)}>
+  <.modal return_to={Routes.influencer_dashboard_index_path(@socket, :index)}>
     <.live_component
       module={AllThingsSocialWeb.InfluencerDashboardLive.ChatComponent}
       id="new"
@@ -52,7 +52,7 @@
       brand={@brand}
       logged_in_influencer={@logged_in_influencer}
       chats={@chats}
-      return_to={Routes.all_influencers_index_path(@socket, :index)}
+      return_to={Routes.influencer_dashboard_index_path(@socket, :index)}
     />
   </.modal>
 <% end %>
@@ -579,58 +579,60 @@
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
             <div class="grid grid-cols-2 py-4 gap-8">
               <%= for influencer_account <- @influencer_accounts do %>
-                <div class="h-[200px] hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer  pb-4 group  flex-col  rounded-xl">
-                  <div class="flex flex-col w-[100%]">
-                    <div class="p-2 flex justify-between w-[100%] items-center">
-                      <p class="text-sm font-bold">
-                        Chat with <%= influencer_account.brand.email %>
-                      </p>
+                <%= live_redirect to: Routes.influencer_dashboard_index_path(@socket, :chat , influencer_account.id) do %>
+                  <div class="h-[200px] hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer  pb-4 group  flex-col  rounded-xl">
+                    <div class="flex flex-col w-[100%]">
+                      <div class="p-2 flex justify-between w-[100%] items-center">
+                        <p class="text-sm font-bold">
+                          Chat with <%= influencer_account.brand.email %>
+                        </p>
 
-                      <p class="text-[#887CF2]">....</p>
+                        <p class="text-[#887CF2]">....</p>
+                      </div>
+                      <p class="bg-[#887CF2] w-[100%] h-[1px]" />
                     </div>
-                    <p class="bg-[#887CF2] w-[100%] h-[1px]" />
+                    <div class="flex flex-col gap-1">
+                      <div class="flex gap-2 px-4 items-start">
+                        <%= Heroicons.icon("calendar",
+                          type: "solid",
+                          class: "h-6 text-[#887CF2]  w-6"
+                        ) %>
+
+                        <p>
+                          They have you at the <%= influencer_account.column %> column
+                        </p>
+                      </div>
+                      <div class="flex gap-2 px-4 items-start">
+                        <%= Heroicons.icon("calendar",
+                          type: "solid",
+                          class: "h-6 text-[#887CF2]  w-6"
+                        ) %>
+
+                        <p>
+                          You are in the <%= influencer_account.content_board.name %> content board
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1">
+                      <div class="flex gap-2 px-4 items-start">
+                        <%= Heroicons.icon("calendar",
+                          type: "solid",
+                          class: "h-6 text-[#887CF2]  w-6"
+                        ) %>
+
+                        <p>
+                          You have <%= length(
+                            AllThingsSocial.Chats.list_chats_for_a_brand_and_influencer(
+                              influencer_account.brand_id,
+                              influencer_account.influencer_id
+                            )
+                          ) %> messages
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex flex-col gap-1">
-                    <div class="flex gap-2 px-4 items-start">
-                      <%= Heroicons.icon("calendar",
-                        type: "solid",
-                        class: "h-6 text-[#887CF2]  w-6"
-                      ) %>
-
-                      <p>
-                        They have you at the <%= influencer_account.column %> column
-                      </p>
-                    </div>
-                    <div class="flex gap-2 px-4 items-start">
-                      <%= Heroicons.icon("calendar",
-                        type: "solid",
-                        class: "h-6 text-[#887CF2]  w-6"
-                      ) %>
-
-                      <p>
-                        You are in the <%= influencer_account.content_board.name %> content board
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col gap-1">
-                    <div class="flex gap-2 px-4 items-start">
-                      <%= Heroicons.icon("calendar",
-                        type: "solid",
-                        class: "h-6 text-[#887CF2]  w-6"
-                      ) %>
-
-                      <p>
-                        You have <%= length(
-                          AllThingsSocial.Chats.list_chats_for_a_brand_and_influencer(
-                            influencer_account.brand_id,
-                            influencer_account.influencer_id
-                          )
-                        ) %> messages
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                <% end %>
               <% end %>
             </div>
           </div>

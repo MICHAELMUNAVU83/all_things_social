@@ -44,7 +44,7 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.ChatComponent do
                   <div class="md:w-[85%] w-[75%] text-[#A8B1CF] ">
                     <%= text_input(f, :message,
                       class:
-                        "w-[100%] md:h-[90%] h-[50%]  border border-transparent text-[#A8B1CF]  focus:ring-0 border-none  p-4 bg-white shadow-gray-300 shadow-md",
+                        "w-[100%] md:h-[90%] h-[50%]  border border-transparent   focus:ring-0 border-none  p-4 bg-white shadow-gray-300 shadow-md",
                       placeholder: "Enter message..."
                     ) %>
                   </div>
