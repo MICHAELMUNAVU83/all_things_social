@@ -13,10 +13,24 @@
   >
     <div class="flex gap-2 w-[80%] mx-auto flex-col">
       <div class="flex gap-2 flex-col w-[100%]">
-        <%= text_input(f, :name,
+        <%= select(
+          f,
+          :name,
+          [
+            "Fitness and Wellness",
+            "Fashion and Beauty",
+            "Travel",
+            "Food and Cooking",
+            "Lifestyle and Personal Development",
+            "Parenting and Family",
+            "Tech and Gadgets",
+            "Gaming",
+            "Art and Creativity",
+            "Environment and Sustainability"
+          ],
+          prompt: "Select a Niche",
           class:
-            "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent",
-          placeholder: "Name of Niche"
+            "w-[100%] h-[60px] border-2 my-2 border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
         ) %>
         <p class="pt-5">
           <%= error_tag(f, :name) %>

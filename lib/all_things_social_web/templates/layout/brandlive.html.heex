@@ -17,20 +17,22 @@
         <p class="dancing text-[#887CF2]">All Things Social</p>
 
         <div class="flex gap-2 items-center">
-          <p>Michael Munavu</p>
-
-          <%= Heroicons.icon("chevron-down", type: "outline", class: "h-4 w-4") %>
+          <p><%= @logged_in_brand.email %></p>
         </div>
       </div>
       <div class="flex justify-between items-center ">
         <div class="flex gap-8  text-[#595959] text-xs font-bold uppercase items-center">
-          <p>Boards</p>
-          <p>Discover Influencers</p>
-          <p>My Influencers</p>
+          <%= live_redirect("Brands", to: Routes.content_board_index_path(@socket, :index)) %>
+          <%= live_redirect("Discover Influencers",
+            to: Routes.all_influencers_index_path(@socket, :index)
+          ) %>
+          <%= live_redirect("My influnecers",
+            to: Routes.my_influencers_index_path(@socket, :index)
+          ) %>
         </div>
         <div class="flec gap-2 text-sm items-center">
           <button class="bg-gradient-to-r cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white px-2 py-1 rounded-md">
-            Pay Premium
+            <%= link("Log out", to: Routes.brand_session_path(@socket, :delete), method: :delete) %>
           </button>
         </div>
       </div>

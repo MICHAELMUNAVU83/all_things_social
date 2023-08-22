@@ -25,33 +25,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-3 p-4 gap-4">
-        <div class="w-[100%] flex justify-center items-center flex-col gap-1 ">
-          <p class="text-[#595959] font-semibold">
-            52
-          </p>
-          <p>
-            Followers
-          </p>
-        </div>
-
-        <div class="w-[100%] flex justify-center items-center flex-col gap-1 ">
-          <p class="text-[#595959] font-semibold">
-            52
-          </p>
-          <p>
-            Followers
-          </p>
-        </div>
-        <div class="w-[100%] flex justify-center items-center flex-col gap-1 ">
-          <p class="text-[#595959] font-semibold">
-            52
-          </p>
-          <p>
-            Followers
-          </p>
-        </div>
-      </div>
+      <div class="grid grid-cols-3 p-4 gap-4"></div>
 
       <%= live_redirect to: Routes.my_influencers_show_path(@socket, :add_task, @influencer_account.id) do %>
         <div class="bg-[#FFF9E6] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
@@ -62,7 +36,11 @@
         </div>
       <% end %>
 
-      <div class="bg-[#E8D8F4] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
+      <div
+        class="bg-[#E8D8F4] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl"
+        phx-click="change_state"
+        phx-value-id="chats"
+      >
         <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#887CF2] font-semibold w-4") %>
         <p class="text-[#887CF2] font-semibold">
           Chat with <%= @influencer_account.influencer.email %>
@@ -72,23 +50,6 @@
 
     <div class="flex flex-col bg-white  h-[90vh] p-4  shadow-md rounded-xl shadow-gray-400  w-[70%] gap-4">
       <div class="flex items-center gap-5">
-        <%= if @state == "analytics" do %>
-          <div
-            phx-click="change_state"
-            phx-value-id="analytics"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
-          >
-            Analytics
-          </div>
-        <% else %>
-          <div
-            phx-click="change_state"
-            phx-value-id="analytics"
-            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
-          >
-            Analytics
-          </div>
-        <% end %>
         <%= if @state == "tasks" do %>
           <div
             phx-click="change_state"
@@ -460,6 +421,68 @@
                       <p>
                         <%= niche.name %>
                       </p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= if @state == "payments" do %>
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
+          <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
+            <div class="grid grid-cols-2 py-4 gap-8">
+              <%= for payment <- @payments do %>
+                <div class="h-[250px] p-2 hover:scale-105 transition-all ease-in-out duration-500  gap-2 w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
+                  <div class="flex flex-col gap-1">
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("banknotes",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= payment.price %>
+                      </p>
+                    </div>
+
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("user",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= payment.influencer.email %>
+                      </p>
+                    </div>
+
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("rectangle-stack",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= payment.task.name %> KSH
+                      </p>
+                    </div>
+                    <div class="flex gap-2 px-4 items-start">
+                      <%= Heroicons.icon("briefcase",
+                        type: "solid",
+                        class: "h-6 text-[#887CF2]  w-6"
+                      ) %>
+
+                      <p>
+                        <%= payment.content_board.name %>
+                      </p>
+                    </div>
+                    <div class="flex flex-col justify-center w-[100%] items-center">
+                      <button class="w-[100%] text-white bg-[#887CF2] p-2 rounded-md">
+                        <%= payment.status %>
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -9,6 +9,7 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
   alias AllThingsSocial.SocialMediaAccounts
   alias AllThingsSocial.Rates
   alias AllThingsSocial.Niches
+  alias AllThingsSocial.Payments
 
   def mount(_params, session, socket) do
     logged_in_brand = Brands.get_brand_by_session_token(session["brand_token"])
@@ -72,6 +73,13 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
         niche.influencer_id == influencer_id
       end)
 
+    payments =
+      Payments.list_payments()
+      |> Enum.filter(fn payment ->
+        payment.brand_id == socket.assigns.logged_in_brand.id and
+          payment.influencer_id == influencer_id
+      end)
+
     {:noreply,
      socket
      |> assign(:influencer_account, InfluencerAccounts.get_influencer_account!(id))
@@ -81,6 +89,7 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
      |> assign(:rates, rates)
      |> assign(:niches, niches)
      |> assign(:tasks, tasks)
+     |> assign(:payments, payments)
      |> assign(:page_title, "New Task")
      |> assign(:content_board_id, content_board_id)
      |> assign(:influencer_id, influencer_id)

@@ -15,39 +15,6 @@
 <p class="text-[#887CF2] font-bold text-xl">Your Board</p>
 
 <div class="bg-white min-h-[50vh] shadow-md rounded-xl p-4 shadow-gray-300">
-  <div class="flex justify-between items-center">
-    <div>
-      <select class="border-2 border-gray-300 rounded-md text-[#808AA2] font-bold  h-[50px] px-8 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent">
-        <option value="All">Creation Date</option>
-      </select>
-    </div>
-    <div class="py-5">
-      <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5 text-[#808AA2]"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            >
-            </path>
-          </svg>
-        </div>
-        <input
-          class="w-full px-4 pl-10     focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent  border-gray-300 border-2 rounded-xl h-[50px] "
-          placeholder="Search Boards"
-        />
-      </div>
-    </div>
-  </div>
   <div class="grid grid-cols-4 gap-8">
     <%= live_patch( to: Routes.content_board_index_path(@socket, :new)) do %>
       <div class="h-[250px] w-[100%] border-2 flex cursor-pointer justify-center group items-center flex-col border-gray-300 border-dashed rounded-xl">
