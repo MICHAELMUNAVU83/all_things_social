@@ -57,6 +57,82 @@
   </.modal>
 <% end %>
 
+<%= if @error_modal == true do %>
+  <div class="fixed poppins-regular  shadow-xl h-[100vh] bg-white/60  inset-0  z-50 flex flex-col  justify-center items-center  mx-auto">
+    <div class="bg-white shadow-xl  rounded-xl shadow-gray-200 w-[500px] flex flex-col items-center  h-[400px]">
+      <div class="flex flex-col w-[100%] p-2">
+        <div class="flex justify-between items-center">
+          <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            Payment Unsuccesful
+          </h1>
+
+          <div
+            class="cursor-pointer h-[20px] w-[20px] flex justify-center items-center rounded-full shadow-xl shadow-gray-400"
+            phx-click="close_error_modal"
+          >
+            <%= Heroicons.icon("x-mark",
+              type: "solid",
+              class: "h-[20px] font-bold w-[20px]"
+            ) %>
+          </div>
+        </div>
+
+        <p class="bg-gradient-to-r from-purple-300 to-white w-[100%] h-[2px] my-2" />
+      </div>
+
+      <div class="flex flex-col justify-center items-center">
+        <%= Heroicons.icon("x-mark",
+          type: "solid",
+          class: "h-48  text-red-500  font-bold w-48"
+        ) %>
+        <div class="flex flex-col justify-center items-center text-center">
+          <p class=" text-2xl jakrata-regular ">
+            <%= @error_message %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= if @success_modal == true do %>
+  <div class="fixed poppins-regular  shadow-xl h-[100vh] bg-white/60  inset-0  z-50 flex flex-col  justify-center items-center  mx-auto">
+    <div class="bg-white shadow-xl  rounded-xl shadow-gray-200 w-[500px] flex flex-col items-center  h-[400px]">
+      <div class="flex flex-col w-[100%] p-2">
+        <div class="flex justify-between items-center">
+          <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            Payment Successful
+          </h1>
+
+          <div
+            class="cursor-pointer h-[20px] w-[20px] flex justify-center items-center rounded-full shadow-xl shadow-gray-400"
+            phx-click="close_error_modal"
+          >
+            <%= Heroicons.icon("x-mark",
+              type: "solid",
+              class: "h-[20px] font-bold w-[20px]"
+            ) %>
+          </div>
+        </div>
+
+        <p class="bg-gradient-to-r from-purple-300 to-white w-[100%] h-[2px] my-2" />
+      </div>
+
+      <div class="flex flex-col justify-center items-center">
+        <%= Heroicons.icon("check",
+          type: "solid",
+          class: "h-48  text-green-500  font-bold w-48"
+        ) %>
+        <div class="flex flex-col justify-center items-center text-center">
+          <p class=" text-2xl jakrata-regular ">
+            The Payment was successful , you shall receive your payments within 48 hours
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <div class="flex flex-col gap-4  bg-gradient-to-br from-purple-100 py-4 px-2 via-purple-100 to-white">
   <div class="flex justify-between items-center ">
     <p class="dancing text-[#887CF2]">All Things Social</p>
@@ -354,6 +430,30 @@
                         <p class="text-sm text-center font-semibold">
                           This task is in review , once approved , you will can claim your paymnent
                         </p>
+                      </div>
+                    <% end %>
+
+                    <button
+                      class="w-[100%] text-white bg-[#887CF2] p-2 rounded-md"
+                      phx-click="pay"
+                      phx-disable-with="Submitting Payment.."
+                      phx-value-id={task.id}
+                    >
+                      bjnkml
+                    </button>
+
+                    <%= if task.status == "approved" do %>
+                      <div class="flex flex-col gap-1">
+                        <p class="text-sm text-center font-semibold">
+                          This task has been approved , you can request payment by clicking the button
+                        </p>
+                        <button
+                          class="w-[100%] text-white bg-[#887CF2] p-2 rounded-md"
+                          phx-click="pay"
+                          phx-disable-with="Submitting Payment.."
+                        >
+                          bjnkml
+                        </button>
                       </div>
                     <% end %>
                   </div>

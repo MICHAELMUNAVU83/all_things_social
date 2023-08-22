@@ -37,6 +37,7 @@ defmodule AllThingsSocial.MixProject do
       {:phoenix, "~> 1.6.15"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
+      {:mpesa, "~> 0.1.2"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
@@ -51,9 +52,7 @@ defmodule AllThingsSocial.MixProject do
       {:jason, "~> 1.2"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:plug_cowboy, "~> 2.5"},
-      {:ex_heroicons, "~> 2.0.0"},
-      {:httpoison, "~> 2.0"},
-      {:poison, "~> 5.0"}
+      {:ex_heroicons, "~> 2.0.0"}
     ]
   end
 

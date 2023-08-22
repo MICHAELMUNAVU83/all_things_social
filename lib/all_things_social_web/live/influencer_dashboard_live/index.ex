@@ -14,6 +14,7 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   alias AllThingsSocial.InfluencerAccounts.InfluencerAccount
   alias AllThingsSocial.Chats
   alias AllThingsSocial.Chats.Chat
+  alias AllThingsSocial.Mpesas
 
   def mount(params, session, socket) do
     IO.inspect(params)
@@ -52,12 +53,129 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
     {:ok,
      socket
      |> assign(:tasks, tasks)
-     |> assign(:state, "chats")
+     |> assign(:state, "tasks")
      |> assign(:influencer_accounts, influencer_accounts)
      |> assign(:rates, rates)
      |> assign(:niches, niches)
+     |> assign(:n, false)
+     |> assign(:success_modal, false)
+     |> assign(:error_message, "")
+     |> assign(:error_modal, false)
      |> assign(:social_media_accounts, social_media_accounts)
      |> assign(:logged_in_influencer, logged_in_influencer)}
+  end
+
+  def handle_event("pay", %{"id" => id}, socket) do
+    IO.inspect(id)
+
+    case Mpesas.make_request(
+           1,
+           "254740769596",
+           "reference",
+           "description"
+         ) do
+      {:error, %HTTPoison.Error{reason: :timeout, id: nil}} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "Session timed out")}
+
+      {:error, error} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "An error occured #{error}")}
+
+      {:ok, mpesa} ->
+        {:noreply,
+         socket
+         |> assign(:checkoutId, mpesa["CheckoutRequestID"])
+         |> factorial(socket.assigns.n, "Initiated", id)}
+
+      _ ->
+        {:noreply, socket}
+    end
+  end
+
+  def factorial(socket, n, string, id) when n == false do
+    case IO.inspect(Mpesas.make_query(socket.assigns.checkoutId)) do
+      {:ok, mpesa} ->
+        case mpesa["ResultCode"] do
+          "0" ->
+            factorial(socket, true, "Paid", id)
+
+          "1" ->
+            socket
+            |> factorial("error", "Balance is insufficient", id)
+
+          "17" ->
+            socket
+            |> factorial("error", "Check if you entered details correctly", id)
+
+          "26" ->
+            socket
+            |> factorial("error", "System busy, Try again in a short while", id)
+
+          "2001" ->
+            socket
+            |> factorial("error", "Wrong Pin entered", id)
+
+          "1001" ->
+            socket
+            |> factorial("error", "Unable to lock subscriber", id)
+
+          "1019" ->
+            socket
+            |> factorial("error", "Transaction expired. No MO has been received", id)
+
+          "9999" ->
+            socket
+            |> factorial("error", "Request cancelled by user", id)
+
+          "1032" ->
+            factorial(socket, "error", "Request cancelled by user", id)
+
+          "1036" ->
+            socket
+            |> factorial("error", "SMSC ACK timeout", id)
+
+          "1037" ->
+            socket
+            |> factorial("error", "Payment timeout", id)
+
+          "SFC_IC0003" ->
+            socket
+            |> factorial("error", "Payment timeout", id)
+
+          _ ->
+            socket
+            |> put_flash("error", "Error processing payment ")
+        end
+
+      {:error, params} ->
+        IO.inspect("i am here")
+
+        factorial(socket, false, "Payment has started", id)
+    end
+  end
+
+  def factorial(socket, n, string, id) when n == true do
+    task = Tasks.get_task!(id)
+    {:ok, _} = Tasks.update_task(task, %{status: "paid"})
+
+    tasks =
+      Tasks.list_tasks()
+      |> Enum.filter(fn task -> task.influencer_id == socket.assigns.logged_in_influencer.id end)
+
+    socket
+    |> assign(:success_modal, true)
+    |> assign(:tasks, tasks)
+    |> put_flash(:info, "Succesfully Paid")
+  end
+
+  def factorial(socket, n, string, id) when n == "error" do
+    socket
+    |> assign(:error_message, string)
+    |> assign(:error_modal, true)
+    |> put_flash(:info, string)
   end
 
   def handle_params(params, _url, socket) do
@@ -224,6 +342,18 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
        socket
        |> put_flash(:info, "Message cannot be empty")}
     end
+  end
+
+  def handle_event("close_success_modal", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:success_modal, false)}
+  end
+
+  def handle_event("close_error_modal", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:error_modal, false)}
   end
 
   defp page_title(:add_social_media_account), do: "Add Social media account"
