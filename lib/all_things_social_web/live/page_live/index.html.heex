@@ -35,11 +35,23 @@
     </p>
     <div class="flex justify-center items-center gap-4 w-[100%]">
       <button class="bg-[#887CF2] text-white px-4 py-2 rounded-md">
-        I am A Brand
+        <%= if @logged_in_brand == true do %>
+          <%= live_redirect("I  am a brand", to: Routes.content_board_index_path(@socket, :index)) %>
+        <% else %>
+          <%= live_redirect("I  am a brand", to: Routes.brand_session_path(@socket, :new)) %>
+        <% end %>
       </button>
 
       <button class="bg-[#887CF2] text-white px-4 py-2 rounded-md">
-        I am An Influencer
+        <%= if @logged_in_brand == true do %>
+          <%= live_redirect("I  am an influencer",
+            to: Routes.influencer_dashboard_index_path(@socket, :index)
+          ) %>
+        <% else %>
+          <%= live_redirect("I  am an influencer",
+            to: Routes.influencer_session_path(@socket, :new)
+          ) %>
+        <% end %>
       </button>
     </div>
   </div>

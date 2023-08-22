@@ -41,7 +41,7 @@ defmodule AllThingsSocialWeb.Router do
   end
 
   scope "/", AllThingsSocialWeb do
-    pipe_through [:browser, :redirect_if_brand_is_authenticated]
+    pipe_through [:browser, :require_authenticated_brand]
 
     live "/content_boards", ContentBoardLive.Index, :index
     live "/content_boards/new", ContentBoardLive.Index, :new
@@ -82,7 +82,7 @@ defmodule AllThingsSocialWeb.Router do
   end
 
   scope "/", AllThingsSocialWeb do
-    pipe_through [:browser, :redirect_if_influencer_is_authenticated]
+    pipe_through [:browser, :require_authenticated_influencer]
 
     live "/influencer_dashboard", InfluencerDashboardLive.Index, :index
 

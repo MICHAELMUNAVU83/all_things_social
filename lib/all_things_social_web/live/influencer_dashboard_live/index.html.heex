@@ -138,9 +138,7 @@
     <p class="dancing text-[#887CF2]">All Things Social</p>
 
     <div class="flex gap-2 items-center">
-      <p>Michael Munavu</p>
-
-      <%= Heroicons.icon("chevron-down", type: "outline", class: "h-4 w-4") %>
+      <p><%= @logged_in_influencer.email %></p>
     </div>
   </div>
   <div class="flex justify-between items-center ">
@@ -195,24 +193,6 @@
 
     <div class="flex flex-col bg-white  h-[90vh] p-4  shadow-md rounded-xl shadow-gray-400  w-[70%] gap-4">
       <div class="flex items-center gap-5">
-        <%= if @state == "analytics" do %>
-          <div
-            phx-click="change_state"
-            phx-value-id="analytics"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
-          >
-            Analytics
-          </div>
-        <% else %>
-          <div
-            phx-click="change_state"
-            phx-value-id="analytics"
-            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
-          >
-            Analytics
-          </div>
-        <% end %>
-
         <%= if @state == "tasks" do %>
           <div
             phx-click="change_state"
