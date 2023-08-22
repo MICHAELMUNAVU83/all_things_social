@@ -19,6 +19,9 @@ defmodule AllThingsSocial.InfluencerAccounts do
   """
   def list_influencer_accounts do
     Repo.all(InfluencerAccount)
+    |> Repo.preload(:influencer)
+    |> Repo.preload(:brand)
+    |> Repo.preload(:content_board)
   end
 
   def list_influencer_accounts_for_a_brand(brand_id) do
