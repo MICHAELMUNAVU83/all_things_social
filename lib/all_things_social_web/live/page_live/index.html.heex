@@ -33,24 +33,34 @@
         <span class="text-[#887CF2]">easily in one place</span>
       </p>
       <div class="flex gap-4  text-[#595959] items-center">
-
-            <img src="/images/instagramicon.png" class="w-[50px]  h-[50px]  object-contain" alt="instagram" />
-              <img src="/images/youtubeicon.png" class="w-[50px]  h-[50px]  object-contain" alt="instagram" />
-                <img src="/images/tiktokicon.png" class="w-[50px]  h-[50px]  object-contain" alt="instagram" />
-       
+        <img
+          src="/images/instagramicon.png"
+          class="w-[50px]  h-[50px]  object-contain"
+          alt="instagram"
+        />
+        <img
+          src="/images/youtubeicon.png"
+          class="w-[50px]  h-[50px]  object-contain"
+          alt="instagram"
+        />
+        <img
+          src="/images/tiktokicon.png"
+          class="w-[50px]  h-[50px]  object-contain"
+          alt="instagram"
+        />
       </div>
     </div>
     <div class="md:w-[30%] my-8 md:my-0 w-[90%] mx-auto flex flex-col md:rotate-12 rotate-6 justify-center items-center">
       <img src="/images/instagram.jpg" class="w-[100%] h-[400px] object-cover" alt="instagram" />
       <div class="bg-white py-4 w-[100%] flex justify-between items-center  h-[50px]">
         <div class="flex justify-center  gap-2 items-center">
-          <%= Heroicons.icon("heart", type: "outline", class: "h-4 text-red-500 w-4") %>
+          <%= Heroicons.icon("heart", type: "solid", class: "h-8 text-red-500 w-8") %>
 
-          <%= Heroicons.icon("chat-bubble-oval-left", type: "outline", class: "h-4  w-4") %>
-          <%= Heroicons.icon("paper-airplane", type: "outline", class: "h-4 rotate-12  w-4") %>
+          <%= Heroicons.icon("chat-bubble-oval-left", type: "outline", class: "h-8  w-8") %>
+          <%= Heroicons.icon("paper-airplane", type: "outline", class: "h-8 rotate-12  w-8") %>
         </div>
 
-        <%= Heroicons.icon("bookmark", type: "outline", class: "h-4 rotate-12  w-4") %>
+        <%= Heroicons.icon("bookmark", type: "outline", class: "h-8   w-8") %>
       </div>
     </div>
   </div>
@@ -191,12 +201,12 @@
       </button>
       <button class="bg-[#887CF2] border-2 uppercase w-[300px] text-white py-4 rounded-md">
         <%= if @logged_in_brand == true do %>
-          <%= live_redirect("I  am an influencer",
-            to: Routes.influencer_dashboard_index_path(@socket, :index)
+          <%= live_redirect("Get Started as a brand",
+            to: Routes.content_board_index_path(@socket, :index)
           ) %>
         <% else %>
-          <%= live_redirect("I  am an influencer",
-            to: Routes.influencer_session_path(@socket, :new)
+          <%= live_redirect("Get Started as a brand",
+            to: Routes.brand_session_path(@socket, :new)
           ) %>
         <% end %>
       </button>
@@ -308,7 +318,15 @@
         Book A Demo Call
       </button>
       <button class="bg-[#887CF2] border-2 uppercase w-[300px] text-white py-4 rounded-md">
-        Get Started as an Influencer
+        <%= if @logged_in_influencer == true do %>
+          <%= live_redirect("Get Started as an influencer",
+            to: Routes.influencer_dashboard_index_path(@socket, :index)
+          ) %>
+        <% else %>
+          <%= live_redirect("Get Started as an influencer",
+            to: Routes.influencer_session_path(@socket, :new)
+          ) %>
+        <% end %>
       </button>
     </div>
   </div>
@@ -519,50 +537,64 @@
       <p class="text-[#595959] text-xl font-bold mt-4">About Us</p>
       <div class="flex flex-col gap-1">
         <p>
-          <a href="#">About Us</a>
+          <a href="#">Home</a>
         </p>
         <p>
-          <a href="#">About Us</a>
+          <a href="#">Influencers</a>
         </p>
         <p>
-          <a href="#">About Us</a>
+          <a href="#">Brands</a>
         </p>
         <p>
-          <a href="#">About Us</a>
-        </p>
-      </div>
-    </div>
-    <div class="w-[30%] flex justify-center items-center flex-col gap-2">
-      <p class="text-[#595959] text-xl font-bold mt-4">About Us</p>
-      <div class="flex flex-col gap-1">
-        <p>
-          <a href="#">About Us</a>
-        </p>
-        <p>
-          <a href="#">About Us</a>
-        </p>
-        <p>
-          <a href="#">About Us</a>
-        </p>
-        <p>
-          <a href="#">About Us</a>
+          <a href="#">Get Started</a>
         </p>
       </div>
     </div>
     <div class="w-[30%] flex justify-center items-center flex-col gap-2">
-      <p class="text-[#595959] text-xl font-bold mt-4">About Us</p>
+      <p class="text-[#595959] text-xl font-bold mt-4">Guides</p>
       <div class="flex flex-col gap-1">
         <p>
-          <a href="#">About Us</a>
+          <a href="#">Check for fake followers
+Measure influencer marketing
+
+
+
+</a>
         </p>
         <p>
-          <a href="#">About Us</a>
+          <a href="#">Find Instagram influencers
+Find TikTok influencers
+Find YouTube influencers</a>
         </p>
         <p>
-          <a href="#">About Us</a>
+          <a href="#">Brand ambassadors
+Long-term collaborations
+Influencer relationships</a>
+        </p>
+      
+      </div>
+    </div>
+    <div class="w-[30%] flex justify-center items-center flex-col gap-2">
+      <p class="text-[#595959] text-xl font-bold mt-4">Our Products</p>
+      <div class="flex flex-col gap-1">
+        <p>
+          <a href="#">Influencer search tool
+
+            Influencer marketing API
+            White label solution</a>
         </p>
         <p>
-          <a href="#">About Us</a>
+          <a href="#">Influencer management tool
+            Influencer analytics tool
+            Content tracking</a>
+        </p>
+        <p>
+          <a href="#">TikTok influencer search
+            YouTube influencer search</a>
+        </p>
+        <p>
+          <a href="#">Influencer marketing API
+            White label solution</a>
         </p>
       </div>
     </div>

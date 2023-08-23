@@ -37,12 +37,12 @@ defmodule AllThingsSocial.Influencers do
         Repo.all(Influencer)
         |> Repo.preload(:niches)
     else
-    query =
-      Repo.all(Influencer)
-      |> Enum.filter(fn influencer ->
-        String.contains?(String.downcase(influencer.username), String.downcase(search))
-      end)
-      |> Repo.preload(:niches)
+      query =
+        Repo.all(Influencer)
+        |> Enum.filter(fn influencer ->
+          String.contains?(String.downcase(influencer.username), String.downcase(search))
+        end)
+        |> Repo.preload(:niches)
     end
   end
 
@@ -61,12 +61,10 @@ defmodule AllThingsSocial.Influencers do
     end
   end
 
-
   def get_niches_for_an_influencer(id) do
     from(i in Influencer, where: i.id == ^id)
     |> Repo.one()
     |> Repo.preload(:niches)
-
   end
 
   @doc """

@@ -72,9 +72,6 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.Index do
         []
       end
 
-
-
-
     {:ok,
      socket
      |> assign(:influencers, influencers)
