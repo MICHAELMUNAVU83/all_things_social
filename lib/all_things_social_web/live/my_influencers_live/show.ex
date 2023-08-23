@@ -263,7 +263,7 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
   end
 
   def factorial(socket, n, string, id) when n == true do
-    {:ok, brand} = Brands.update_brand(socket.assigns.logged_in_brand, %{"username" => "hey"})
+    {:ok, brand} = Brands.update_brand(socket.assigns.logged_in_brand, %{"role" => "premium"})
 
     socket
     |> assign(:success_modal, true)

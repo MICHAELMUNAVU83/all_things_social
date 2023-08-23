@@ -596,29 +596,87 @@
       <%= if @state == "analytics" do %>
         <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col  gap-2  p-4   w-[100%]">
-            <div class="w-[100%] h-[100%] flex flex-col justify-center text-center items-center">
-              <%= Heroicons.icon("gift",
-                type: "solid",
-                class: "h-[200px] text-[#887CF2] w-[200px]"
-              ) %>
+            <%= if @logged_in_brand.role == "user" do %>
+              <div class="w-[100%] h-[100%] flex flex-col justify-center text-center items-center">
+                <%= Heroicons.icon("gift",
+                  type: "solid",
+                  class: "h-[200px] text-[#887CF2] w-[200px]"
+                ) %>
 
-              <p class="py-2">
-                Pay for the premium version to enjoy this feature and get the latest analytics
-              </p>
+                <p class="py-2">
+                  Pay for the premium version to enjoy this feature and get the latest analytics
+                </p>
 
-              <p class="bg-[#887CF2]  w-[60%] rounded-2xl text-white p-4 font-bold">
-                Once you pay , you will get an MPESA prompt to enter your MPESA pin
-              </p>
+                <p class="bg-[#887CF2]  w-[60%] rounded-2xl text-white p-4 font-bold">
+                  Once you pay , you will get an MPESA prompt to enter your MPESA pin
+                </p>
 
-              <button
-                phx-click="pay"
-                phx-disable-with="Submitting payment..."
-                phx-value-id={@logged_in_brand.id}
-                class="bg-[#887CF2] text-white my-2 p-2 rounded-md "
-              >
-                Pay Now
-              </button>
-            </div>
+                <button
+                  phx-click="pay"
+                  phx-disable-with="Submitting payment..."
+                  phx-value-id={@logged_in_brand.id}
+                  class="bg-[#887CF2] text-white my-2 p-2 rounded-md "
+                >
+                  Pay Now
+                </button>
+              </div>
+            <% else %>
+              <div class="w-[100%] mt-16 grid md:grid-cols-2 gap-4">
+                <div class="bg-white h-[450px] rounded-2xl shadow-xl relative shadow-gray-500">
+                  <div class="p-8 ">
+                    <canvas
+                      id="myChart"
+                      style="height: 300px ;width:100% "
+                      class="absolute bg-[#887CF2]   rounded-xl -top-8"
+                      phx-hook="Chart"
+                      phx-update="ignore"
+                    >
+                    </canvas>
+                  </div>
+
+                  <div class=" absolute w-[100%] flex flex-col bottom-16">
+                    <p class="text-[#4A5B78] px-8 text-2xl font-bold ">
+                      Total Tickets Scanned
+                    </p>
+                    <p class="text-gray-600 px-8">
+                      Representation of all tickets and their status
+                    </p>
+                    <p class="bg-gray-500 w-[90%] mx-auto h-[1px]  " />
+
+                    <div class="flex items-center px-8 my-4 text-gray-400 text-sm">
+                      updated just now
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-white h-[450px] mt-16 md:mt-0 rounded-2xl shadow-xl relative shadow-gray-500">
+                  <div class="p-8  ">
+                    <canvas
+                      id="myChart2"
+                      style="height: 300px ;width:100% "
+                      class="absolute bg-[#887CF2]     object-contain rounded-xl -top-8"
+                      phx-hook="Chart2"
+                      phx-update="ignore"
+                    >
+                    </canvas>
+                  </div>
+
+                  <div class=" absolute w-[100%] flex flex-col bottom-16">
+                    <p class="text-[#4A5B78] px-8 text-2xl font-bold ">
+                      Total Tickets Scanned
+                    </p>
+                    <p class="text-gray-600 px-8">
+                      Representation of all tickets and their status
+                    </p>
+                    <p class="bg-gray-500 w-[90%] mx-auto h-[1px]  " />
+
+                    <div class="flex items-center px-8 my-4 text-gray-400 text-sm">
+                      updated just now
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
       <% end %>
