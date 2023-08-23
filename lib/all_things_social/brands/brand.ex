@@ -7,6 +7,7 @@ defmodule AllThingsSocial.Brands.Brand do
     field :password, :string, virtual: true, redact: true
     field :username, :string
     field :phone_number, :string
+    field :role, :string, default: "user"
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
 
@@ -32,7 +33,7 @@ defmodule AllThingsSocial.Brands.Brand do
   """
   def registration_changeset(brand, attrs, opts \\ []) do
     brand
-    |> cast(attrs, [:email, :password, :username, :phone_number])
+    |> cast(attrs, [:email, :password, :username, :phone_number, :role])
     |> validate_required([:username, :phone_number])
     |> validate_email()
     |> validate_format(:phone_number, ~r/^254\d{9}$/,
@@ -43,7 +44,7 @@ defmodule AllThingsSocial.Brands.Brand do
 
   def changeset(brand, attrs, opts \\ []) do
     brand
-    |> cast(attrs, [:email, :password, :username, :phone_number])
+    |> cast(attrs, [:email, :password, :username, :phone_number, :role])
   end
 
   defp validate_email(changeset) do

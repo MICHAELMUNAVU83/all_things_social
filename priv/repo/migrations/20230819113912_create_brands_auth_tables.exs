@@ -10,6 +10,7 @@ defmodule AllThingsSocial.Repo.Migrations.CreateBrandsAuthTables do
       add :confirmed_at, :naive_datetime
       add :username, :string, null: false
       add :phone_number, :string
+      add :role, :string, null: false, default: "user"
       timestamps()
     end
 
