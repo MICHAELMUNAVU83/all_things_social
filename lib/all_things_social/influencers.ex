@@ -28,6 +28,7 @@ defmodule AllThingsSocial.Influencers do
 
   def list_influencers do
     Repo.all(Influencer)
+    |> Repo.preload(:niches)
   end
 
   def list_influencers_by_search(search) do
