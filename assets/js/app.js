@@ -79,11 +79,11 @@ Hooks.Testimonials = {
     function displayTestimonial() {
       testimonialsContainer.innerHTML = `
         
-          <div class="md:w-[659px] w-[270px] flex flex-col gap-4  justify-center text-center items-center p-8 md:h-[521px] bg-[#D9D9D9]/80 transition-all ease-in-out duration-500">
+          <div class="md:w-[659px] w-[270px] flex flex-col gap-4  justify-center text-center items-center p-8 md:h-[521px] bg-white transition-all ease-in-out duration-500">
           <img
               src="${testimonials[i].image}"
             alt="testimonial image"
-            class="rounded-full border-2 border-[#FC9200]  md:w-[80px] md:h-[80px] w-[40px] h-[40px] object-cover"
+            class="rounded-full border-2 border-purple-500  md:w-[80px] md:h-[80px] w-[40px] h-[40px] object-cover"
           />
           <img
               src="${testimonials[i].stars}"
@@ -91,7 +91,7 @@ Hooks.Testimonials = {
             class="   h-[40px]  object-cover"
           />
           <div>
-            <p class="text-xl font-semibold text-[#FC9200] poppins-semibold">
+            <p class="text-xl font-semibold text-purple-500 poppins-semibold">
               ${testimonials[i].name}
             </p>
             <p class="inter-extra-bold ">

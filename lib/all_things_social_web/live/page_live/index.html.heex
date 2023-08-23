@@ -530,7 +530,7 @@
 </div>
 
 <div class="flex flex-col w-[100%]  " phx-hook="Testimonials" id="test">
-  <div class="bg-[#31AB2D]/50  w-[100%] flex flex-col items-center  pt-8">
+  <div class=" bg-gradient-to-bl from-purple-300 via-purple-100 to-white   w-[100%] flex flex-col items-center  pt-8">
     <h1 class="text-5xl inter-extra-bold text-center font-bold my-2">
       Testimonials
     </h1>
@@ -554,11 +554,10 @@
           class="bg-white hover:scale-105  cursor-pointer transition-all duration-500 ease-in-out"
           id="prev"
         >
-          <img
-            src="/images/instagram.jpg"
-            alt="prev slide"
-            class="md:h-[50px]  md:w-[50px] h-[40px] w-[40px] object-cover"
-          />
+         <%= Heroicons.icon("chevron-left",
+            type: "outline",
+            class: "h-[40px] object-cover w-[40px]"
+          ) %>
         </div>
 
         <div id="testimonials"></div>
@@ -567,16 +566,15 @@
           class="bg-white hover:scale-105  cursor-pointer transition-all duration-500 ease-in-out"
           id="next"
         >
-          <img
-            src="/images/instagram.jpg"
-            alt="prev slide"
-            class="md:h-[50px]  md:w-[50px] h-[40px] w-[40px] object-cover"
-          />
+          <%= Heroicons.icon("chevron-right",
+            type: "outline",
+            class: "h-[40px] object-cover w-[40px]"
+          ) %>
         </div>
       </div>
       <div class="w-1/5 hidden md:block">
         <img
-            src="/images/instagram.jpg"
+          src="/images/instagram.jpg"
           alt="farmer image"
           class="h-[521px] w-[100%]  object-cover"
         />
