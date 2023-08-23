@@ -1,0 +1,3 @@
+#!/bin/sh
+cd -P -- "$(dirname -- "$0")"
+exec ./all_things_social eval AllThingsSocial.Release.migrate
