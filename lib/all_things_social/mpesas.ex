@@ -5,9 +5,7 @@ defmodule AllThingsSocial.Mpesas do
 
   @doc false
   def get_url do
-
-      "https://sandbox.safaricom.co.ke"
-
+    "https://sandbox.safaricom.co.ke"
   end
 
   @doc false

@@ -85,11 +85,7 @@ Hooks.Testimonials = {
             alt="testimonial image"
             class="rounded-full border-2 border-purple-500  md:w-[80px] md:h-[80px] w-[40px] h-[40px] object-cover"
           />
-          <img
-              src="${testimonials[i].stars}"
-            alt="4 stars "
-            class="   h-[40px]  object-cover"
-          />
+        
           <div>
             <p class="text-xl font-semibold text-purple-500 poppins-semibold">
               ${testimonials[i].name}
