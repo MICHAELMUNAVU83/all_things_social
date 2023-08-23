@@ -171,8 +171,6 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
   end
 
   def handle_event("pay", %{"id" => id}, socket) do
-    IO.inspect(id)
-
     case Mpesas.make_request(
            1,
            socket.assigns.logged_in_brand.phone_number,
