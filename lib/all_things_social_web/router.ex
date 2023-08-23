@@ -44,6 +44,7 @@ defmodule AllThingsSocialWeb.Router do
     pipe_through [:browser, :require_authenticated_brand]
 
     live "/content_boards", ContentBoardLive.Index, :index
+    live("/content_boards/pay_premium", ContentBoardLive.Index, :pay_premium)
     live "/content_boards/new", ContentBoardLive.Index, :new
     live "/content_boards/:id/edit", ContentBoardLive.Index, :edit
 

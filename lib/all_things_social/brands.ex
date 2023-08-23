@@ -157,6 +157,12 @@ defmodule AllThingsSocial.Brands do
     |> Ecto.Multi.delete_all(:tokens, BrandToken.brand_and_contexts_query(brand, [context]))
   end
 
+  def update_brand(%Brand{} = brand, attrs) do
+    brand
+    |> Brand.changeset(attrs)
+    |> Repo.update()
+  end
+
   @doc """
   Delivers the update email instructions to the given brand.
 

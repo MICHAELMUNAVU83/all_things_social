@@ -10,9 +10,12 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
   alias AllThingsSocial.Rates
   alias AllThingsSocial.Niches
   alias AllThingsSocial.Payments
+  alias AllThingsSocial.Mpesas
 
   def mount(_params, session, socket) do
     logged_in_brand = Brands.get_brand_by_session_token(session["brand_token"])
+
+    IO.inspect(logged_in_brand)
 
     {:ok,
      socket
@@ -93,7 +96,11 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
      |> assign(:page_title, "New Task")
      |> assign(:content_board_id, content_board_id)
      |> assign(:influencer_id, influencer_id)
-     |> assign(:state, "tasks")
+     |> assign(:state, "analytics")
+     |> assign(:error_modal, false)
+     |> assign(:n, false)
+     |> assign(:success_modal, false)
+     |> assign(:error_message, "")
      |> assign(:brand_id, brand_id)
      |> assign(:task, task)
      |> assign(:correct_brand, correct_brand)}
@@ -161,5 +168,125 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
     {:noreply,
      socket
      |> assign(:state, id)}
+  end
+
+  def handle_event("pay", %{"id" => id}, socket) do
+    IO.inspect(id)
+
+    case Mpesas.make_request(
+           1,
+           socket.assigns.logged_in_brand.phone_number,
+           "reference",
+           "description"
+         ) do
+      {:error, %HTTPoison.Error{reason: :timeout, id: nil}} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "Session timed out")}
+
+      {:error, error} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "An error occured #{error}")}
+
+      {:ok, mpesa} ->
+        {:noreply,
+         socket
+         |> assign(:checkoutId, mpesa["CheckoutRequestID"])
+         |> factorial(socket.assigns.n, "Initiated", id)}
+
+      _ ->
+        {:noreply, socket}
+    end
+  end
+
+  def factorial(socket, n, string, id) when n == false do
+    case IO.inspect(Mpesas.make_query(socket.assigns.checkoutId)) do
+      {:ok, mpesa} ->
+        case mpesa["ResultCode"] do
+          "0" ->
+            factorial(socket, true, "Paid", id)
+
+          "1" ->
+            socket
+            |> factorial("error", "Balance is insufficient", id)
+
+          "17" ->
+            socket
+            |> factorial("error", "Check if you entered details correctly", id)
+
+          "26" ->
+            socket
+            |> factorial("error", "System busy, Try again in a short while", id)
+
+          "2001" ->
+            socket
+            |> factorial("error", "Wrong Pin entered", id)
+
+          "1001" ->
+            socket
+            |> factorial("error", "Unable to lock subscriber", id)
+
+          "1019" ->
+            socket
+            |> factorial("error", "Transaction expired. No MO has been received", id)
+
+          "9999" ->
+            socket
+            |> factorial("error", "Request cancelled by user", id)
+
+          "1032" ->
+            factorial(socket, "error", "Request cancelled by user", id)
+
+          "1036" ->
+            socket
+            |> factorial("error", "SMSC ACK timeout", id)
+
+          "1037" ->
+            socket
+            |> factorial("error", "Payment timeout", id)
+
+          "SFC_IC0003" ->
+            socket
+            |> factorial("error", "Payment timeout", id)
+
+          _ ->
+            socket
+            |> put_flash("error", "Error processing payment ")
+        end
+
+      {:error, params} ->
+        IO.inspect("i am here")
+
+        factorial(socket, false, "Payment has started", id)
+    end
+  end
+
+  def factorial(socket, n, string, id) when n == true do
+    {:ok, brand} = Brands.update_brand(socket.assigns.logged_in_brand, %{"username" => "hey"})
+
+    socket
+    |> assign(:success_modal, true)
+    |> assign(:logged_in_brand, brand)
+    |> put_flash(:info, "Succesfully Paid")
+  end
+
+  def factorial(socket, n, string, id) when n == "error" do
+    socket
+    |> assign(:error_message, string)
+    |> assign(:error_modal, true)
+    |> put_flash(:info, string)
+  end
+
+  def handle_event("close_success_modal", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:success_modal, false)}
+  end
+
+  def handle_event("close_error_modal", %{}, socket) do
+    {:noreply,
+     socket
+     |> assign(:error_modal, false)}
   end
 end

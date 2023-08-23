@@ -34,6 +34,12 @@ defmodule AllThingsSocialWeb.ContentBoardLive.Index do
     |> assign(:content_board, %ContentBoard{})
   end
 
+  defp apply_action(socket, :pay_premium, _params) do
+    socket
+    |> assign(:page_title, "New Content board")
+    |> assign(:content_board, %ContentBoard{})
+  end
+
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Content boards")

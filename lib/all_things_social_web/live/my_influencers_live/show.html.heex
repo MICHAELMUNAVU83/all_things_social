@@ -14,6 +14,83 @@
   </.modal>
 <% end %>
 
+<%= if @error_modal == true do %>
+  <div class="fixed poppins-regular  shadow-xl h-[100vh] bg-white/60  inset-0  z-50 flex flex-col  justify-center items-center  mx-auto">
+    <div class="bg-white shadow-xl  rounded-xl shadow-gray-200 w-[500px] flex flex-col items-center  h-[400px]">
+      <div class="flex flex-col w-[100%] p-2">
+        <div class="flex justify-between items-center">
+          <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            Payment Unsuccesful
+          </h1>
+
+          <div
+            class="cursor-pointer h-[20px] w-[20px] flex justify-center items-center rounded-full shadow-xl shadow-gray-400"
+            phx-click="close_error_modal"
+          >
+            <%= Heroicons.icon("x-mark",
+              type: "solid",
+              class: "h-[20px] font-bold w-[20px]"
+            ) %>
+          </div>
+        </div>
+
+        <p class="bg-gradient-to-r from-purple-300 to-white w-[100%] h-[2px] my-2" />
+      </div>
+
+      <div class="flex flex-col justify-center items-center">
+        <%= Heroicons.icon("x-mark",
+          type: "solid",
+          class: "h-48  text-red-500  font-bold w-48"
+        ) %>
+        <div class="flex flex-col justify-center items-center text-center">
+          <p class=" text-2xl jakrata-regular ">
+            <%= @error_message %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= if @success_modal == true do %>
+  <div class="fixed poppins-regular  shadow-xl h-[100vh] bg-white/60  inset-0  z-50 flex flex-col  justify-center items-center  mx-auto">
+    <div class="bg-white shadow-xl  rounded-xl shadow-gray-200 w-[500px] flex flex-col items-center  h-[400px]">
+      <div class="flex flex-col w-[100%] p-2">
+        <div class="flex justify-between items-center">
+          <h1 class="font-extrabold text-transparent text-xl  bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            Payment Successful
+          </h1>
+
+          <div
+            class="cursor-pointer h-[20px] w-[20px] flex justify-center items-center rounded-full shadow-xl shadow-gray-400"
+            phx-click="close_success_modal"
+          >
+            <%= Heroicons.icon("x-mark",
+              type: "solid",
+              class: "h-[20px] font-bold w-[20px]"
+            ) %>
+          </div>
+        </div>
+
+        <p class="bg-gradient-to-r from-purple-300 to-white w-[100%] h-[2px] my-2" />
+      </div>
+
+      <div class="flex flex-col justify-center items-center">
+        <%= Heroicons.icon("check",
+          type: "solid",
+          class: "h-48  text-green-500  font-bold w-48"
+        ) %>
+        <div class="flex flex-col justify-center items-center text-center">
+          <p class=" text-2xl jakrata-regular ">
+            The Payment was successful , you are now  a premium user
+            and can now view the analytics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <%= if @correct_brand == true do %>
   <div class="flex justify-between  pt-4  items-start">
     <div class="flex flex-col h-[400px] bg-white p-4 shadow-md rounded-xl shadow-gray-400 w-[25%] gap-4">
@@ -49,6 +126,24 @@
 
     <div class="flex flex-col bg-white  h-[90vh] p-4  shadow-md rounded-xl shadow-gray-400  w-[70%] gap-4">
       <div class="flex items-center gap-5">
+        <%= if @state == "analytics" do %>
+          <div
+            phx-click="change_state"
+            phx-value-id="analytics"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+          >
+            Analytics
+          </div>
+        <% else %>
+          <div
+            phx-click="change_state"
+            phx-value-id="analytics"
+            class="bg-gray-100 px-4 py-2  cursor-pointer text-black rounded-3xl"
+          >
+            Analytics
+          </div>
+        <% end %>
+
         <%= if @state == "tasks" do %>
           <div
             phx-click="change_state"
@@ -493,6 +588,36 @@
                   </div>
                 </div>
               <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= if @state == "analytics" do %>
+        <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
+          <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col  gap-2  p-4   w-[100%]">
+            <div class="w-[100%] h-[100%] flex flex-col justify-center text-center items-center">
+              <%= Heroicons.icon("gift",
+                type: "solid",
+                class: "h-[200px] text-[#887CF2] w-[200px]"
+              ) %>
+
+              <p class="py-2">
+                Pay for the premium version to enjoy this feature and get the latest analytics
+              </p>
+
+              <p class="bg-[#887CF2]  w-[60%] rounded-2xl text-white p-4 font-bold">
+                Once you pay , you will get an MPESA prompt to enter your MPESA pin
+              </p>
+
+              <button
+                phx-click="pay"
+                phx-disable-with="Submitting payment..."
+                phx-value-id={@logged_in_brand.id}
+                class="bg-[#887CF2] text-white my-2 p-2 rounded-md "
+              >
+                Pay Now
+              </button>
             </div>
           </div>
         </div>

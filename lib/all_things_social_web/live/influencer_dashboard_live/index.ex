@@ -370,8 +370,7 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.Index do
   def handle_event("close_success_modal", %{}, socket) do
     {:noreply,
      socket
-     |> assign(:success_modal, false)
-     |> live_redirect(to: Routes.influencer_dashboard_index_path(socket, :index))}
+     |> assign(:success_modal, false)}
   end
 
   def handle_event("close_error_modal", %{}, socket) do

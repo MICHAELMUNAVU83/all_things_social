@@ -41,6 +41,11 @@ defmodule AllThingsSocial.Brands.Brand do
     |> validate_password(opts)
   end
 
+  def changeset(brand, attrs, opts \\ []) do
+    brand
+    |> cast(attrs, [:email, :password, :username, :phone_number])
+  end
+
   defp validate_email(changeset) do
     changeset
     |> validate_required([:email])
