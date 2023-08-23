@@ -5,11 +5,9 @@ defmodule AllThingsSocial.Mpesas do
 
   @doc false
   def get_url do
-    if Application.get_env(:mpesa, :env) === "sandbox" do
+
       "https://sandbox.safaricom.co.ke"
-    else
-      "https://api.safaricom.co.ke"
-    end
+
   end
 
   @doc false
@@ -17,8 +15,8 @@ defmodule AllThingsSocial.Mpesas do
     url = get_url() <> "/oauth/v1/generate?grant_type=client_credentials"
 
     string =
-      Application.get_env(:mpesa, :consumer_key) <>
-        ":" <> Application.get_env(:mpesa, :consumer_secret)
+      "72yw1nun6g1QQPPgOsAObCGSfuimGO7b" <>
+        ":" <> "vRzZiD5RllMLIdLD"
 
     token = Base.encode64(string)
 
@@ -120,8 +118,8 @@ defmodule AllThingsSocial.Mpesas do
   @doc false
   def request(token, amount, phone, reference, description) do
     url = get_url() <> "/mpesa/stkpush/v1/processrequest"
-    paybill = Application.get_env(:mpesa, :mpesa_short_code)
-    passkey = Application.get_env(:mpesa, :mpesa_passkey)
+    paybill = "174379"
+    passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
     {:ok, timestamp} = Timex.now() |> Timex.format("%Y%m%d%H%M%S", :strftime)
     password = Base.encode64(paybill <> passkey <> timestamp)
 
@@ -134,7 +132,7 @@ defmodule AllThingsSocial.Mpesas do
       "PartyA" => phone,
       "PartyB" => paybill,
       "PhoneNumber" => phone,
-      "CallBackURL" => Application.get_env(:mpesa, :mpesa_callback_url),
+      "CallBackURL" => "http://91eb0af5.ngrok.io/api/payment/callback",
       "AccountReference" => reference,
       "TransactionDesc" => description
     }
@@ -152,8 +150,8 @@ defmodule AllThingsSocial.Mpesas do
 
   def query(token, checkout) do
     url = get_url() <> "/mpesa/stkpushquery/v1/query"
-    paybill = Application.get_env(:mpesa, :mpesa_short_code)
-    passkey = Application.get_env(:mpesa, :mpesa_passkey)
+    paybill = "174379"
+    passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
     {:ok, timestamp} = Timex.now() |> Timex.format("%Y%m%d%H%M%S", :strftime)
     password = Base.encode64(paybill <> passkey <> timestamp)
 
