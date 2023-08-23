@@ -15,5 +15,6 @@ defmodule AllThingsSocial.SocialMediaAccounts.SocialMediaAccount do
     social_media_account
     |> cast(attrs, [:account_url, :platform, :influencer_id])
     |> validate_required([:account_url, :platform, :influencer_id])
+    |> validate_format(:account_url, ~r/https:\/\//, message: "must start with 'https://'")
   end
 end
