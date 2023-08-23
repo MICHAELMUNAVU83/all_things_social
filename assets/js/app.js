@@ -146,16 +146,32 @@ Hooks.Testimonials = {
 Hooks.Chart = {
   mounted() {
     var events_in_the_system = [
-      "Golf Event 1",
-      "Golf Event 2",
-      "Golf Event 3",
-      "Golf Event 4",
-      "Golf Event 5",
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
     ];
-    var total_tickets_for_each_event = [12, 19, 17, 20, 18];
-    var total_tickets_scanned_for_each_event = [9, 13, 10, 15, 9];
+    var total_tickets_for_each_event = [
+      100, 200, 350, 240, 500, 300, 700, 1000,
+    ];
+    var total_tickets_scanned_for_each_event = [
+      200, 300, 450, 800, 900, 500, 800, 600,
+    ];
 
-    var barColors = ["white", "white", "white", "white", "white"];
+    var barColors = [
+      "white",
+      "white",
+      "white",
+      "white",
+      "white",
+      "white",
+      "white",
+      "white",
+    ];
 
     new Chart("myChart", {
       type: "bar",
@@ -164,12 +180,12 @@ Hooks.Chart = {
         labels: events_in_the_system,
         datasets: [
           {
-            label: "Total Tickets",
+            label: "Total Post Engagements",
             backgroundColor: barColors,
             data: total_tickets_for_each_event,
           },
           {
-            label: "Total Tickets Scanned",
+            label: "Total Reel Engagements",
             backgroundColor: barColors,
             data: total_tickets_scanned_for_each_event,
           },
@@ -189,7 +205,7 @@ Hooks.Chart = {
         plugins: {
           title: {
             display: true,
-            text: "Tickets Scanned for each Event",
+            text: "Total Engagements for Posts and Reels",
             color: "white",
           },
           legend: {
@@ -205,14 +221,8 @@ Hooks.Chart = {
 
 Hooks.Chart2 = {
   mounted() {
-    var xValues = [
-      "Golf Event 1",
-      "Golf Event 2",
-      "Golf Event 3",
-      "Golf Event 4",
-      "Golf Event 5",
-    ];
-    var yValues = [55, 49, 44, 24, 15];
+    var xValues = ["Kenya", "Uganda", "Nigeria", "Qatar", "Tanzania"];
+    var yValues = [1200, 1000, 980, 758, 800];
     var barColors = ["#b91d47", "#00aba9", "#2b5797", "#e8c3b9", "#1e7145"];
 
     new Chart("myChart2", {
@@ -224,7 +234,7 @@ Hooks.Chart2 = {
         datasets: [
           {
             backgroundColor: "white",
-            label: "Total Tickets Scanned",
+            label: "Followers per Country",
 
             data: yValues,
             borderColor: "white",
