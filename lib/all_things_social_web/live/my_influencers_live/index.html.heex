@@ -2,23 +2,7 @@
   <div class="flex justify-between items-center">
     <p class="text-[#887CF2] font-bold text-xl">My Influencers</p>
 
-    <div class="bg-[#E0DDFF] p-2 flex justify-center gap-2 items-center rounded-md">
-      <div class="flex gap-2 bg-white px-2 py-1 rounded-md items-center">
-        <%= Heroicons.icon("pencil",
-          type: "solid",
-          class: "h-6 text-[#887CF2]  w-6"
-        ) %>
-        <p class="text-[#887CF2]">Tiktok</p>
-      </div>
-
-      <div class="flex gap-2 px-2 py-1 rounded-md items-center">
-        <%= Heroicons.icon("pencil",
-          type: "solid",
-          class: "h-6 text-[#887CF2]  w-6"
-        ) %>
-        <p class="text-[#887CF2]">Chat</p>
-      </div>
-    </div>
+  
 
     <div class="bg-[#887CF2] p-2 flex justify-center  items-center rounded-md">
       <%= Heroicons.icon("bell-alert",
@@ -32,8 +16,10 @@
       <thead class="text-[#595959] border-b-[1px] border-t-[1px] border-[#595959]/80 py-2 text-xs text-center font-bold uppercase">
         <tr>
           <th class="py-2">Influencer</th>
-          <th class="py-2">Followers</th>
-          <th class="py-2">Post</th>
+          <th class="py-2">Username</th>
+          <th class="py-2">Niches</th>
+          <th class="py-2">Action</th>
+          <th class="py-2"> Content Board</th>
         </tr>
       </thead>
       <tbody class="">
@@ -47,22 +33,40 @@
                 />
                 <div class="flex items-start flex-col">
                   <p>
-                    <span class="font-bold">Instagram</span>
+                    <span class="font-bold"> <%= influencer_account.influencer.username %></span>
                   </p>
-                  <p class="text-[#595959] text-xs">Fashion</p>
+                  <p class="text-[#595959] text-xs"><%= influencer_account.influencer.email %></p>
                 </div>
               </div>
             </td>
-            <td>5.6 M</td>
-            <td>10</td>
+               <td><%= influencer_account.influencer.username %></td>
+           <td>
+              <div class="flex flex-col gap-1 text-sm">
+                <%= for niche <- AllThingsSocial.Influencers.get_niches_for_an_influencer(influencer_account.influencer.id).niches do %>
+                  <p>
+                    <%= niche.name %>
+                  </p>
+                <% end %>
+              </div>
+            </td>
+          
             <td>
               <%= live_redirect to: Routes.my_influencers_show_path(@socket, :show , influencer_account)  do %>
-                View
+                <%= Heroicons.icon("eye",
+                    type: "solid",
+                    class: "h-6 text-[#887CF2]  w-6"
+                  ) %>
               <% end %>
             </td>
 
-            <td>5.6 M</td>
-            <td>5.6 M</td>
+              <td>
+             
+                <button class="bg-gradient-to-r cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white px-2 py-1 rounded-md">
+                 <%=influencer_account.content_board.name  %>
+                </button>
+             
+            </td>
+
           </tr>
         <% end %>
       </tbody>

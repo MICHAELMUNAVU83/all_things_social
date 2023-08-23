@@ -72,11 +72,8 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.Index do
         []
       end
 
-    niches =
-      Niches.list_niches()
-      |> Enum.filter(fn niche ->
-        niche.influencer_id == influencer_id
-      end)
+
+
 
     {:ok,
      socket

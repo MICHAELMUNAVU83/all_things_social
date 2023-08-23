@@ -1,4 +1,4 @@
-<div class="flex  bg-gradient-to-bl from-purple-300 via-purple-100 to-white items-center justify-between">
+<div class="flex absolute top-0 w-[100%] px-2  bg-transparent items-center justify-between">
   <p class="dancing text-[#887CF2] ">
     <%= live_redirect("All Things Social", to: Routes.page_index_path(@socket, :index)) %>
   </p>
@@ -33,9 +33,11 @@
         <span class="text-[#887CF2]">easily in one place</span>
       </p>
       <div class="flex gap-4  text-[#595959] items-center">
-        <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
-        <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
-        <%= Heroicons.icon("arrow-long-right", type: "outline", class: "h-4 w-4") %>
+
+            <img src="/images/instagramicon.png" class="w-[50px]  h-[50px]  object-contain" alt="instagram" />
+              <img src="/images/youtubeicon.png" class="w-[50px]  h-[50px]  object-contain" alt="instagram" />
+                <img src="/images/tiktokicon.png" class="w-[50px]  h-[50px]  object-contain" alt="instagram" />
+       
       </div>
     </div>
     <div class="md:w-[30%] my-8 md:my-0 w-[90%] mx-auto flex flex-col md:rotate-12 rotate-6 justify-center items-center">

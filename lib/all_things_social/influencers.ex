@@ -32,11 +32,18 @@ defmodule AllThingsSocial.Influencers do
   end
 
   def list_influencers_by_search(search) do
+    if search == "" do
+      query =
+        Repo.all(Influencer)
+        |> Repo.preload(:niches)
+    else
     query =
       Repo.all(Influencer)
       |> Enum.filter(fn influencer ->
         String.contains?(String.downcase(influencer.username), String.downcase(search))
       end)
+      |> Repo.preload(:niches)
+    end
   end
 
   def list_influencers_by_niches(niche) do
@@ -52,6 +59,14 @@ defmodule AllThingsSocial.Influencers do
           Enum.any?(influencer.niches, fn n -> n.name == niche end)
         end)
     end
+  end
+
+
+  def get_niches_for_an_influencer(id) do
+    from(i in Influencer, where: i.id == ^id)
+    |> Repo.one()
+    |> Repo.preload(:niches)
+
   end
 
   @doc """
