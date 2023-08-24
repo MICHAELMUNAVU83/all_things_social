@@ -23,13 +23,13 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.ChatComponent do
                 <%= for chat <- @chats do %>
                   <%= if chat.sender == "brand" do %>
                     <div class="flex  justify-start   ">
-                      <p class="   p-2 md:h-[70px] text-xs bg-white text-black w-[200px]">
+                      <p class="   p-2 md:h-[70px] text-xs bg-white break-words text-black w-[200px]">
                         <%= chat.message %>
                       </p>
                     </div>
                   <% else %>
                     <div class="flex  justify-end   ">
-                      <p class="  text-white p-2 md:h-[70px] text-xs bg-[#887CF2] w-[200px]">
+                      <p class="  text-white p-2 md:h-[70px] break-words text-xs bg-[#887CF2] w-[200px]">
                         <%= chat.message %>
                       </p>
                     </div>
@@ -41,7 +41,7 @@ defmodule AllThingsSocialWeb.InfluencerDashboardLive.ChatComponent do
             <div class="bg-gray-100 rounded-b-xl border-gray-200 border-t-2  pb-8  p-4   w-[100%]">
               <.form let={f} for={@changeset} id="message-form" phx-submit="save">
                 <div class="flex justify-between  w-[100%] items-center">
-                  <div class="md:w-[85%] w-[75%] text-[#A8B1CF] ">
+                  <div class="md:w-[85%] w-[75%] text-black ">
                     <%= text_input(f, :message,
                       class:
                         "w-[100%] md:h-[90%] h-[50%]  border border-transparent   focus:ring-0 border-none  p-4 bg-white shadow-gray-300 shadow-md",

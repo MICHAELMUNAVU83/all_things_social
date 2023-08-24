@@ -101,8 +101,6 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-3 p-4 gap-4"></div>
-
       <%= live_redirect to: Routes.my_influencers_show_path(@socket, :add_task, @influencer_account.id) do %>
         <div class="bg-[#FFF9E6] flex justify-center hover:scale-105 transition-all ease-in-out duration-500  cursor-pointer items-center  p-2 rounded-xl">
           <%= Heroicons.icon("plus", type: "solid", class: "h-4 text-[#F59E0B] font-semibold w-4") %>
@@ -130,7 +128,7 @@
           <div
             phx-click="change_state"
             phx-value-id="analytics"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer flex justify-center items-center  text-white rounded-3xl"
           >
             Analytics
           </div>
@@ -138,7 +136,7 @@
           <div
             phx-click="change_state"
             phx-value-id="analytics"
-            class="bg-gray-100 px-4 py-2  cursor-pointer text-black rounded-3xl"
+            class="bg-gray-100 px-4 py-2  cursor-pointer flex justify-center items-center text-black rounded-3xl"
           >
             Analytics
           </div>
@@ -148,7 +146,7 @@
           <div
             phx-click="change_state"
             phx-value-id="tasks"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer flex justify-center items-center  text-white rounded-3xl"
           >
             Tasks
           </div>
@@ -156,7 +154,7 @@
           <div
             phx-click="change_state"
             phx-value-id="tasks"
-            class="bg-gray-100 px-4 py-2 cursor-pointer text-black rounded-3xl"
+            class="bg-gray-100 px-4 py-2 cursor-pointer flex justify-center items-center text-black rounded-3xl"
           >
             Tasks
           </div>
@@ -165,7 +163,7 @@
           <div
             phx-click="change_state"
             phx-value-id="chats"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  flex justify-center items-center text-white rounded-3xl"
           >
             Chats
           </div>
@@ -173,7 +171,7 @@
           <div
             phx-click="change_state"
             phx-value-id="chats"
-            class="bg-gray-100 px-4 py-2  cursor-pointer text-black rounded-3xl"
+            class="bg-gray-100 px-4 py-2  cursor-pointer flex justify-center items-center text-black rounded-3xl"
           >
             Chats
           </div>
@@ -182,7 +180,7 @@
           <div
             phx-click="change_state"
             phx-value-id="payments"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer flex justify-center items-center text-white rounded-3xl"
           >
             Payments
           </div>
@@ -190,7 +188,7 @@
           <div
             phx-click="change_state"
             phx-value-id="payments"
-            class="bg-gray-100 px-4 py-2  cursor-pointer text-black rounded-3xl"
+            class="bg-gray-100 px-4 py-2  cursor-pointer flex justify-center items-center text-black rounded-3xl"
           >
             Payments
           </div>
@@ -200,7 +198,7 @@
           <div
             phx-click="change_state"
             phx-value-id="social_media_accounts"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer flex justify-center items-center  text-white rounded-3xl"
           >
             Socials
           </div>
@@ -208,7 +206,7 @@
           <div
             phx-click="change_state"
             phx-value-id="social_media_accounts"
-            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+            class="bg-gray-100 px-4 py-2 cursor-pointer flex justify-center items-center  text-black rounded-3xl"
           >
             Socials
           </div>
@@ -218,7 +216,7 @@
           <div
             phx-click="change_state"
             phx-value-id="rates"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer flex justify-center items-center  text-white rounded-3xl"
           >
             Rates
           </div>
@@ -226,7 +224,7 @@
           <div
             phx-click="change_state"
             phx-value-id="rates"
-            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+            class="bg-gray-100 px-4 py-2 cursor-pointer  flex justify-center items-center text-black rounded-3xl"
           >
             Rates
           </div>
@@ -236,7 +234,7 @@
           <div
             phx-click="change_state"
             phx-value-id="niches"
-            class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+            class="bg-[#887CF2] px-4 py-2 cursor-pointer  flex justify-center items-center text-white rounded-3xl"
           >
             Niches
           </div>
@@ -244,7 +242,7 @@
           <div
             phx-click="change_state"
             phx-value-id="niches"
-            class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+            class="bg-gray-100 px-4 py-2 cursor-pointer flex justify-center items-center  text-black rounded-3xl"
           >
             Niches
           </div>
@@ -268,13 +266,13 @@
               <%= for chat <- @chats do %>
                 <%= if chat.sender == "brand" do %>
                   <div class="flex  justify-end   ">
-                    <p class="   p-2 md:h-[70px] text-xs bg-white text-black w-[200px]">
+                    <p class="   p-2 md:h-[70px] text-xs break-words  bg-white text-black w-[200px]">
                       <%= chat.message %>
                     </p>
                   </div>
                 <% else %>
                   <div class="flex  justify-start   ">
-                    <p class="  text-white p-2 md:h-[70px] text-xs bg-[#887CF2] w-[200px]">
+                    <p class="  text-white p-2 md:h-[70px] break-words text-xs bg-[#887CF2] w-[200px]">
                       <%= chat.message %>
                     </p>
                   </div>
@@ -317,7 +315,7 @@
                 <%= @influencer_account.influencer.username %>
               </p>
             </div>
-            <div class="grid grid-cols-2 py-4 gap-8">
+            <div class="grid md:grid-cols-2 py-4 gap-8">
               <%= for task <- @tasks do %>
                 <div class="h-[250px] hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
                   <div class="flex flex-col w-[100%]">
@@ -407,12 +405,11 @@
       <%= if @state == "social_media_accounts" do %>
         <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
-            <div class="grid grid-cols-2 py-4 gap-8">
+            <div class="grid md:grid-cols-2 py-4 gap-8">
               <%= for social_media_account <- @social_media_accounts do %>
                 <%= if social_media_account.platform == "Instagram" do %>
                   <div class="h-[100px] p-2 hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col gap-2  rounded-xl">
                     <div class="flex gap-2 items-start">
-                      >
                       <img
                         src="/images/instagramicon.png"
                         class="w-[50px] object-cover  rounded-full h-[50px]"
@@ -462,7 +459,7 @@
       <%= if @state == "rates" do %>
         <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
-            <div class="grid grid-cols-2 py-4 gap-8">
+            <div class="grid md:grid-cols-2 py-4 gap-8">
               <%= for rate <- @rates do %>
                 <div class="h-[150px] p-2 hover:scale-105 transition-all ease-in-out duration-500  gap-2 w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
                   <div class="flex flex-col gap-1">
@@ -509,7 +506,7 @@
       <%= if @state == "niches" do %>
         <div class="w-[100%]   overflow-y-scroll h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
-            <div class="grid grid-cols-2 py-4 gap-8">
+            <div class="grid md:grid-cols-2 py-4 gap-8">
               <%= for niche <- @niches do %>
                 <div class="h-[100px] p-2 hover:scale-105 transition-all ease-in-out duration-500  w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
                   <div class="flex flex-col gap-1">
@@ -534,7 +531,7 @@
       <%= if @state == "payments" do %>
         <div class="w-[100%]  overflow-y-scroll md:h-[100vh] flex flex-col">
           <div class="border-gray-100 border-b-2 rounded-t-xl bg-gray-100 h-[100%] shadow-gray-300 flex flex-col gap-2  p-4   w-[100%]">
-            <div class="grid grid-cols-2 py-4 gap-8">
+            <div class="grid md:grid-cols-2 py-4 gap-8">
               <%= for payment <- @payments do %>
                 <div class="h-[250px] p-2 hover:scale-105 transition-all ease-in-out duration-500  gap-2 w-[100%] border-2 flex cursor-pointer justify-between pb-4 group  flex-col  rounded-xl">
                   <div class="flex flex-col gap-1">
@@ -621,20 +618,16 @@
                 </button>
               </div>
             <% else %>
-              <div class="w-[100%] mt-16 grid md:grid-cols-2 gap-4">
-                <div class="bg-white h-[450px] rounded-2xl shadow-xl relative shadow-gray-500">
-                  <div class="p-8 ">
-                    <canvas
-                      id="myChart"
-                      style="height: 220px "
-                      class="absolute bg-[#887CF2] w-[350px]   rounded-xl -top-8"
-                      phx-hook="Chart"
-                      phx-update="ignore"
-                    >
-                    </canvas>
-                  </div>
+              <div class="w-[100%] mt-16 md:p-4 grid md:grid-cols-2 gap-4">
+                <div class="bg-white md:h-[450px] h-[300px] w-[100%] rounded-2xl  shadow-xl shadow-gray-500">
+                  <canvas
+                    id="myChart"
+                    class=" bg-[#887CF2] md:w-[350px] w-[100%]  m-4  rounded-xl "
+                    phx-hook="Chart"
+                    phx-update="ignore"
+                  />
 
-                  <div class=" absolute w-[100%] flex flex-col bottom-16">
+                  <div class="  w-[100%] flex flex-col ">
                     <p class="text-[#4A5B78] px-8 text-2xl font-bold ">
                       Total Engagements
                     </p>
@@ -649,19 +642,15 @@
                   </div>
                 </div>
 
-                <div class="bg-white h-[450px] mt-16 md:mt-0 rounded-2xl shadow-xl relative shadow-gray-500">
-                  <div class="p-8  ">
-                    <canvas
-                      id="myChart2"
-                      style="height: 220px "
-                      class="absolute bg-[#887CF2] w-[350px]      object-contain rounded-xl md:-top-8"
-                      phx-hook="Chart2"
-                      phx-update="ignore"
-                    >
-                    </canvas>
-                  </div>
+                <div class="bg-white md:h-[450px] h-[300px] mt-16 md:mt-0 rounded-2xl  shadow-xl  shadow-gray-500">
+                  <canvas
+                    id="myChart2"
+                    class=" bg-[#887CF2] md:w-[350px] w-[100%]  m-4   object-contain rounded-xl md:-top-8"
+                    phx-hook="Chart2"
+                    phx-update="ignore"
+                  />
 
-                  <div class=" absolute w-[100%] flex flex-col bottom-16">
+                  <div class=" w-[100%] flex flex-col">
                     <p class="text-[#4A5B78] px-8 text-2xl font-bold ">
                       Followers per Coutry
                     </p>
