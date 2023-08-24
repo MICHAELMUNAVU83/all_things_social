@@ -15,7 +15,7 @@
 <p class="text-[#887CF2] font-bold text-xl">Your Board</p>
 
 <div class="bg-white min-h-[50vh] shadow-md rounded-xl p-4 shadow-gray-300">
-  <div class="grid grid-cols-4 gap-8">
+  <div class="grid md:grid-cols-4 gap-8">
     <%= live_patch( to: Routes.content_board_index_path(@socket, :new)) do %>
       <div class="h-[250px] w-[100%] border-2 flex cursor-pointer justify-center group items-center flex-col border-gray-300 border-dashed rounded-xl">
         <p class="text-white bg-[#ADAAD2] flex justify-center items-center font-bold hover:scale-105 transition-all ease-in-out duration-500 group-hover:bg-[#887CF2]  h-[20px] w-[20px] rounded-full ">

@@ -45,9 +45,9 @@
       ) %>
     </div>
   </div>
-  <div class="bg-white min-h-[50vh] shadow-md rounded-xl p-4 shadow-gray-300">
-    <div class="flex justify-between items-center">
-      <div class="py-5 w-[50%]">
+  <div class="bg-white md:min-h-[50vh]  min-h-[80vh] mb-4 shadow-md rounded-xl p-4 shadow-gray-300">
+    <div class="flex md:flex-row flex-col  my-4 md:my-0 justify-between items-center">
+      <div class="py-5 w-[100%] md:w-[50%]">
         <div class="relative">
           <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
@@ -77,7 +77,7 @@
           </.form>
         </div>
       </div>
-      <div class="w-[20%]">
+      <div class="md:w-[20%] w-[100%]">
         <.form let={f} id="search" phx-change="search_niche" for={@niche_changeset}>
           <%= select(f, :search, @niches,
             prompt: "Filter by Niche",
