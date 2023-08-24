@@ -274,6 +274,21 @@ Hooks.Chart2 = {
   },
 };
 
+Hooks.ClearFlash = {
+  mounted() {
+    function timeMsg() {
+      window.setTimeout("clearMsg()", 5000); //10secs
+    }
+
+    //
+
+    function clearMsg() {
+      document.getElementById("hideMsg").innerText = "";
+    }
+
+    timeMsg();
+  },
+};
 let liveSocket = new LiveSocket("/live", Socket, {
   hooks: Hooks,
   params: { _csrf_token: csrfToken },

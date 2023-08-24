@@ -17,8 +17,26 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js">
     </script>
+    <script language="javascript" type="text/javascript">
+    
+      function timeMsg(){
+       
+
+          window.setTimeout("clearMsg()",5000);//10secs
+
+        }
+
+        //
+
+        function clearMsg(){
+
+          document.getElementById("hideMsg").innerText="";
+
+        }
+        
+    </script>
   </head>
-  <body>
+  <body >
     <header></header>
     <%= @inner_content %>
   </body>
