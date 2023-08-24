@@ -45,7 +45,7 @@
       ) %>
     </div>
   </div>
-  <div class="bg-white md:min-h-[50vh]  min-h-[80vh] mb-4 shadow-md rounded-xl p-4 shadow-gray-300">
+  <div class="bg-white md:min-h-[50vh] overflow-x-scroll  min-h-[80vh] mb-4 shadow-md rounded-xl p-4 shadow-gray-300">
     <div class="flex md:flex-row flex-col  my-4 md:my-0 justify-between items-center">
       <div class="py-5 w-[100%] md:w-[50%]">
         <div class="relative">
@@ -88,7 +88,7 @@
         </.form>
       </div>
     </div>
-    <table class="table-auto w-full text-center  overflow-auto">
+    <table class="w-full text-center ">
       <thead class="text-[#595959] border-b-[1px] border-t-[1px] border-[#595959]/80 py-2 text-xs text-center font-bold uppercase">
         <tr>
           <th class="py-2">Influencer</th>
@@ -98,10 +98,10 @@
           <th class="py-2">Save</th>
         </tr>
       </thead>
-      <tbody class="">
+      <tbody class="py-2">
         <%= for influencer <- @influencers do %>
           <tr>
-            <td>
+            <td class="py-2">
               <div class="flex justify-center items-center gap-2">
                 <img
                   src="/images/instagram.jpg"
@@ -142,7 +142,7 @@
 
             <td>
               <%= live_redirect to: Routes.all_influencers_index_path(@socket, :add_influencer_account , influencer) do %>
-                <button class="bg-gradient-to-r cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white px-2 py-1 rounded-md">
+                <button class="bg-gradient-to-r w-[150px] py-2 cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white  rounded-md">
                   Save to Board
                 </button>
               <% end %>

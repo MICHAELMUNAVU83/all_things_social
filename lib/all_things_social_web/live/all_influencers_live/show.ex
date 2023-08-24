@@ -14,12 +14,12 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.ShowComponent do
 
           <div class="flex justify-between  pt-4  items-start">
             <div class="flex flex-col bg-white overflow-y-scroll h-[400px] shadow-md rounded-xl shadow-gray-400  w-[100%] p-4 gap-4">
-              <div class="flex items-center gap-5">
+              <div class="flex md:flex-row flex-col md:items-start justify-center gap-4 md:gap-5">
                 <%= if @state == "social_media_accounts" do %>
                   <div
                     phx-click="change_state"
                     phx-value-id="social_media_accounts"
-                    class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+                    class="bg-[#887CF2] px-4 py-2 cursor-pointer  flex justify-center items-center text-white rounded-3xl"
                   >
                     Social Media Accounts
                   </div>
@@ -27,7 +27,7 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.ShowComponent do
                   <div
                     phx-click="change_state"
                     phx-value-id="social_media_accounts"
-                    class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+                    class="bg-gray-100 px-4 py-2 cursor-pointer flex justify-center items-center  text-black rounded-3xl"
                   >
                     Social Media Accounts
                   </div>
@@ -37,7 +37,7 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.ShowComponent do
                   <div
                     phx-click="change_state"
                     phx-value-id="rates"
-                    class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+                    class="bg-[#887CF2] px-4 py-2 cursor-pointer flex justify-center items-center  text-white rounded-3xl"
                   >
                     Rates
                   </div>
@@ -45,7 +45,7 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.ShowComponent do
                   <div
                     phx-click="change_state"
                     phx-value-id="rates"
-                    class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+                    class="bg-gray-100 px-4 py-2 cursor-pointer flex justify-center items-center  text-black rounded-3xl"
                   >
                     Rates
                   </div>
@@ -55,7 +55,7 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.ShowComponent do
                   <div
                     phx-click="change_state"
                     phx-value-id="niches"
-                    class="bg-[#887CF2] px-4 py-2 cursor-pointer  text-white rounded-3xl"
+                    class="bg-[#887CF2] px-4 py-2 cursor-pointer  flex justify-center items-center text-white rounded-3xl"
                   >
                     Niches
                   </div>
@@ -63,7 +63,7 @@ defmodule AllThingsSocialWeb.AllInfluencersLive.ShowComponent do
                   <div
                     phx-click="change_state"
                     phx-value-id="niches"
-                    class="bg-gray-100 px-4 py-2 cursor-pointer  text-black rounded-3xl"
+                    class="bg-gray-100 px-4 py-2 cursor-pointer flex justify-center items-center  text-black rounded-3xl"
                   >
                     Niches
                   </div>

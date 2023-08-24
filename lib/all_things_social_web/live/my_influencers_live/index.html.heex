@@ -9,7 +9,7 @@
       ) %>
     </div>
   </div>
-  <div class="bg-white min-h-[50vh] shadow-md rounded-xl p-4 shadow-gray-300">
+  <div class="bg-white  md:min-h-[50vh] overflow-x-scroll  min-h-[80vh]  shadow-md rounded-xl p-4 shadow-gray-300">
     <table class="table-auto w-full text-center  overflow-auto">
       <thead class="text-[#595959] border-b-[1px] border-t-[1px] border-[#595959]/80 py-2 text-xs text-center font-bold uppercase">
         <tr>
@@ -20,7 +20,7 @@
           <th class="py-2">Content Board</th>
         </tr>
       </thead>
-      <tbody class="">
+      <tbody class="py-2">
         <%= for influencer_account <- @influencer_accounts do %>
           <tr>
             <td>
