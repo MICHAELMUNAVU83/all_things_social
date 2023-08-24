@@ -96,7 +96,7 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
      |> assign(:page_title, "New Task")
      |> assign(:content_board_id, content_board_id)
      |> assign(:influencer_id, influencer_id)
-     |> assign(:state, "social_media_accounts")
+     |> assign(:state, "analytics")
      |> assign(:error_modal, false)
      |> assign(:n, false)
      |> assign(:success_modal, false)

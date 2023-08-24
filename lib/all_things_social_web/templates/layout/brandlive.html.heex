@@ -19,7 +19,9 @@
         </p>
 
         <div class="flex gap-2 items-center">
-          <p><%= @logged_in_brand.email %></p>
+        <button class="bg-gradient-to-r cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white px-2 py-1 rounded-md">
+            <%= link("Log out", to: Routes.brand_session_path(@socket, :delete), method: :delete) %>
+          </button>
         </div>
       </div>
       <div class="flex justify-between items-center ">
@@ -32,11 +34,7 @@
             to: Routes.my_influencers_index_path(@socket, :index)
           ) %>
         </div>
-        <div class="flec gap-2 text-sm items-center">
-          <button class="bg-gradient-to-r cursor-pointer hover:scale-105 transition-all ease-in-out duration-500 from-purple-400 to-pink-600 text-white px-2 py-1 rounded-md">
-            <%= link("Log out", to: Routes.brand_session_path(@socket, :delete), method: :delete) %>
-          </button>
-        </div>
+      
       </div>
     </div>
     <div class="bg-[#EEF0F8] flex flex-col gap-4 md:px-8  px-3 pt-8 pb-8 md:pb-0 md:min-h-[100vh]">
