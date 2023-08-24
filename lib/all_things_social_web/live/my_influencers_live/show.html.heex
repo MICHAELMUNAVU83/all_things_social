@@ -43,7 +43,7 @@
           class: "h-48  text-red-500  font-bold w-48"
         ) %>
         <div class="flex flex-col justify-center items-center text-center">
-          <p class=" text-2xl jakrata-regular ">
+          <p class=" md:text-2xl jakrata-regular ">
             <%= @error_message %>
           </p>
         </div>
@@ -81,7 +81,7 @@
           class: "h-48  text-green-500  font-bold w-48"
         ) %>
         <div class="flex flex-col justify-center items-center text-center">
-          <p class=" text-2xl jakrata-regular ">
+          <p class=" md:text-2xl jakrata-regular ">
             The Payment was successful , you are now  a premium user
             and can now view the analytics.
           </p>
@@ -93,7 +93,7 @@
 
 <%= if @correct_brand == true do %>
   <div class="flex justify-between w-[100%] md:flex-row flex-col pt-4  gap-8 items-start">
-    <div class="flex flex-col h-[400px] bg-white p-4 shadow-md rounded-xl shadow-gray-400 w-[100%] md:w-[25%] gap-4">
+    <div class="flex flex-col md:h-[400px] h-[350px] bg-white p-4 shadow-md rounded-xl shadow-gray-400 w-[100%] md:w-[25%] gap-4">
       <div class="flex gap-2 flex-col items-center">
         <div class="w-[50px] h-[50px] rounded-full bg-[#887CF2]"></div>
         <div class="flex flex-col">
@@ -654,7 +654,7 @@
                     <canvas
                       id="myChart2"
                       style="height: 220px "
-                      class="absolute bg-[#887CF2] w-[350px]     object-contain rounded-xl -top-8"
+                      class="absolute bg-[#887CF2] w-[350px]      object-contain rounded-xl md:-top-8"
                       phx-hook="Chart2"
                       phx-update="ignore"
                     >

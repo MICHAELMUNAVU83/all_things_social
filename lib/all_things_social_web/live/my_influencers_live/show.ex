@@ -97,7 +97,7 @@ defmodule AllThingsSocialWeb.MyInfluencersLive.Show do
      |> assign(:content_board_id, content_board_id)
      |> assign(:influencer_id, influencer_id)
      |> assign(:state, "analytics")
-     |> assign(:error_modal, true)
+     |> assign(:error_modal, false)
      |> assign(:n, false)
      |> assign(:success_modal, false)
      |> assign(:error_message, "")
