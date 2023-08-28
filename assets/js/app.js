@@ -260,7 +260,7 @@ Hooks.Chart2 = {
         plugins: {
           title: {
             display: true,
-            text: "Tickets Scanned for each Event",
+            text: "Followers per Country",
             color: "white",
           },
           legend: {
