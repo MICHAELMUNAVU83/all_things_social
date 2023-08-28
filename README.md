@@ -18,7 +18,12 @@ This is an influencer management system that allows brands to get influencer , i
 
 
 
-https://github.com/MICHAELMUNAVU83/truck_expense_system/assets/86654131/dd0ad079-3a68-4ead-baba-786ecf2ebc5b
+
+
+https://github.com/MICHAELMUNAVU83/all_things_social/assets/86654131/6afb0a55-e121-4dd9-ba61-115dad69ffdb
+
+
+
 
 ## Technologies
 
