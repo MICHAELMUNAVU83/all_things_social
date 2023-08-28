@@ -49,12 +49,23 @@ defmodule AllThingsSocialWeb.ContentBoardLive.Index do
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     content_board = ContentBoards.get_content_board!(id)
-    {:ok, _} = ContentBoards.delete_content_board(content_board)
 
-    content_boards =
-      ContentBoards.list_content_boards_for_a_brand(socket.assigns.logged_in_brand.id)
+    if content_board.tasks != [] || content_board.payments != [] ||
+         content_board.influencer_accounts != [] || content_board.chats != [] do
+      {:noreply,
+       socket
+       |> put_flash(
+         :error,
+         "You cannot delete a content board that has tasks, payments, influencer accounts, or chats associated with it."
+       )}
+    else
+      {:ok, _} = ContentBoards.delete_content_board(content_board)
 
-    {:noreply, assign(socket, :content_boards, content_boards)}
+      content_boards =
+        ContentBoards.list_content_boards_for_a_brand(socket.assigns.logged_in_brand.id)
+
+      {:noreply, assign(socket, :content_boards, content_boards)}
+    end
   end
 
   defp list_content_boards do

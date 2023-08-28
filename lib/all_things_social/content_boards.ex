@@ -106,7 +106,14 @@ defmodule AllThingsSocial.ContentBoards do
       ** (Ecto.NoResultsError)
 
   """
-  def get_content_board!(id), do: Repo.get!(ContentBoard, id)
+  def get_content_board!(id),
+    do:
+      Repo.get!(ContentBoard, id)
+      |> Repo.preload(:brand)
+      |> Repo.preload(:tasks)
+      |> Repo.preload(:payments)
+      |> Repo.preload(:influencer_accounts)
+      |> Repo.preload(:chats)
 
   @doc """
   Creates a content_board.
